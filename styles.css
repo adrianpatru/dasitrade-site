@@ -916,20 +916,24 @@ img { max-width: 100%; display: block; }
 
 /* ── Portfolio slideshow ─────────────────────────────────────────── */
 .port-slider__track {
-  display: grid;
-  grid-template-areas: "s";
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/7;
   margin-top: 2px;
+  overflow: hidden;
 }
 .port-slide {
-  grid-area: s;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: unset !important;
   grid-column: unset !important;
-  aspect-ratio: 16/8 !important;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  transform: translateY(6px);
+  transition: opacity 0.6s ease;
 }
-.port-slide.is-active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.port-slide.is-active { opacity: 1; pointer-events: auto; }
 .port-slider__bar { height: 2px; background: var(--line-strong); }
 .port-slider__bar-fill { height: 100%; background: var(--accent); width: 0; }
 .port-slider__controls {
