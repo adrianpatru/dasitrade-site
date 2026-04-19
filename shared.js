@@ -86,7 +86,7 @@
         </div>
         <div class="footer__col">
           <div class="footer__col-label">Sediu</div>
-          <p>Bacău<br/>Str. Florilor nr. 32</p>
+          <p>Bacău<br/>Str. Nufărului Nr. 10<br/>Bl. 10, Sc. B, Et. 3, Ap. 7</p>
         </div>
         <div class="footer__col">
           <div class="footer__col-label">Dispatch</div>
@@ -102,10 +102,33 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <span>© 2006–2026 Dasitrade SRL</span>
-        <span>Operational · All systems nominal</span>
+        <span>© 2006–2026 Dasitrade SRL · CUI RO 18802465</span>
+        <a href="gdpr.html" style="color:var(--fg-dark-dim);font-size:12px;font-family:var(--mono);letter-spacing:0.12em;">Politica de confidențialitate</a>
       </div>
     `;
+  }
+
+  function mountCookieBanner() {
+    try {
+      if (localStorage.getItem('dasitrade_cookies_ok') === '1') return;
+    } catch {}
+    const banner = h('div', { class: 'cookie-banner', role: 'region', 'aria-label': 'Cookie consent' });
+    banner.innerHTML = `
+      <p>
+        Acest site folosește cookie-uri funcționale necesare pentru funcționarea corectă a paginii.
+        Nu colectăm date de urmărire sau publicitate fără consimțământul dumneavoastră.
+        <a href="gdpr.html">Politica de confidențialitate →</a>
+      </p>
+      <div class="cookie-banner__actions">
+        <button class="btn btn--accent" style="font-size:12px;padding:10px 20px;" data-cookie-accept>Accept</button>
+        <a href="gdpr.html" class="btn btn--ghost-dark" style="font-size:12px;padding:10px 20px;">Detalii</a>
+      </div>
+    `;
+    document.body.appendChild(banner);
+    banner.querySelector('[data-cookie-accept]').addEventListener('click', () => {
+      try { localStorage.setItem('dasitrade_cookies_ok', '1'); } catch {}
+      banner.classList.add('cookie-banner--hidden');
+    });
   }
 
   function mountDispatch() {
@@ -197,7 +220,7 @@
   // Reveal on scroll
   function mountReveal() {
     const els = document.querySelectorAll('[data-reveal]');
-    if (!els.length || !('IntersectionObserver' in window)) {
+    if (!els.length || !('IntersectionObserver' in globalThis)) {
       els.forEach(el => el.classList.add('is-revealed'));
       return;
     }
@@ -219,6 +242,7 @@
       mountFooter();
       mountDispatch();
       mountReveal();
+      mountCookieBanner();
     }
   };
 })();
