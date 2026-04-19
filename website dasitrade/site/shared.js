@@ -45,10 +45,30 @@
       h('span', { class: 'nav__dot' }),
       h('span', {}, 'DISPATCH 24/7'),
     ]);
+
+    const burger = h('button', { class: 'nav__burger', 'aria-label': 'Meniu', 'aria-expanded': 'false' });
+    burger.innerHTML = '<span></span><span></span><span></span>';
+
+    const mobileMenu = h('div', { class: 'nav__mobile' },
+      NAV_ITEMS.map(it => h('a', {
+        href: it.href,
+        class: it.key === current ? 'is-active' : '',
+      }, it.label))
+    );
+    document.body.appendChild(mobileMenu);
+
+    burger.addEventListener('click', () => {
+      const open = host.classList.toggle('nav--open');
+      burger.setAttribute('aria-expanded', String(open));
+      mobileMenu.classList.toggle('nav__mobile--open');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
     host.className = `nav nav--${variant}`;
     host.appendChild(brand);
     host.appendChild(links);
     host.appendChild(status);
+    host.appendChild(burger);
   }
 
   function mountFooter() {
@@ -88,7 +108,7 @@
   }
 
   function mountDispatch() {
-    if (window.innerWidth < 900) return;
+    if (globalThis.innerWidth < 900) return;
     const el = h('div', { class: 'dispatch dispatch--collapsed', 'data-dispatch': '' });
     el.innerHTML = `
       <div class="dispatch__head">
@@ -157,7 +177,7 @@
         transition: opacity 500ms ease;
       `;
       const iframe = h('iframe', {
-        src: '../Dasitrade Intro.html',
+        src: 'intro.html',
         style: 'width:100%;height:100%;border:0;display:block;',
       });
       overlay.appendChild(iframe);
@@ -191,7 +211,7 @@
     els.forEach(el => io.observe(el));
   }
 
-  window.DasitradeSite = {
+  globalThis.DasitradeSite = {
     init({ current, navVariant = 'dark' } = {}) {
       maybeSplash();
       mountNav(current, navVariant);

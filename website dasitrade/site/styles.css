@@ -849,11 +849,78 @@ img { max-width: 100%; display: block; }
 }
 .badge--dark { color: var(--fg-dark-dim); border-color: var(--line-dark-strong); }
 
+/* ── Hero stats (home) ───────────────────────────────────────────── */
+.hero__stat-num {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--fg-dark);
+}
+.hero__stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-dark-faint);
+  margin-top: 6px;
+}
+
+/* ── Mobile nav ──────────────────────────────────────────────────── */
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: inherit;
+}
+.nav__burger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 250ms ease, opacity 200ms ease;
+}
+.nav--open .nav__burger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav--open .nav__burger span:nth-child(2) { opacity: 0; }
+.nav--open .nav__burger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.nav__mobile {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 48;
+  background: var(--ink-void);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.nav__mobile--open { display: flex; }
+.nav__mobile a {
+  font-family: var(--serif);
+  font-size: clamp(36px, 8vw, 56px);
+  color: var(--fg-dark);
+  letter-spacing: -0.015em;
+  opacity: 0.55;
+  transition: opacity 150ms;
+  padding: 8px 0;
+}
+.nav__mobile a:hover,
+.nav__mobile a.is-active { opacity: 1; }
+.nav__mobile a.is-active::before { content: '[ '; color: var(--accent); }
+.nav__mobile a.is-active::after  { content: ' ]'; color: var(--accent); }
+
 /* ── Responsive ──────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 40px; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
   .nav__links { display: none; }
+  .nav__burger { display: flex; }
   .section { padding: 80px 20px; }
   .page-hero { padding: 120px 20px 60px; }
   .dispatch { display: none; }
