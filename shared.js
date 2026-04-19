@@ -20,6 +20,7 @@
     { href: 'despre.html', label: 'Despre', key: 'despre' },
     { href: 'servicii.html', label: 'Servicii', key: 'servicii' },
     { href: 'portofoliu.html', label: 'Portofoliu', key: 'portofoliu' },
+    { href: 'cariere.html', label: 'Cariere', key: 'cariere' },
     { href: 'contact.html', label: 'Contact', key: 'contact' },
   ];
 

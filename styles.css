@@ -915,6 +915,191 @@ img { max-width: 100%; display: block; }
 .nav__mobile a.is-active::before { content: '[ '; color: var(--accent); }
 .nav__mobile a.is-active::after  { content: ' ]'; color: var(--accent); }
 
+/* ── Cariere — Job cards ─────────────────────────────────────────── */
+.jobs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--line);
+}
+.job-card {
+  background: var(--paper);
+  padding: 52px 48px;
+  transition: background 200ms;
+}
+.job-card:hover { background: var(--paper-warm); }
+.job-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  margin-bottom: 28px;
+}
+.job-card__id {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.job-card__title {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 0 0 14px;
+}
+.job-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+.job-card__sep {
+  width: 3px; height: 3px;
+  background: var(--fg-faint);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.job-card__cta { flex-shrink: 0; }
+.job-card__desc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--fg-dim);
+  max-width: 72ch;
+  margin-bottom: 32px;
+}
+.job-card__reqs-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  margin-bottom: 12px;
+}
+.job-card__reqs ul {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 48px;
+}
+.job-card__reqs li {
+  font-size: 14px;
+  color: var(--fg-dim);
+  line-height: 1.5;
+  padding-left: 16px;
+  position: relative;
+}
+.job-card__reqs li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* ── Cariere — Application form ──────────────────────────────────── */
+.apply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.apply-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+.apply-form__field {
+  display: flex;
+  flex-direction: column;
+}
+.apply-form__field label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  margin-bottom: 8px;
+}
+.apply-form__field input,
+.apply-form__field textarea,
+.apply-form__field select {
+  width: 100%;
+  padding: 14px 0;
+  font-family: var(--sans);
+  font-size: 18px;
+  border: none;
+  border-bottom: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--fg);
+  outline: none;
+  transition: border-color 150ms;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.apply-form__field input:focus,
+.apply-form__field textarea:focus,
+.apply-form__field select:focus { border-bottom-color: var(--fg); }
+.apply-form__field textarea { resize: vertical; min-height: 120px; }
+.apply-form__file-wrap { position: relative; }
+.apply-form__file-wrap input[type="file"] {
+  position: absolute; inset: 0;
+  opacity: 0; cursor: pointer;
+  width: 100%; height: 100%;
+  font-size: 0;
+}
+.apply-form__file-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line-strong);
+  cursor: pointer;
+  transition: border-color 150ms, color 150ms;
+  font-size: 18px;
+  color: var(--fg-dim);
+}
+.apply-form__file-wrap:focus-within .apply-form__file-label,
+.apply-form__file-wrap:hover .apply-form__file-label {
+  border-bottom-color: var(--fg);
+  color: var(--fg);
+}
+.apply-form__file-icon {
+  font-family: var(--mono);
+  font-size: 18px;
+  color: var(--accent);
+  line-height: 1;
+}
+.apply-form__actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding-top: 8px;
+}
+.apply-form__note {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--fg-faint);
+  text-transform: uppercase;
+}
+.apply-form__feedback {
+  padding: 28px 32px;
+  border: 1px solid var(--line-strong);
+}
+.apply-form__feedback p {
+  font-size: 17px;
+  color: var(--fg-dim);
+  margin: 0;
+}
+.apply-form__feedback--ok { border-color: var(--accent); }
+.apply-form__feedback--err { border-color: #e05c5c; }
+
 /* ── Responsive ──────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 40px; }
@@ -938,4 +1123,9 @@ img { max-width: 100%; display: block; }
   .portfolio-item, .portfolio-item--wide { grid-column: span 2; }
   .contact-grid { grid-template-columns: 1fr; gap: 60px; padding: 80px 0; }
   .hero__content { padding: 100px 20px 40px; }
+  .job-card { padding: 32px 20px; }
+  .job-card__head { flex-direction: column; gap: 20px; }
+  .job-card__reqs ul { grid-template-columns: 1fr; }
+  .apply-form__row { grid-template-columns: 1fr; gap: 32px; }
+  .apply-form__actions { flex-direction: column; align-items: flex-start; gap: 16px; }
 }

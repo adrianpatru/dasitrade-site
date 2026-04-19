@@ -1,0 +1,71 @@
+{
+  "positions": [
+    {
+      "id": "teh-sec-001",
+      "title": "Tehnician Sisteme de Securitate",
+      "department": "Instalare & Service",
+      "type": "Full-time",
+      "location": "Bacău",
+      "posted": "2026-04-01",
+      "active": true,
+      "description": "Instalezi, configurezi și menții în funcțiune sisteme de efracție, CCTV și control acces la clienții din portofoliu. Lucrezi în echipă cu un inginer proiectant și raportezi direct șefului de service.",
+      "requirements": [
+        "Studii tehnice (electrotehnică, electronică, mecanică sau similar)",
+        "Cunoștințe de bază în electronică și cablare",
+        "Capacitatea de a citi scheme tehnice și planuri de instalare",
+        "Permis de conducere categoria B",
+        "Disponibilitate pentru deplasări în județul Bacău și zone limitrofe"
+      ],
+      "nice_to_have": [
+        "Experiență cu sisteme Paradox, Bosch sau DSC (efracție)",
+        "Experiență cu camere Hikvision sau Dahua (CCTV)",
+        "Atestat IGPR sau dorința de a-l obține — susținem procesul",
+        "Experiență în cablare structurată Cat5e/Cat6"
+      ]
+    },
+    {
+      "id": "ing-prj-001",
+      "title": "Inginer Proiectant Sisteme Integrate",
+      "department": "Proiectare & Ofertare",
+      "type": "Full-time",
+      "location": "Bacău",
+      "posted": "2026-04-01",
+      "active": true,
+      "description": "Elaborezi proiecte tehnice pentru sisteme integrate de securitate — efracție, incendiu, CCTV, control acces. Faci ridicări la teren, dimensionezi sistemele, redactezi specificații și oferte tehnico-financiare.",
+      "requirements": [
+        "Absolvent inginerie electrică, electronică, automatică sau similar",
+        "Capacitate de redactare documentație tehnică (memorii, scheme, BASM)",
+        "Cunoaștere normative aplicabile: SR EN 50131, SR EN 54, P-118",
+        "Operare AutoCAD sau echivalent pentru scheme",
+        "Organizare și atenție la detalii tehnice"
+      ],
+      "nice_to_have": [
+        "Experiență anterioară în proiectare sisteme de securitate",
+        "Cunoaștere platforme VMS sau PSIM enterprise",
+        "Relație cu furnizori Bosch, Honeywell, Axis, Hikvision"
+      ]
+    },
+    {
+      "id": "op-disp-001",
+      "title": "Operator Dispecerat Securitate",
+      "department": "Dispecerat 24/7",
+      "type": "Full-time · Ture",
+      "location": "Bacău",
+      "posted": "2026-04-10",
+      "active": true,
+      "description": "Monitorizezi în timp real sistemele de alarmare ale clienților din portofoliu, gestionezi alertele, dispui intervențiile echipelor de teren și documentezi fiecare eveniment. Lucrezi în ture de 12h.",
+      "requirements": [
+        "Bacalaureat sau studii superioare (orice profil)",
+        "Capacitate de lucru sub presiune și decizie rapidă",
+        "Cunoaștere operare PC și aplicații software specifice",
+        "Seriozitate și disciplina în respectarea procedurilor",
+        "Disponibilitate pentru ture de noapte și weekend"
+      ],
+      "nice_to_have": [
+        "Experiență în dispecerat securitate sau urgențe",
+        "Cunoaștere platforme Manitou, SBN sau echivalent",
+        "Atestat IGPR (susținem obținerea)"
+      ]
+    }
+  ]
+}

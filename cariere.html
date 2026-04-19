@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8"/>
+<title>Cariere · Dasitrade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="Locuri de muncă la Dasitrade SRL. Alătură-te echipei de tehnicieni și ingineri în securitate integrată din Bacău."/>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500&family=Newsreader:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<header data-nav></header>
+
+<section class="page-hero" style="min-height:60vh;" data-screen-label="cariere.hero">
+  <div class="page-hero__img">
+    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=2400&q=80" alt="" loading="eager"/>
+  </div>
+  <div class="grain"></div>
+  <div class="page-hero__content">
+    <div class="page-hero__meta">
+      <span>§ / CARIERE</span>
+      <span>FILE · DSTRD-HR-2026</span>
+      <span>CLASIF · PUBLIC</span>
+    </div>
+    <div class="eyebrow eyebrow--dark" style="margin-bottom:24px;">Echipa Dasitrade · Bacău</div>
+    <h1 class="heading-xl" style="color:var(--fg-dark); max-width:18ch;">
+      Construiește<br/>cu <em style="color:var(--accent);font-style:italic;">cei serioși.</em>
+    </h1>
+    <p class="lede lede--dark" style="margin-top:40px;max-width:52ch;">
+      Nu angajăm oricând și oricât. Angajăm când avem nevoie de oameni buni —
+      tehnicieni care înțeleg că un sistem prost instalat pune oameni în pericol.
+    </p>
+  </div>
+</section>
+
+<!-- WHY DASITRADE -->
+<section class="band" style="border-top:1px solid var(--line-dark);">
+  <div class="container">
+    <div class="band__eyebrow-row">
+      <span class="eyebrow">§ 00 / De ce Dasitrade</span>
+    </div>
+    <div class="grid-3" style="margin-top:8px;">
+      <div data-reveal>
+        <div class="principle__num">· 01</div>
+        <h3 class="principle__title">Meserie reală</h3>
+        <p class="principle__body">Lucrezi pe proiecte industriale, medicale, instituționale. Nu case particulare cu 2 camere — sisteme cu sute de puncte.</p>
+      </div>
+      <div data-reveal>
+        <div class="principle__num">· 02</div>
+        <h3 class="principle__title">Certificări plătite de noi</h3>
+        <p class="principle__body">Susținem obținerea atestatului IGPR și certificările producătorilor (Bosch, Hikvision, Genetec). Investim în oameni.</p>
+      </div>
+      <div data-reveal>
+        <div class="principle__num">· 03</div>
+        <h3 class="principle__title">Echipă stabilă</h3>
+        <p class="principle__body">Mulți colegi sunt cu noi de peste 8 ani. Nu suntem o firmă cu rotație rapidă — dacă ești bun, rămâi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSITIONS -->
+<section class="section" style="background:var(--paper); padding-top:80px;">
+  <div class="container">
+    <div class="grid-2" style="align-items:end; margin-bottom:60px;">
+      <div>
+        <div class="eyebrow" style="margin-bottom:24px;">§ 01 / Posturi disponibile</div>
+        <h2 class="heading-lg">Ce căutăm<br/>acum.</h2>
+      </div>
+      <p class="lede" style="font-size:17px;">
+        Pozițiile de mai jos sunt active. Dacă nu găsești ce cauți,
+        poți trimite o candidatură spontană — o păstrăm în baza de date.
+      </p>
+    </div>
+
+    <div id="jobs-list" class="jobs-list"></div>
+
+    <div id="jobs-empty" style="display:none; padding:80px 0; text-align:center; border-top:1px solid var(--line);">
+      <div class="mono" style="font-size:11px; letter-spacing:0.28em; color:var(--fg-faint); text-transform:uppercase; margin-bottom:16px;">// NO ACTIVE POSITIONS</div>
+      <p class="lede" style="font-size:17px; color:var(--fg-dim); max-width:44ch; margin:0 auto;">
+        Nu avem posturi active în acest moment. Poți trimite o candidatură spontană
+        — te contactăm noi când apare o oportunitate potrivită.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION FORM -->
+<section id="aplica" class="section" style="background:var(--paper-warm); border-top:1px solid var(--line);">
+  <div class="container container--narrow">
+    <div class="eyebrow" style="margin-bottom:24px;">§ 02 / Aplicație</div>
+    <div class="grid-2" style="align-items:start; margin-bottom:60px;">
+      <h2 class="heading-lg">Trimite dosarul.<br/>Răspundem în 5 zile.</h2>
+      <p class="lede" style="font-size:17px;">
+        Completează formularul și atașează CV-ul. Dacă profilul se potrivește,
+        te sunăm direct pentru un interviu tehnic scurt — fără birocrație.
+      </p>
+    </div>
+
+    <form id="apply-form" class="apply-form" enctype="multipart/form-data">
+      <!-- Web3Forms — obții cheia gratuită la web3forms.com cu emailul companiei -->
+      <input type="hidden" name="access_key" value="REPLACE_WITH_WEB3FORMS_KEY"/>
+      <input type="hidden" name="subject" id="form-subject" value="Aplicație Cariere · Dasitrade"/>
+      <input type="hidden" name="from_name" value="Dasitrade Cariere"/>
+      <input type="hidden" name="redirect" value="false"/>
+      <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1"/>
+
+      <div class="apply-form__row">
+        <div class="apply-form__field">
+          <label for="af-name">Nume complet</label>
+          <input type="text" id="af-name" name="name" required placeholder="Ion Popescu"/>
+        </div>
+        <div class="apply-form__field">
+          <label for="af-email">Email</label>
+          <input type="email" id="af-email" name="email" required placeholder="ion@email.com"/>
+        </div>
+      </div>
+
+      <div class="apply-form__row">
+        <div class="apply-form__field">
+          <label for="af-phone">Telefon</label>
+          <input type="tel" id="af-phone" name="phone" placeholder="+40 7xx xxx xxx"/>
+        </div>
+        <div class="apply-form__field">
+          <label for="af-position">Postul vizat</label>
+          <select id="af-position" name="position" required>
+            <option value="">— Selectează —</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="apply-form__field">
+        <label for="af-cv">CV · PDF sau Word, max 5 MB</label>
+        <div class="apply-form__file-wrap">
+          <input type="file" id="af-cv" name="attachment" accept=".pdf,.doc,.docx" required/>
+          <label for="af-cv" class="apply-form__file-label" aria-hidden="true">
+            <span class="apply-form__file-icon">↑</span>
+            <span id="af-cv-name">Alege fișierul</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="apply-form__field">
+        <label for="af-letter">
+          Scrisoare de intenție
+          <span style="color:var(--fg-faint); font-size:10px; letter-spacing:0.1em; text-transform:none;">— opțional</span>
+        </label>
+        <textarea id="af-letter" name="message" rows="5" placeholder="De ce Dasitrade, ce experiență ai, ce îți dorești..."></textarea>
+      </div>
+
+      <div class="apply-form__actions">
+        <button type="submit" class="btn btn--primary" id="af-submit">
+          <span id="af-submit-label">Trimite aplicația →</span>
+        </button>
+        <p class="apply-form__note">Datele sunt folosite exclusiv pentru procesul de recrutare.</p>
+      </div>
+
+      <div id="af-success" class="apply-form__feedback apply-form__feedback--ok" style="display:none;">
+        <div class="mono" style="color:var(--accent); font-size:11px; letter-spacing:0.28em; text-transform:uppercase; margin-bottom:12px;">// Transmis cu succes</div>
+        <p>Aplicația a fost primită. Te vom contacta în maximum 5 zile lucrătoare.</p>
+      </div>
+      <div id="af-error" class="apply-form__feedback apply-form__feedback--err" style="display:none;">
+        <div class="mono" style="color:#e05c5c; font-size:11px; letter-spacing:0.28em; text-transform:uppercase; margin-bottom:12px;">// Eroare la trimitere</div>
+        <p>A apărut o problemă. Trimite CV-ul direct la <a href="mailto:office@dasitrade.ro" style="border-bottom:1px solid currentColor;">office@dasitrade.ro</a>.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer data-footer></footer>
+<script src="shared.js"></script>
+<script>
+  DasitradeSite.init({ current: 'cariere', navVariant: 'light' });
+
+  (function(){
+    const nav = document.querySelector('[data-nav]');
+    const hero = document.querySelector('.page-hero');
+    if (!nav || !hero) return;
+    nav.classList.remove('nav--light'); nav.classList.add('nav--dark');
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { nav.classList.add('nav--dark'); nav.classList.remove('nav--light'); }
+      else { nav.classList.add('nav--light'); nav.classList.remove('nav--dark'); }
+    }, { rootMargin: '-80px 0px 0px 0px' });
+    io.observe(hero);
+  })();
+
+  // Load positions from jobs.json
+  (async function() {
+    const list = document.getElementById('jobs-list');
+    const empty = document.getElementById('jobs-empty');
+    const select = document.getElementById('af-position');
+
+    const addOption = (value, text) => {
+      const opt = document.createElement('option');
+      opt.value = value;
+      opt.textContent = text;
+      select.appendChild(opt);
+    };
+
+    try {
+      const res = await fetch('jobs.json');
+      const data = await res.json();
+      const active = (data.positions || []).filter(p => p.active);
+
+      if (!active.length) {
+        list.style.display = 'none';
+        empty.style.display = 'block';
+        addOption('spontana', 'Candidatură spontană');
+        return;
+      }
+
+      active.forEach(pos => {
+        addOption(pos.id, pos.title);
+
+        const nice = pos.nice_to_have?.length
+          ? `<div class="job-card__reqs" style="margin-top:20px;">
+               <div class="job-card__reqs-label">Reprezintă avantaj</div>
+               <ul>${pos.nice_to_have.map(r => `<li>${r}</li>`).join('')}</ul>
+             </div>`
+          : '';
+
+        const card = document.createElement('article');
+        card.className = 'job-card';
+        card.dataset.reveal = '';
+        card.innerHTML = `
+          <div class="job-card__head">
+            <div>
+              <div class="job-card__id">${pos.id.toUpperCase()}</div>
+              <h3 class="job-card__title">${pos.title}</h3>
+              <div class="job-card__meta">
+                <span>${pos.department}</span>
+                <span class="job-card__sep"></span>
+                <span>${pos.type}</span>
+                <span class="job-card__sep"></span>
+                <span>${pos.location}</span>
+              </div>
+            </div>
+            <a href="#aplica" class="btn btn--primary job-card__cta" onclick="document.getElementById('af-position').value='${pos.id}'">Aplică →</a>
+          </div>
+          <p class="job-card__desc">${pos.description}</p>
+          <div class="job-card__reqs">
+            <div class="job-card__reqs-label">Cerințe</div>
+            <ul>${pos.requirements.map(r => `<li>${r}</li>`).join('')}</ul>
+          </div>
+          ${nice}
+        `;
+        list.appendChild(card);
+      });
+
+      addOption('spontana', 'Candidatură spontană');
+
+      // trigger reveal for dynamically added cards
+      const revealEls = list.querySelectorAll('[data-reveal]');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-revealed'); io.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        revealEls.forEach(el => io.observe(el));
+      } else {
+        revealEls.forEach(el => el.classList.add('is-revealed'));
+      }
+
+    } catch(e) {
+      list.style.display = 'none';
+      empty.style.display = 'block';
+      addOption('spontana', 'Candidatură spontană');
+    }
+  })();
+
+  // File input — update label
+  document.getElementById('af-cv').addEventListener('change', function() {
+    document.getElementById('af-cv-name').textContent = this.files[0]?.name || 'Alege fișierul';
+  });
+
+  // Position select → sync email subject
+  document.getElementById('af-position').addEventListener('change', function() {
+    const label = this.options[this.selectedIndex]?.text || '';
+    document.getElementById('form-subject').value = label
+      ? `Aplicație: ${label} · Dasitrade`
+      : 'Aplicație Cariere · Dasitrade';
+  });
+
+  // Form submit via Web3Forms
+  document.getElementById('apply-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('af-submit');
+    const label = document.getElementById('af-submit-label');
+    const success = document.getElementById('af-success');
+    const error = document.getElementById('af-error');
+
+    btn.disabled = true;
+    label.textContent = 'Se trimite...';
+    error.style.display = 'none';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(this),
+      });
+      const json = await res.json();
+      if (json.success) {
+        this.style.display = 'none';
+        success.style.display = 'block';
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        throw new Error(json.message || 'Unknown error');
+      }
+    } catch(err) {
+      error.style.display = 'block';
+      btn.disabled = false;
+      label.textContent = 'Trimite aplicația →';
+    }
+  });
+</script>
+</body>
+</html>
