@@ -33,147 +33,171 @@
   </div>
 </section>
 
-<section class="section" style="background:var(--paper); padding-top:60px;">
+<section class="section svc-slider-wrap" style="background:var(--paper); padding-top:60px; padding-bottom:0;">
   <div class="container">
 
-    <div id="idsai" class="service-page__item" data-reveal>
-      <div class="service-page__num">01 / FIRE-DET</div>
-      <div>
-        <h2 class="service-page__title">Detecție, semnalizare și alarmare la incendiu</h2>
-        <div class="service-page__specs">
-          <span>Centrale adresabile EN54</span><span>Detectori optici / termici</span>
-          <span>Aspirație VESDA</span><span>Semnalizare audio-vizuală</span>
-          <span>Integrare HVAC / BMS</span><span>Testare și punere în funcțiune</span>
+    <!-- All 10 slides stacked via CSS grid; JS shows one at a time -->
+    <div class="svc-slider__track" id="svc-track">
+
+      <div id="idsai" class="svc-slide service-page__item">
+        <div class="service-page__num">01 / FIRE-DET</div>
+        <div>
+          <h2 class="service-page__title">Detecție, semnalizare și alarmare la incendiu</h2>
+          <div class="service-page__specs">
+            <span>Centrale adresabile EN54</span><span>Detectori optici / termici</span>
+            <span>Aspirație VESDA</span><span>Semnalizare audio-vizuală</span>
+            <span>Integrare HVAC / BMS</span><span>Testare și punere în funcțiune</span>
+          </div>
         </div>
+        <p class="service-page__body">Realizăm sisteme complete de detecție și alarmare la incendiu conforme cu normele în vigoare (SR EN 54, P-118), inclusiv integrarea cu instalațiile de desfumare, HVAC și BMS. Ne ocupăm de întreg procesul: proiectare, instalare, configurare, testare și punere în funcțiune. Autorizați ISU pentru proiectare (Seria A, Nr. 3167) și instalare (Seria A, Nr. 3170).</p>
+        <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1574974110100-b59d2c4ce0ca?w=800&q=80');"></div>
       </div>
-      <p class="service-page__body">Realizăm sisteme complete de detecție și alarmare la incendiu conforme cu normele în vigoare (SR EN 54, P-118), inclusiv integrarea cu instalațiile de desfumare, HVAC și BMS. Ne ocupăm de întreg procesul: proiectare, instalare, configurare, testare și punere în funcțiune. Autorizați ISU pentru proiectare (Seria A, Nr. 3167) și instalare (Seria A, Nr. 3170).</p>
-      <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1574974110100-b59d2c4ce0ca?w=800&q=80');"></div>
+
+      <div id="desfumare" class="svc-slide service-page__item">
+        <div class="service-page__num">02 / SMOKE-EXT</div>
+        <div>
+          <h2 class="service-page__title">Desfumare mecanizată</h2>
+          <div class="service-page__specs">
+            <span>Ventilatoare axiale 400°C/2h</span><span>Trape de desfumare</span>
+            <span>Clapete antifoc certificate</span><span>Automatizare PLC</span>
+            <span>Integrare centrale incendiu</span><span>Normativ P-118/3 · NP 161</span>
+          </div>
+        </div>
+        <p class="service-page__body">Implementăm sisteme de evacuare a fumului și gazelor fierbinți în caz de incendiu — esențiale pentru siguranța persoanelor și limitarea pagubelor. Sistemele sunt integrate cu detecția incendiu și automatizările clădirii. Autorizați ISU pentru proiectare (Seria A, Nr. 4998) și instalare (Seria A, Nr. 6614).</p>
+        <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80');"></div>
+      </div>
+
+      <div id="stingere" class="svc-slide service-page__item">
+        <div class="service-page__num">03 / FIRE-SUP</div>
+        <div>
+          <h2 class="service-page__title">Stingere incendiu · aerosoli / gaz inert</h2>
+          <div class="service-page__specs">
+            <span>Sisteme FM-200 / NOVEC 1230</span><span>Aerosoli condensați</span>
+            <span>Sprinklere · deluge</span><span>Zone multisector independente</span>
+            <span>Prealarmă redundantă</span><span>Certificare și teste descărcare</span>
+          </div>
+        </div>
+        <p class="service-page__body">Soluții dedicate pentru protecția spațiilor critice: camere server, tablouri electrice, camere tehnice, arhive. Utilizăm sisteme cu aerosoli sau gaz inert care nu deteriorează echipamentele și permit reluarea rapidă a activității după incident. Autorizați ISU pentru instalare și întreținere (Seria B, Nr. 5572).</p>
+        <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80');"></div>
+      </div>
+
+      <div id="efractie" class="svc-slide service-page__item">
+        <div class="service-page__num">04 / SEC-ELC</div>
+        <div>
+          <h2 class="service-page__title">Securitate la efracție</h2>
+          <div class="service-page__specs">
+            <span>Centrale hibrid grad 2–4</span><span>Senzori PIR dual</span>
+            <span>Detectori geam / șoc</span><span>Tastaturi tactile</span>
+            <span>Conectare dispecerat</span><span>Aplicație mobilă</span>
+          </div>
+        </div>
+        <p class="service-page__body">Proiectăm și implementăm sisteme de detecție și alarmare antiefracție adaptate specificului fiecărui obiectiv, cu grad de securitate conform SR EN 50131. Posibilitate de integrare cu CCTV și control acces pentru verificare prealarmă automată. Licențiați IGPR — Nr. 2973/2, valabilă 2025–2029.</p>
+        <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1562813733-b31f71025d54?w=800&q=80');"></div>
+      </div>
+
+      <div id="cctv" class="svc-slide service-page__item">
+        <div class="service-page__num">05 / SEC-CCTV</div>
+        <div>
+          <h2 class="service-page__title">Supraveghere video · CCTV</h2>
+          <div class="service-page__specs">
+            <span>Camere IP 4K / 8MP</span><span>NVR redundant RAID</span>
+            <span>LPR · recunoaștere plăcuțe</span><span>Analiză video inteligentă</span>
+            <span>Integrare VMS · control acces</span><span>Cloud backup opțional</span>
+          </div>
+        </div>
+        <p class="service-page__body">Furnizăm soluții complete de supraveghere video pentru medii industriale, comerciale, instituții publice și rezidențiale. De la 4 camere la sisteme cu 500+ fluxuri. Stocare cu politică de retenție configurată conform GDPR, analiză video pentru alerte proactive. Compatibil ONVIF, integrabil cu orice VMS enterprise.</p>
+        <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=800&q=80');"></div>
+      </div>
+
+      <div id="acces" class="svc-slide service-page__item">
+        <div class="service-page__num">06 / SEC-ACC</div>
+        <div>
+          <h2 class="service-page__title">Control acces și pontaj</h2>
+          <div class="service-page__specs">
+            <span>Cititoare RFID / Mifare</span><span>Biometrie · amprentă / facial</span>
+            <span>Turnicheți · bariere · porți auto</span><span>Interfoane IP</span>
+            <span>Pontaj și audit-trail</span><span>Politici granulare de acces</span>
+          </div>
+        </div>
+        <p class="service-page__body">Implementăm sisteme pentru gestionarea accesului persoanelor, evidența timpului de lucru și securizarea zonelor sensibile. Integrare cu efracție pentru dezarmare automată la acces autorizat și cu CCTV pentru verificare vizuală. Soluții scalabile de la un punct de acces la sute de intrări în obiective complexe.</p>
+        <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80');"></div>
+      </div>
+
+      <div id="voce-date" class="svc-slide service-page__item">
+        <div class="service-page__num">07 / IT-INF</div>
+        <div>
+          <h2 class="service-page__title">Rețele voce-date și cablare structurată</h2>
+          <div class="service-page__specs">
+            <span>Cat6 / Cat6A / Cat7</span><span>Fibră OM3 / OM4 / OS2</span>
+            <span>Rack-uri · patch-panels</span><span>Switch-uri · PoE+</span>
+            <span>Wi-Fi 6 enterprise</span><span>Testare și certificare pe punct</span>
+          </div>
+        </div>
+        <p class="service-page__body">Realizăm infrastructura completă de comunicații: cablare structurată cupru și fibră optică, rack-uri, echipamente active și pasive, testare și certificarea rețelelor. Fiecare priză testată cu analizor profesional, documentație completă cu scheme as-built. Baza pe care funcționează toate celelalte sisteme dintr-un obiectiv integrat.</p>
+        <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80');"></div>
+      </div>
+
+      <div id="sonorizare" class="svc-slide service-page__item">
+        <div class="service-page__num">08 / AV-VOC</div>
+        <div>
+          <h2 class="service-page__title">Sonorizare și evacuare vocală</h2>
+          <div class="service-page__specs">
+            <span>Adresare publică (PA)</span><span>Muzică ambientală</span>
+            <span>Evacuare vocală EN 60849</span><span>Amplificare digitală</span>
+            <span>Integrare centrală incendiu</span><span>Conferințe · teleconferințe</span>
+          </div>
+        </div>
+        <p class="service-page__body">Instalăm sisteme de adresare publică, muzică ambientală și evacuare vocală utilizate în situații de urgență. Sistemele de evacuare vocală sunt integrate cu centralele de incendiu pentru mesaje automate de alertă și evacuare. Proiectare acustică, instalare, calibrare și training pentru personalul de operare.</p>
+        <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80');"></div>
+      </div>
+
+      <div id="tv" class="svc-slide service-page__item">
+        <div class="service-page__num">09 / TV-SIG</div>
+        <div>
+          <h2 class="service-page__title">Sisteme TV și distribuție semnal</h2>
+          <div class="service-page__specs">
+            <span>Antene colective SMATV</span><span>Headend CATV / IPTV</span>
+            <span>Distribuție hotel / spital / birouri</span><span>Modulatoare digitale</span>
+            <span>Sisteme interactive IPTV</span><span>Digital Signage</span>
+          </div>
+        </div>
+        <p class="service-page__body">Implementăm sisteme de televiziune pentru hoteluri, spitale, centre comerciale și clădiri de birouri. De la infrastructura de distribuție semnal RF până la sisteme IPTV interactive cu canal propriu și ecrane de informare digitală (digital signage) în spații publice.</p>
+        <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&q=80');"></div>
+      </div>
+
+      <div id="bms" class="svc-slide service-page__item">
+        <div class="service-page__num">10 / BMS-INT</div>
+        <div>
+          <h2 class="service-page__title">Integrare sisteme · BMS / SMS</h2>
+          <div class="service-page__specs">
+            <span>Platforme SCADA / BMS</span><span>Protocol BACnet / Modbus / KNX</span>
+            <span>Interfețe OPC-UA</span><span>Monitorizare centralizată</span>
+            <span>Dashboard operatori</span><span>Reducere costuri operare</span>
+          </div>
+        </div>
+        <p class="service-page__body">Asigurăm integrarea tuturor sistemelor de curenți slabi într-o platformă unică pentru monitorizare și control centralizat, creșterea eficienței și reducerea costurilor de operare. Prin experiența acumulată, acoperim integral orice tip de sistem de curenți slabi — oferind avantajul unui singur furnizor pentru toate soluțiile.</p>
+        <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80');"></div>
+      </div>
+
+    </div><!-- /.svc-slider__track -->
+
+    <!-- Progress bar -->
+    <div class="svc-slider__bar">
+      <div class="svc-slider__bar-fill" id="svc-bar"></div>
     </div>
 
-    <div id="desfumare" class="service-page__item" data-reveal>
-      <div class="service-page__num">02 / SMOKE-EXT</div>
-      <div>
-        <h2 class="service-page__title">Desfumare mecanizată</h2>
-        <div class="service-page__specs">
-          <span>Ventilatoare axiale 400°C/2h</span><span>Trape de desfumare</span>
-          <span>Clapete antifoc certificate</span><span>Automatizare PLC</span>
-          <span>Integrare centrale incendiu</span><span>Normativ P-118/3 · NP 161</span>
-        </div>
+    <!-- Controls -->
+    <div class="svc-slider__controls">
+      <button class="svc-slider__arrow" id="svc-prev" aria-label="Serviciu anterior">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="svc-slider__info">
+        <span class="svc-slider__count"><span id="svc-cur">01</span> / 10</span>
+        <div class="svc-slider__dots" id="svc-dots"></div>
       </div>
-      <p class="service-page__body">Implementăm sisteme de evacuare a fumului și gazelor fierbinți în caz de incendiu — esențiale pentru siguranța persoanelor și limitarea pagubelor. Sistemele sunt integrate cu detecția incendiu și automatizările clădirii. Autorizați ISU pentru proiectare (Seria A, Nr. 4998) și instalare (Seria A, Nr. 6614).</p>
-      <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80');"></div>
-    </div>
-
-    <div id="stingere" class="service-page__item" data-reveal>
-      <div class="service-page__num">03 / FIRE-SUP</div>
-      <div>
-        <h2 class="service-page__title">Stingere incendiu · aerosoli / gaz inert</h2>
-        <div class="service-page__specs">
-          <span>Sisteme FM-200 / NOVEC 1230</span><span>Aerosoli condensați</span>
-          <span>Sprinklere · deluge</span><span>Zone multisector independente</span>
-          <span>Prealarmă redundantă</span><span>Certificare și teste descărcare</span>
-        </div>
-      </div>
-      <p class="service-page__body">Soluții dedicate pentru protecția spațiilor critice: camere server, tablouri electrice, camere tehnice, arhive. Utilizăm sisteme cu aerosoli sau gaz inert care nu deteriorează echipamentele și permit reluarea rapidă a activității după incident. Autorizați ISU pentru instalare și întreținere (Seria B, Nr. 5572).</p>
-      <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80');"></div>
-    </div>
-
-    <div id="efractie" class="service-page__item" data-reveal>
-      <div class="service-page__num">04 / SEC-ELC</div>
-      <div>
-        <h2 class="service-page__title">Securitate la efracție</h2>
-        <div class="service-page__specs">
-          <span>Centrale hibrid grad 2–4</span><span>Senzori PIR dual</span>
-          <span>Detectori geam / șoc</span><span>Tastaturi tactile</span>
-          <span>Conectare dispecerat</span><span>Aplicație mobilă</span>
-        </div>
-      </div>
-      <p class="service-page__body">Proiectăm și implementăm sisteme de detecție și alarmare antiefracție adaptate specificului fiecărui obiectiv, cu grad de securitate conform SR EN 50131. Posibilitate de integrare cu CCTV și control acces pentru verificare prealarmă automată. Licențiați IGPR — Nr. 2973/2, valabilă 2025–2029.</p>
-      <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1562813733-b31f71025d54?w=800&q=80');"></div>
-    </div>
-
-    <div id="cctv" class="service-page__item" data-reveal>
-      <div class="service-page__num">05 / SEC-CCTV</div>
-      <div>
-        <h2 class="service-page__title">Supraveghere video · CCTV</h2>
-        <div class="service-page__specs">
-          <span>Camere IP 4K / 8MP</span><span>NVR redundant RAID</span>
-          <span>LPR · recunoaștere plăcuțe</span><span>Analiză video inteligentă</span>
-          <span>Integrare VMS · control acces</span><span>Cloud backup opțional</span>
-        </div>
-      </div>
-      <p class="service-page__body">Furnizăm soluții complete de supraveghere video pentru medii industriale, comerciale, instituții publice și rezidențiale. De la 4 camere la sisteme cu 500+ fluxuri. Stocare cu politică de retenție configurată conform GDPR, analiză video pentru alerte proactive. Compatibil ONVIF, integrabil cu orice VMS enterprise.</p>
-      <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=800&q=80');"></div>
-    </div>
-
-    <div id="acces" class="service-page__item" data-reveal>
-      <div class="service-page__num">06 / SEC-ACC</div>
-      <div>
-        <h2 class="service-page__title">Control acces și pontaj</h2>
-        <div class="service-page__specs">
-          <span>Cititoare RFID / Mifare</span><span>Biometrie · amprentă / facial</span>
-          <span>Turnicheți · bariere · porți auto</span><span>Interfoane IP</span>
-          <span>Pontaj și audit-trail</span><span>Politici granulare de acces</span>
-        </div>
-      </div>
-      <p class="service-page__body">Implementăm sisteme pentru gestionarea accesului persoanelor, evidența timpului de lucru și securizarea zonelor sensibile. Integrare cu efracție pentru dezarmare automată la acces autorizat și cu CCTV pentru verificare vizuală. Soluții scalabile de la un punct de acces la sute de intrări în obiective complexe.</p>
-      <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80');"></div>
-    </div>
-
-    <div id="voce-date" class="service-page__item" data-reveal>
-      <div class="service-page__num">07 / IT-INF</div>
-      <div>
-        <h2 class="service-page__title">Rețele voce-date și cablare structurată</h2>
-        <div class="service-page__specs">
-          <span>Cat6 / Cat6A / Cat7</span><span>Fibră OM3 / OM4 / OS2</span>
-          <span>Rack-uri · patch-panels</span><span>Switch-uri · PoE+</span>
-          <span>Wi-Fi 6 enterprise</span><span>Testare și certificare pe punct</span>
-        </div>
-      </div>
-      <p class="service-page__body">Realizăm infrastructura completă de comunicații: cablare structurată cupru și fibră optică, rack-uri, echipamente active și pasive, testare și certificarea rețelelor. Fiecare priză testată cu analizor profesional, documentație completă cu scheme as-built. Baza pe care funcționează toate celelalte sisteme dintr-un obiectiv integrat.</p>
-      <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80');"></div>
-    </div>
-
-    <div id="sonorizare" class="service-page__item" data-reveal>
-      <div class="service-page__num">08 / AV-VOC</div>
-      <div>
-        <h2 class="service-page__title">Sonorizare și evacuare vocală</h2>
-        <div class="service-page__specs">
-          <span>Adresare publică (PA)</span><span>Muzică ambientală</span>
-          <span>Evacuare vocală EN 60849</span><span>Amplificare digitală</span>
-          <span>Integrare centrală incendiu</span><span>Conferințe · teleconferințe</span>
-        </div>
-      </div>
-      <p class="service-page__body">Instalăm sisteme de adresare publică, muzică ambientală și evacuare vocală utilizate în situații de urgență. Sistemele de evacuare vocală sunt integrate cu centralele de incendiu pentru mesaje automate de alertă și evacuare. Proiectare acustică, instalare, calibrare și training pentru personalul de operare.</p>
-      <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80');"></div>
-    </div>
-
-    <div id="tv" class="service-page__item" data-reveal>
-      <div class="service-page__num">09 / TV-SIG</div>
-      <div>
-        <h2 class="service-page__title">Sisteme TV și distribuție semnal</h2>
-        <div class="service-page__specs">
-          <span>Antene colective SMATV</span><span>Headend CATV / IPTV</span>
-          <span>Distribuție hotel / spital / birouri</span><span>Modulatoare digitale</span>
-          <span>Sisteme interactive IPTV</span><span>Digital Signage</span>
-        </div>
-      </div>
-      <p class="service-page__body">Implementăm sisteme de televiziune pentru hoteluri, spitale, centre comerciale și clădiri de birouri. De la infrastructura de distribuție semnal RF până la sisteme IPTV interactive cu canal propriu și ecrane de informare digitală (digital signage) în spații publice.</p>
-      <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&q=80');"></div>
-    </div>
-
-    <div id="bms" class="service-page__item" data-reveal>
-      <div class="service-page__num">10 / BMS-INT</div>
-      <div>
-        <h2 class="service-page__title">Integrare sisteme · BMS / SMS</h2>
-        <div class="service-page__specs">
-          <span>Platforme SCADA / BMS</span><span>Protocol BACnet / Modbus / KNX</span>
-          <span>Interfețe OPC-UA</span><span>Monitorizare centralizată</span>
-          <span>Dashboard operatori</span><span>Reducere costuri operare</span>
-        </div>
-      </div>
-      <p class="service-page__body">Asigurăm integrarea tuturor sistemelor de curenți slabi într-o platformă unică pentru monitorizare și control centralizat, creșterea eficienței și reducerea costurilor de operare. Prin experiența acumulată, acoperim integral orice tip de sistem de curenți slabi — oferind avantajul unui singur furnizor pentru toate soluțiile.</p>
-      <div class="service-page__thumb" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80');"></div>
+      <button class="svc-slider__arrow" id="svc-next" aria-label="Serviciu următor">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
     </div>
 
   </div>
@@ -193,6 +217,74 @@
 <script src="shared.js"></script>
 <script>
   DasitradeSite.init({ current: 'servicii', navVariant: 'light' });
+
+  /* ── Services auto-slideshow ── */
+  (function(){
+    const slides = Array.from(document.querySelectorAll('.svc-slide'));
+    const bar    = document.getElementById('svc-bar');
+    const dotsEl = document.getElementById('svc-dots');
+    const curEl  = document.getElementById('svc-cur');
+    const total  = slides.length;
+    let current = 0, timer = null, startX = 0;
+    const DELAY = 5000;
+
+    const dots = slides.map(function(_, i){
+      var d = document.createElement('button');
+      d.className = 'svc-slider__dot';
+      d.setAttribute('aria-label', 'Serviciu ' + (i + 1));
+      d.addEventListener('click', function(){ goTo(i); });
+      dotsEl.appendChild(d);
+      return d;
+    });
+
+    function resetBar(){
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){
+        bar.style.transition = 'width ' + DELAY + 'ms linear';
+        bar.style.width = '100%';
+      }); });
+    }
+
+    function goTo(idx){
+      slides[current].classList.remove('is-active');
+      dots[current].classList.remove('is-active');
+      current = ((idx % total) + total) % total;
+      slides[current].classList.add('is-active');
+      dots[current].classList.add('is-active');
+      curEl.textContent = String(current + 1).padStart(2, '0');
+      resetBar();
+      clearInterval(timer);
+      timer = setInterval(function(){ goTo(current + 1); }, DELAY);
+    }
+
+    var hash = location.hash.slice(1);
+    var startIdx = hash ? slides.findIndex(function(s){ return s.id === hash; }) : 0;
+    goTo(Math.max(0, startIdx));
+
+    document.getElementById('svc-prev').addEventListener('click', function(){ goTo(current - 1); });
+    document.getElementById('svc-next').addEventListener('click', function(){ goTo(current + 1); });
+
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    var track = document.getElementById('svc-track');
+    track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', function(e){
+      var dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 50) goTo(dx < 0 ? current + 1 : current - 1);
+    });
+
+    var section = document.querySelector('.svc-slider-wrap');
+    section.addEventListener('mouseenter', function(){ clearInterval(timer); });
+    section.addEventListener('mouseleave', function(){
+      timer = setInterval(function(){ goTo(current + 1); }, DELAY);
+      resetBar();
+    });
+  })();
+
   (function(){
     const nav = document.querySelector('[data-nav]');
     const hero = document.querySelector('.page-hero');
