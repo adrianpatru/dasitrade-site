@@ -408,13 +408,31 @@
     ];
     var labels = Array.from(document.querySelectorAll('.hm-label'));
     if (!labels.length) return;
-    var VISIBLE = 5, SHOW_MS = 5000, FADE_MS = 650;
+    /* SVG coords of each dot — used for proximity check */
+    var DOT = [
+      [517,135],[608,153],[390,237],[310,368],[297,429],[488,582],
+      [612,281],[520,410],[610,381],[740,314],[687,422],[640,638],
+      [717,531],[783,566],[869,444],[1022,143],[967,153],[983,260],
+      [947,621],[937,547],[1147,224],[1090,444],[1043,522],[1207,474],
+      [1287,657],[1307,519]
+    ];
+    var MIN2 = 140*140; /* min squared distance between active labels */
+    var VISIBLE = 3, SHOW_MS = 8000, FADE_MS = 750;
     var active = new Set(), deck = [], di = 0;
     function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a; }
     function nextCity(){ if(di>=deck.length){deck=shuffle(CITIES.slice());di=0;} return deck[di++]; }
+    function dsq(a,b){ var dx=DOT[a][0]-DOT[b][0],dy=DOT[a][1]-DOT[b][1]; return dx*dx+dy*dy; }
     function spawn(){
+      /* collect dots not active and not too close to any active dot */
       var free=[];
-      for(var i=0;i<labels.length;i++){ if(!active.has(i)) free.push(i); }
+      for(var i=0;i<labels.length;i++){
+        if(active.has(i)) continue;
+        var ok=true;
+        active.forEach(function(ai){ if(dsq(i,ai)<MIN2) ok=false; });
+        if(ok) free.push(i);
+      }
+      /* fallback: any non-active */
+      if(!free.length){ for(var j=0;j<labels.length;j++) if(!active.has(j)) free.push(j); }
       if(!free.length) return;
       var idx=free[Math.floor(Math.random()*free.length)];
       active.add(idx);
@@ -425,13 +443,13 @@
         el.style.opacity='0';
         setTimeout(function(){
           active.delete(idx);
-          setTimeout(spawn, 200+Math.random()*600);
+          setTimeout(spawn, 1500+Math.random()*2000);
         }, FADE_MS);
       }, SHOW_MS);
     }
-    /* wait for map draw animation (~2.5s), then stagger initial labels */
+    /* wait for map draw animation, then stagger initial labels */
     setTimeout(function(){
-      for(var i=0;i<VISIBLE;i++) setTimeout(spawn, i*550);
+      for(var i=0;i<VISIBLE;i++) setTimeout(spawn, i*1400);
     }, 2600);
   })();
 
@@ -455,12 +473,27 @@
     ];
 
     var taken = new Set();
+    var MIN_DIST = 20; /* minimum % distance between active bubbles */
+
+    function pdist(a, b){
+      return Math.hypot(POOL[a][0]-POOL[b][0], POOL[a][1]-POOL[b][1]);
+    }
 
     function pickPos(exclude) {
-      var free = POOL.filter(function(p, i){ return !taken.has(i) && i !== exclude; });
-      if (!free.length) free = POOL; /* fallback: use any */
-      var idx = POOL.indexOf(free[Math.floor(Math.random() * free.length)]);
-      return idx;
+      var takenArr = Array.from(taken);
+      var candidates = POOL.reduce(function(acc, p, i){
+        if (taken.has(i) || i === exclude) return acc;
+        var tooClose = takenArr.some(function(ti){ return pdist(i, ti) < MIN_DIST; });
+        if (!tooClose) acc.push(i);
+        return acc;
+      }, []);
+      /* fallback: any non-taken non-excluded */
+      if (!candidates.length) candidates = POOL.reduce(function(acc, p, i){
+        if (!taken.has(i) && i !== exclude) acc.push(i);
+        return acc;
+      }, []);
+      if (!candidates.length) candidates = POOL.map(function(_,i){ return i; });
+      return candidates[Math.floor(Math.random() * candidates.length)];
     }
 
     function startBubble(el, initialDelay) {
@@ -479,8 +512,8 @@
           el.style.transform = 'scale(1) translateY(0)';
         });
 
-        /* stay visible 3.5–6s */
-        var visible = 3500 + Math.random() * 2500;
+        /* stay visible 7–10s */
+        var visible = 7000 + Math.random() * 3000;
         setTimeout(hide, visible);
       }
 
@@ -489,8 +522,8 @@
         el.style.opacity = '0';
         el.style.transform = 'scale(0.88) translateY(-12px)';
 
-        /* pause 1–3s before reappearing */
-        var pause = 1000 + Math.random() * 2000;
+        /* pause 2–4s before reappearing */
+        var pause = 2000 + Math.random() * 2000;
         setTimeout(show, FADE + pause);
       }
 
