@@ -73,7 +73,6 @@ function TypedLine({ text, x, y, start, typeDur, color = 'rgba(200,210,220,0.85)
 
   const local = t - start;
   const total = text.length;
-  // Fast typing — clamp to typeDur
   const charsShown = Math.min(total, Math.floor((local / typeDur) * total));
   const shown = text.slice(0, charsShown);
 
@@ -140,23 +139,23 @@ function ScanLine() {
 // ── Title: "DASITRADE SYSTEM v1.0" ──────────────────────────────────────────
 function Title() {
   const t = useTime();
-  // Fade in 0.00 -> 0.32
-  const fadeIn = clamp(t / 0.32, 0, 1);
+  // Fade in 0.00 -> 0.8 (slow reveal)
+  const fadeIn = clamp(t / 0.8, 0, 1);
   const eased = Easing.easeOutCubic(fadeIn);
 
-  // Very subtle glitch at ~0.18s
-  const glitchT = t - 0.18;
+  // Very subtle glitch at ~0.45s
+  const glitchT = t - 0.45;
   let glitchX = 0;
-  if (glitchT > 0 && glitchT < 0.08) {
+  if (glitchT > 0 && glitchT < 0.2) {
     glitchX = (Math.random() - 0.5) * 4;
   }
 
-  // Fade out slightly at end (stays mostly visible)
-  const fadeOut = t > 1.35 ? clamp((t - 1.35) / 0.15, 0, 1) : 0;
+  // Fade out slightly at end
+  const fadeOut = t > 3.40 ? clamp((t - 3.40) / 0.38, 0, 1) : 0;
   const opacity = eased * (1 - fadeOut * 0.3);
 
   // Letter-spacing eases in for subtle reveal
-  const ls = interpolate([0, 0.32], [0.8, 0.42], Easing.easeOutCubic)(t);
+  const ls = interpolate([0, 0.8], [0.8, 0.42], Easing.easeOutCubic)(t);
 
   return (
     <>
@@ -222,20 +221,18 @@ function Title() {
 // ── Terminal log lines ──────────────────────────────────────────────────────
 function TerminalLogs() {
   const t = useTime();
-  // Terminal lines appear after title has established (0.35s in)
-  const line1Start = 0.35;
-  const line1TypeDur = 0.28;
-  const line1Done = line1Start + line1TypeDur;
+  // Terminal lines appear after title has established
+  const line1Start = 0.88;
+  const line1TypeDur = 0.7;
+  const line1Done = line1Start + line1TypeDur;   // 1.58
 
-  const line2Start = 0.70;
-  const line2TypeDur = 0.30;
-  const line2Done = line2Start + line2TypeDur;
+  const line2Start = 1.75;
+  const line2TypeDur = 0.75;
+  const line2Done = line2Start + line2TypeDur;   // 2.50
 
-  const grantStart = 1.08;
+  const grantStart = 2.70;
 
-  // Container fades in as lines begin
-  const containerOpacity = clamp((t - 0.32) / 0.15, 0, 1);
-  // Fade out at very end? No — hold through end.
+  const containerOpacity = clamp((t - 0.8) / 0.38, 0, 1);
 
   return (
     <div style={{ position: 'absolute', inset: 0, opacity: containerOpacity }}>
@@ -250,7 +247,7 @@ function TerminalLogs() {
         cursorEnd={line2Start}
       />
       {/* [OK] marker after line 1 completes */}
-      {t >= line1Done + 0.02 && (
+      {t >= line1Done + 0.05 && (
         <div style={{
           position: 'absolute',
           left: 1180, top: 620,
@@ -258,7 +255,7 @@ function TerminalLogs() {
           fontSize: 22,
           color: 'rgba(160,180,170,0.75)',
           letterSpacing: '0.08em',
-          opacity: clamp((t - (line1Done + 0.02)) / 0.08, 0, 1),
+          opacity: clamp((t - (line1Done + 0.05)) / 0.2, 0, 1),
         }}>
           [ OK ]
         </div>
@@ -274,7 +271,7 @@ function TerminalLogs() {
         size={22}
         cursorEnd={grantStart}
       />
-      {t >= line2Done + 0.02 && (
+      {t >= line2Done + 0.05 && (
         <div style={{
           position: 'absolute',
           left: 1180, top: 665,
@@ -282,7 +279,7 @@ function TerminalLogs() {
           fontSize: 22,
           color: 'rgba(160,180,170,0.75)',
           letterSpacing: '0.08em',
-          opacity: clamp((t - (line2Done + 0.02)) / 0.08, 0, 1),
+          opacity: clamp((t - (line2Done + 0.05)) / 0.2, 0, 1),
         }}>
           [ OK ]
         </div>
@@ -298,18 +295,17 @@ function TerminalLogs() {
 // ── ACCESS GRANTED final line ───────────────────────────────────────────────
 function AccessGranted() {
   const t = useTime();
-  const start = 1.08;
+  const start = 2.70;
   if (t < start) return null;
   const local = t - start;
 
-  // Entry: quick fade + scale
-  const entry = Easing.easeOutCubic(clamp(local / 0.18, 0, 1));
+  // Entry: fade + scale
+  const entry = Easing.easeOutCubic(clamp(local / 0.45, 0, 1));
   // Subtle pulse after appearance
   const pulse = 0.85 + 0.15 * Math.sin(local * 10);
 
-  // Soft green — professional, not neon
-  const green = 'oklch(78% 0.10 155)';
-  const greenSoft = 'oklch(78% 0.10 155 / 0.35)';
+  const green = 'oklch(78% 0.1 155)';
+  const greenSoft = 'oklch(78% 0.1 155 / 0.35)';
 
   return (
     <>
@@ -354,16 +350,15 @@ function AccessGranted() {
 function BootScene() {
   const t = useTime();
 
-  // Update root data-screen-label with timestamp each second-ish
   React.useEffect(() => {
     const root = document.getElementById('video-root');
     if (root) root.setAttribute('data-screen-label', `t=${t.toFixed(2)}s`);
   }, [Math.floor(t * 10)]);
 
-  // Overall fade in at very start (first ~80ms)
-  const bootFade = clamp(t / 0.08, 0, 1);
-  // Final fade to black at very end (last 80ms)
-  const endFade = t > 1.42 ? clamp((t - 1.42) / 0.08, 0, 1) : 0;
+  // Overall fade in at very start
+  const bootFade = clamp(t / 0.2, 0, 1);
+  // Final fade to black at very end
+  const endFade = t > 3.55 ? clamp((t - 3.55) / 0.2, 0, 1) : 0;
 
   return (
     <div style={{
@@ -371,13 +366,12 @@ function BootScene() {
       background: '#000',
       opacity: bootFade * (1 - endFade * 0.4),
     }}>
-      {/* Deep bg subtle gradient */}
       <div style={{
         position: 'absolute', inset: 0,
         background: 'radial-gradient(ellipse at center, rgba(15,20,28,1) 0%, rgba(0,0,0,1) 70%)',
       }}/>
 
-      <CornerBrackets opacity={clamp((t - 0.15) / 0.2, 0, 1) * 0.9}/>
+      <CornerBrackets opacity={clamp((t - 0.38) / 0.5, 0, 1) * 0.9}/>
       <ScanLine/>
       <Title/>
       <TerminalLogs/>

@@ -213,7 +213,7 @@
           overlay.remove();
           sessionStorage.setItem('dasitrade_splash_seen', '1');
         }, 500);
-      }, 1600);
+      }, 3900);
     } catch {}
   }
 
