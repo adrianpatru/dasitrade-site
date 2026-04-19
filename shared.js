@@ -97,7 +97,7 @@
         </div>
         <div class="footer__col">
           <div class="footer__col-label">Sediu</div>
-          <p>Bacău<br/>Str. Nufărului Nr. 10<br/>Bl. 10, Sc. B, Et. 3, Ap. 7</p>
+          <p>Bld. Unirii, Nr. 92 B<br/>Bacău, România</p>
         </div>
         <div class="footer__col">
           <div class="footer__col-label">Dispatch</div>
