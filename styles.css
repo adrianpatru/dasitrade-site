@@ -926,6 +926,49 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.22em;
 }
 
+/* ── Portfolio slideshow ─────────────────────────────────────────── */
+.port-slider__track {
+  display: grid;
+  grid-template-areas: "s";
+  margin-top: 2px;
+}
+.port-slide {
+  grid-area: s;
+  grid-column: unset !important;
+  aspect-ratio: 16/8 !important;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(6px);
+}
+.port-slide.is-active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.port-slider__bar { height: 2px; background: var(--line-strong); }
+.port-slider__bar-fill { height: 100%; background: var(--accent); width: 0; }
+.port-slider__controls {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; padding: 20px 0 12px;
+}
+.port-slider__arrow {
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: none; border: 1px solid var(--line-strong);
+  color: var(--fg-dim); cursor: pointer; border-radius: 2px;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+.port-slider__arrow:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.port-slider__info { display: flex; flex-direction: column; align-items: center; gap: 10px; flex: 1; }
+.port-slider__count { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; color: var(--fg-faint); }
+.port-slider__count span:first-child { color: var(--fg); }
+.port-slider__dots { display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; }
+.port-slider__dot {
+  width: 16px; height: 3px; padding: 0; border: none;
+  background: var(--line-strong); cursor: pointer; border-radius: 2px;
+  transition: background 0.25s, width 0.25s;
+}
+.port-slider__dot.is-active { background: var(--accent); width: 28px; }
+.port-slider__dot:hover:not(.is-active) { background: var(--fg-faint); }
+
 /* ── Contact ─────────────────────────────────────────────────────── */
 .contact-grid {
   display: grid;
