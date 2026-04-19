@@ -46,7 +46,15 @@
     const host = document.querySelector('[data-nav]');
     if (!host) return;
     const brand = h('a', { class: 'nav__brand', href: 'index.html' });
-    brand.innerHTML = `<img src="assets/logo.png" alt="Dasitrade" class="nav__logo"/>`;
+    brand.innerHTML = `
+      <img src="assets/logo.png" alt="Dasitrade" class="nav__logo nav__logo--real"/>
+      <svg class="nav__logo nav__logo--svg" viewBox="0 0 260 48" aria-hidden="true">
+        <rect x="2" y="8" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <rect x="10" y="16" width="16" height="16" fill="currentColor"/>
+        <line x1="2" y1="24" x2="34" y2="24" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+        <text x="48" y="31" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="17" font-weight="500" letter-spacing="4" fill="currentColor">DASITRADE</text>
+      </svg>
+    `;
     const links = h('nav', { class: 'nav__links' },
       NAV_ITEMS.map(it => h('a', {
         href: it.href,
