@@ -254,21 +254,21 @@
     <a href="servicii.html" class="mono" style="font-size:12px;letter-spacing:0.18em;text-transform:uppercase;border-bottom:1px solid var(--fg);padding-bottom:4px;">Vezi toate serviciile →</a>
   </div>
 
-  <div class="cap-bubble" style="--bx:2%;  --by:8%;  --bd:0s">Detecție incendiu</div>
-  <div class="cap-bubble" style="--bx:72%; --by:5%;  --bd:0.7s">Desfumare</div>
-  <div class="cap-bubble" style="--bx:83%; --by:22%; --bd:1.4s">Stingere gaz</div>
-  <div class="cap-bubble" style="--bx:87%; --by:50%; --bd:2.1s">Efracție</div>
-  <div class="cap-bubble" style="--bx:80%; --by:76%; --bd:2.8s">CCTV</div>
-  <div class="cap-bubble" style="--bx:58%; --by:88%; --bd:3.5s">Control acces</div>
-  <div class="cap-bubble" style="--bx:18%; --by:87%; --bd:4.2s">Cablare structurată</div>
-  <div class="cap-bubble" style="--bx:2%;  --by:72%; --bd:4.9s">Sonorizare</div>
-  <div class="cap-bubble" style="--bx:2%;  --by:42%; --bd:5.6s">Sisteme TV</div>
-  <div class="cap-bubble" style="--bx:22%; --by:6%;  --bd:6.3s">BMS / SMS</div>
-  <div class="cap-bubble cap-bubble--accent" style="--bx:44%; --by:3%;  --bd:7.0s">Nurse Call</div>
-  <div class="cap-bubble" style="--bx:3%;  --by:25%; --bd:1.0s">LPR · Bariere auto</div>
-  <div class="cap-bubble" style="--bx:84%; --by:38%; --bd:3.0s">Interfoane video</div>
-  <div class="cap-bubble" style="--bx:38%; --by:91%; --bd:5.0s">Dispecerat 24/7</div>
-  <div class="cap-bubble" style="--bx:58%; --by:4%;  --bd:2.5s">Smart Building</div>
+  <div class="cap-bubble">Detecție incendiu</div>
+  <div class="cap-bubble">Desfumare</div>
+  <div class="cap-bubble">Stingere gaz</div>
+  <div class="cap-bubble">Efracție</div>
+  <div class="cap-bubble">CCTV</div>
+  <div class="cap-bubble">Control acces</div>
+  <div class="cap-bubble">Cablare structurată</div>
+  <div class="cap-bubble">Sonorizare</div>
+  <div class="cap-bubble">Sisteme TV</div>
+  <div class="cap-bubble">BMS / SMS</div>
+  <div class="cap-bubble cap-bubble--accent">Nurse Call</div>
+  <div class="cap-bubble">LPR · Bariere auto</div>
+  <div class="cap-bubble">Interfoane video</div>
+  <div class="cap-bubble">Dispecerat 24/7</div>
+  <div class="cap-bubble">Smart Building</div>
 </section>
 
 <!-- PRINCIPLES -->
@@ -360,7 +360,77 @@
     };
     tick(); setInterval(tick, 1000);
   })();
-  // Nav goes light on scroll past hero
+  /* ── Capability bubbles: random cycling positions ── */
+  (function(){
+    var bubbles = Array.from(document.querySelectorAll('.cap-bubble'));
+    if (!bubbles.length) return;
+
+    /* 28 positions on the perimeter, avoiding center zone (30-70% x, 28-72% y) */
+    var POOL = [
+      /* top strip */
+      [2,5],[14,4],[27,3],[40,3],[53,4],[65,5],[76,4],[86,3],
+      /* right strip */
+      [85,14],[87,26],[87,40],[87,54],[86,66],[84,78],
+      /* bottom strip */
+      [74,88],[60,91],[46,89],[32,88],[18,87],[6,88],
+      /* left strip */
+      [2,76],[2,62],[2,48],[2,33],[2,19],
+      /* corners/extras */
+      [12,12],[77,12],[12,83],[74,83]
+    ];
+
+    var taken = new Set();
+
+    function pickPos(exclude) {
+      var free = POOL.filter(function(p, i){ return !taken.has(i) && i !== exclude; });
+      if (!free.length) free = POOL; /* fallback: use any */
+      var idx = POOL.indexOf(free[Math.floor(Math.random() * free.length)]);
+      return idx;
+    }
+
+    function startBubble(el, initialDelay) {
+      var posIdx = -1;
+      var FADE = 700; /* ms */
+
+      function show() {
+        posIdx = pickPos(posIdx);
+        taken.add(posIdx);
+        var p = POOL[posIdx];
+        el.style.left = p[0] + '%';
+        el.style.top  = p[1] + '%';
+
+        requestAnimationFrame(function(){
+          el.style.opacity = '1';
+          el.style.transform = 'scale(1) translateY(0)';
+        });
+
+        /* stay visible 3.5–6s */
+        var visible = 3500 + Math.random() * 2500;
+        setTimeout(hide, visible);
+      }
+
+      function hide() {
+        taken.delete(posIdx);
+        el.style.opacity = '0';
+        el.style.transform = 'scale(0.88) translateY(-12px)';
+
+        /* pause 1–3s before reappearing */
+        var pause = 1000 + Math.random() * 2000;
+        setTimeout(show, FADE + pause);
+      }
+
+      /* initial state */
+      el.style.opacity = '0';
+      el.style.transform = 'scale(0.88) translateY(8px)';
+      setTimeout(show, initialDelay);
+    }
+
+    bubbles.forEach(function(el, i){
+      startBubble(el, i * 420);
+    });
+  })();
+
+  /* ── Nav goes light on scroll past hero ── */
   (function(){
     const nav = document.querySelector('[data-nav]');
     const hero = document.querySelector('.hero');

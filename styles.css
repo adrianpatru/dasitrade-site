@@ -620,30 +620,23 @@ img { max-width: 100%; display: block; }
 }
 .cap-bubble {
   position: absolute;
-  left: var(--bx);
-  top: var(--by);
-  padding: 13px 28px;
+  padding: 15px 32px;
   border: 1px solid var(--line-strong);
   border-radius: 100px;
   font-family: var(--mono);
-  font-size: 13px;
-  letter-spacing: 0.14em;
+  font-size: 15px;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--fg-dim);
   background: var(--paper);
   white-space: nowrap;
-  box-shadow: 0 3px 18px rgba(20,21,24,0.08);
+  box-shadow: 0 4px 20px rgba(20,21,24,0.09);
   opacity: 0;
-  animation: cap-cycle 11s var(--bd, 0s) ease-in-out infinite;
+  transform: scale(0.88) translateY(8px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  pointer-events: none;
 }
 .cap-bubble--accent { border-color: var(--accent); color: var(--accent); }
-@keyframes cap-cycle {
-  0%   { opacity: 0; transform: scale(0.82) translateY(8px); }
-  8%   { opacity: 1; transform: scale(1)    translateY(0); }
-  45%  { opacity: 1; transform: scale(1)    translateY(-9px); }
-  58%  { opacity: 0; transform: scale(0.9)  translateY(-14px); }
-  100% { opacity: 0; transform: scale(0.82) translateY(8px); }
-}
 
 /* Three-principle block */
 .principles {
@@ -1292,7 +1285,7 @@ img { max-width: 100%; display: block; }
   .hero__img-placeholder { width: 100%; opacity: 0.3; }
   .capability-bubbles { display: block; min-height: auto; padding: 80px 24px 60px; text-align: center; }
   .capability-bubbles__center { margin: 0 auto 40px; }
-  .cap-bubble { position: static; display: inline-block; margin: 6px; animation: cap-cycle 11s var(--bd, 0s) ease-in-out infinite; }
+  .cap-bubble { position: static; display: inline-block; margin: 6px; opacity: 1 !important; transform: none !important; transition: none; }
   .principles__grid { grid-template-columns: 1fr; }
   .voices__grid { grid-template-columns: 1fr; }
   .cta__tier { grid-template-columns: 1fr; }
