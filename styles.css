@@ -611,10 +611,14 @@ img { max-width: 100%; display: block; }
 
 /* ── Capability bubbles ──────────────────────────────────────────── */
 .capability-bubbles {
-  position: relative;
-  min-height: 660px;
   background: var(--paper-warm);
   border-top: 1px solid var(--line);
+}
+.capability-bubbles__inner {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 660px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1292,7 +1296,7 @@ img { max-width: 100%; display: block; }
   .hero__bottom { grid-template-columns: 1fr 1fr; }
   .hero__lede { grid-column: span 2; }
   .hero__img-placeholder { width: 100%; opacity: 0.3; }
-  .capability-bubbles { display: block; min-height: auto; padding: 80px 24px 60px; text-align: center; }
+  .capability-bubbles__inner { display: block; min-height: auto; padding: 80px 24px 60px; text-align: center; }
   .capability-bubbles__center { margin: 0 auto 40px; }
   .cap-bubble { position: static; display: inline-block; margin: 6px; opacity: 1 !important; transform: none !important; transition: none; }
   .principles__grid { grid-template-columns: 1fr; }
