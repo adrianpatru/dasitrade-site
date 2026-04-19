@@ -82,24 +82,32 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   text-decoration: none;
+  border-radius: 6px;
+  padding: 3px 8px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Real PNG logo: visible only on light nav (scrolled) */
-.nav__logo--real {
-  display: none;
-  height: 44px;
-  width: auto;
-  mix-blend-mode: multiply; /* white background becomes transparent on light nav */
+/* On dark nav (hero): white pill so logo is readable */
+.nav--dark .nav__brand {
+  background: rgba(255,255,255,0.96);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.22);
 }
-.nav--light .nav__logo--real { display: block; }
 
-/* SVG wordmark: visible only on dark nav (over hero) */
-.nav__logo--svg {
-  display: none;
-  height: 28px;
+/* On light nav (scrolled): no pill, multiply removes white bg */
+.nav--light .nav__brand {
+  background: transparent;
+  box-shadow: none;
+}
+
+.nav__logo {
+  display: block;
+  height: 40px;
   width: auto;
 }
-.nav--dark .nav__logo--svg { display: block; }
+
+.nav--light .nav__logo {
+  mix-blend-mode: multiply;
+}
 .nav__links { display: flex; gap: 28px; }
 .nav__links a { position: relative; opacity: 0.7; transition: opacity 140ms; }
 .nav__links a:hover, .nav__links a.is-active { opacity: 1; }
