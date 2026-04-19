@@ -33,75 +33,123 @@
     <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=2400&q=80" alt="" loading="eager"/>
   </div>
 
-  <!-- Romania coverage map -->
+  <!-- Romania coverage map — full viewport -->
   <div class="hero__map" aria-hidden="true">
-    <svg class="hero__map-svg" viewBox="-80 -30 960 550" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <svg class="hero__map-svg" viewBox="0 0 1600 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
       <defs>
         <filter id="hm-glow" x="-150%" y="-150%" width="400%" height="400%">
-          <feGaussianBlur stdDeviation="5" result="blur"/>
+          <feGaussianBlur stdDeviation="6" result="blur"/>
           <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
         <filter id="hm-glow-sm" x="-100%" y="-100%" width="300%" height="300%">
-          <feGaussianBlur stdDeviation="2.5" result="blur"/>
+          <feGaussianBlur stdDeviation="3" result="blur"/>
           <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
-        <radialGradient id="hm-vignette" cx="69%" cy="37%" r="55%">
-          <stop offset="0%" stop-color="white" stop-opacity="1"/>
-          <stop offset="100%" stop-color="white" stop-opacity="0.15"/>
+        <!-- Vignette: opaque at Bacău (66%, 39%), fades toward all edges -->
+        <radialGradient id="hm-vignette" cx="66%" cy="39%" r="70%">
+          <stop offset="0%"   stop-color="white" stop-opacity="1"/>
+          <stop offset="60%"  stop-color="white" stop-opacity="0.7"/>
+          <stop offset="100%" stop-color="white" stop-opacity="0.05"/>
         </radialGradient>
         <mask id="hm-fade">
-          <rect x="-80" y="-30" width="960" height="550" fill="url(#hm-vignette)"/>
+          <rect width="1600" height="800" fill="url(#hm-vignette)"/>
         </mask>
       </defs>
 
       <g mask="url(#hm-fade)">
-        <!-- Romania border — simplified polygon, ~35 points, clockwise from NW -->
-        <path class="hm-border" d="
-          M232,60 L256,40 L304,45 L352,60 L400,40 L440,60
-          L480,50 L512,45 L536,65 L584,85
-          L632,120 L656,160 L664,230 L656,260
-          L712,290 L776,330 L784,360 L776,420
-          L720,460 L688,460
-          L640,440 L592,450 L544,470 L480,460 L392,470
-          L336,450 L288,440 L240,440
-          L208,410 L192,370 L144,320 L112,260 L96,220
-          L104,190 L136,160 L160,140 L184,110 L224,90 Z
-        "/>
+        <!--
+          Bacău home: 1055, 310
+          All lines: M1055,310 Q cx,cy  x,y
+          Control points pushed above both endpoints (curves upward).
+          Cities scaled from geographic coords to fill 1600×800 viewport.
+        -->
 
-        <!-- Lines from Bacău (553,183) to major cities — all curving upward -->
-        <!-- Q cx cy = control point pushed above both endpoints -->
-        <path class="hm-line" style="--i:0"  d="M553,183 Q353,33  154,133"/><!-- Oradea -->
-        <path class="hm-line" style="--i:1"  d="M553,183 Q329,73  106,223"/><!-- Arad/Timișoara W -->
-        <path class="hm-line" style="--i:2"  d="M553,183 Q325,63  98,265"/> <!-- Timișoara -->
-        <path class="hm-line" style="--i:3"  d="M553,183 Q420,83  287,163"/><!-- Cluj-Napoca -->
-        <path class="hm-line" style="--i:4"  d="M553,183 Q442,93  332,260"/><!-- Sibiu -->
-        <path class="hm-line" style="--i:5"  d="M553,183 Q526,25  500,75"/> <!-- Suceava -->
-        <path class="hm-line" style="--i:6"  d="M553,183 Q580,74  608,124"/><!-- Iași -->
-        <path class="hm-line" style="--i:7"  d="M553,183 Q598,113 644,296"/><!-- Galați -->
-        <path class="hm-line" style="--i:8"  d="M553,183 Q497,103 441,275"/><!-- Brașov -->
-        <path class="hm-line" style="--i:9"  d="M553,183 Q520,103 488,397"/><!-- București -->
-        <path class="hm-line" style="--i:10" d="M553,183 Q428,63  304,408"/><!-- Craiova -->
-        <path class="hm-line" style="--i:11" d="M553,183 Q622,83  692,422"/><!-- Constanța -->
+        <!-- ── Lines from Bacău to Romanian cities ── -->
+        <path class="hm-line" style="--i:0"  d="M1055,310 Q786,45  517,135"/><!-- Satu Mare -->
+        <path class="hm-line" style="--i:1"  d="M1055,310 Q831,63  608,153"/><!-- Baia Mare -->
+        <path class="hm-line" style="--i:2"  d="M1055,310 Q722,137 390,237"/><!-- Oradea -->
+        <path class="hm-line" style="--i:3"  d="M1055,310 Q682,190 310,368"/><!-- Arad -->
+        <path class="hm-line" style="--i:4"  d="M1055,310 Q676,180 297,429"/><!-- Timișoara -->
+        <path class="hm-line" style="--i:5"  d="M1055,310 Q488,192 488,582"/><!-- Drobeta-T.S. -->
+        <path class="hm-line" style="--i:6"  d="M1055,310 Q833,191 612,281"/><!-- Cluj-Napoca -->
+        <path class="hm-line" style="--i:7"  d="M1055,310 Q740,200 520,410"/><!-- Deva -->
+        <path class="hm-line" style="--i:8"  d="M1055,310 Q832,210 610,381"/><!-- Alba Iulia -->
+        <path class="hm-line" style="--i:9"  d="M1055,310 Q897,230 740,314"/><!-- Târgu Mureș -->
+        <path class="hm-line" style="--i:10" d="M1055,310 Q871,210 687,422"/><!-- Sibiu -->
+        <path class="hm-line" style="--i:11" d="M1055,310 Q847,180 640,638"/><!-- Craiova -->
+        <path class="hm-line" style="--i:12" d="M1055,310 Q771,180 488,582"/><!-- Drobeta (2) -->
+        <path class="hm-line" style="--i:13" d="M1055,310 Q886,200 717,531"/><!-- Râmnicu Vâlcea -->
+        <path class="hm-line" style="--i:14" d="M1055,310 Q919,200 783,566"/><!-- Pitești -->
+        <path class="hm-line" style="--i:15" d="M1055,310 Q962,220 869,444"/><!-- Brașov -->
+        <path class="hm-line" style="--i:16" d="M1055,310 Q1038,83 1022,143"/><!-- Botoșani -->
+        <path class="hm-line" style="--i:17" d="M1055,310 Q1011,83 967,153"/><!-- Suceava -->
+        <path class="hm-line" style="--i:18" d="M1055,310 Q1019,190 983,260"/><!-- Piatra Neamț -->
+        <path class="hm-line" style="--i:19" d="M1055,310 Q1001,210 947,621"/><!-- București -->
+        <path class="hm-line" style="--i:20" d="M1055,310 Q996,220 937,547"/><!-- Ploiești -->
+        <path class="hm-line" style="--i:21" d="M1055,310 Q1101,144 1147,224"/><!-- Iași -->
+        <path class="hm-line" style="--i:22" d="M1055,310 Q1072,220 1090,444"/><!-- Focșani -->
+        <path class="hm-line" style="--i:23" d="M1055,310 Q1049,220 1043,522"/><!-- Buzău -->
+        <path class="hm-line" style="--i:24" d="M1055,310 Q1131,220 1207,474"/><!-- Galați -->
+        <path class="hm-line" style="--i:25" d="M1055,310 Q1171,200 1287,657"/><!-- Constanța -->
+        <path class="hm-line" style="--i:26" d="M1055,310 Q1181,210 1307,519"/><!-- Tulcea -->
 
-        <!-- City dots -->
-        <circle class="hm-city" style="--i:0"  cx="154" cy="133" r="3.5" filter="url(#hm-glow-sm)"/><!-- Oradea -->
-        <circle class="hm-city" style="--i:1"  cx="106" cy="223" r="3.5" filter="url(#hm-glow-sm)"/><!-- Arad -->
-        <circle class="hm-city" style="--i:2"  cx="98"  cy="265" r="3.5" filter="url(#hm-glow-sm)"/><!-- Timișoara -->
-        <circle class="hm-city" style="--i:3"  cx="287" cy="163" r="3.5" filter="url(#hm-glow-sm)"/><!-- Cluj -->
-        <circle class="hm-city" style="--i:4"  cx="332" cy="260" r="3.5" filter="url(#hm-glow-sm)"/><!-- Sibiu -->
-        <circle class="hm-city" style="--i:5"  cx="500" cy="75"  r="3.5" filter="url(#hm-glow-sm)"/><!-- Suceava -->
-        <circle class="hm-city" style="--i:6"  cx="608" cy="124" r="3.5" filter="url(#hm-glow-sm)"/><!-- Iași -->
-        <circle class="hm-city" style="--i:7"  cx="644" cy="296" r="3.5" filter="url(#hm-glow-sm)"/><!-- Galați -->
-        <circle class="hm-city" style="--i:8"  cx="441" cy="275" r="3.5" filter="url(#hm-glow-sm)"/><!-- Brașov -->
-        <circle class="hm-city" style="--i:9"  cx="488" cy="397" r="3.5" filter="url(#hm-glow-sm)"/><!-- București -->
-        <circle class="hm-city" style="--i:10" cx="304" cy="408" r="3.5" filter="url(#hm-glow-sm)"/><!-- Craiova -->
-        <circle class="hm-city" style="--i:11" cx="692" cy="422" r="3.5" filter="url(#hm-glow-sm)"/><!-- Constanța -->
+        <!-- ── Lines to viewport edges — full coverage ── -->
+        <path class="hm-line hm-line--edge" style="--i:27" d="M1055,310 Q727,-50  400,30"/><!-- top-left -->
+        <path class="hm-line hm-line--edge" style="--i:28" d="M1055,310 Q1127,-50 1200,30"/><!-- top-right -->
+        <path class="hm-line hm-line--edge" style="--i:29" d="M1055,310 Q567,-40  80,60"/><!-- far NW -->
+        <path class="hm-line hm-line--edge" style="--i:30" d="M1055,310 Q1287,-10 1520,80"/><!-- far NE -->
+        <path class="hm-line hm-line--edge" style="--i:31" d="M1055,310 Q567,180  80,400"/><!-- far W -->
+        <path class="hm-line hm-line--edge" style="--i:32" d="M1055,310 Q1287,190 1520,400"/><!-- far E -->
+        <path class="hm-line hm-line--edge" style="--i:33" d="M1055,310 Q702,150  350,770"/><!-- bottom-left -->
+        <path class="hm-line hm-line--edge" style="--i:34" d="M1055,310 Q1152,150 1250,770"/><!-- bottom-right -->
+        <path class="hm-line hm-line--edge" style="--i:35" d="M1055,310 Q567,160  80,720"/><!-- far SW -->
+        <path class="hm-line hm-line--edge" style="--i:36" d="M1055,310 Q1287,160 1520,720"/><!-- far SE -->
 
-        <!-- Bacău — home base -->
-        <circle class="hm-home-ring2" cx="553" cy="183" r="28"/>
-        <circle class="hm-home-ring"  cx="553" cy="183" r="16"/>
-        <circle class="hm-home-dot"   cx="553" cy="183" r="6" filter="url(#hm-glow)"/>
-        <circle class="hm-home-core"  cx="553" cy="183" r="2.5"/>
+        <!-- ── City dots — Romanian cities ── -->
+        <circle class="hm-city" style="--i:0"  cx="517"  cy="135" r="3" filter="url(#hm-glow-sm)"/><!-- Satu Mare -->
+        <circle class="hm-city" style="--i:1"  cx="608"  cy="153" r="3" filter="url(#hm-glow-sm)"/><!-- Baia Mare -->
+        <circle class="hm-city" style="--i:2"  cx="390"  cy="237" r="3.5" filter="url(#hm-glow-sm)"/><!-- Oradea -->
+        <circle class="hm-city" style="--i:3"  cx="310"  cy="368" r="3.5" filter="url(#hm-glow-sm)"/><!-- Arad -->
+        <circle class="hm-city" style="--i:4"  cx="297"  cy="429" r="3.5" filter="url(#hm-glow-sm)"/><!-- Timișoara -->
+        <circle class="hm-city" style="--i:5"  cx="488"  cy="582" r="3" filter="url(#hm-glow-sm)"/><!-- Drobeta -->
+        <circle class="hm-city" style="--i:6"  cx="612"  cy="281" r="4" filter="url(#hm-glow-sm)"/><!-- Cluj -->
+        <circle class="hm-city" style="--i:7"  cx="520"  cy="410" r="3" filter="url(#hm-glow-sm)"/><!-- Deva -->
+        <circle class="hm-city" style="--i:8"  cx="610"  cy="381" r="3" filter="url(#hm-glow-sm)"/><!-- Alba Iulia -->
+        <circle class="hm-city" style="--i:9"  cx="740"  cy="314" r="3" filter="url(#hm-glow-sm)"/><!-- Târgu Mureș -->
+        <circle class="hm-city" style="--i:10" cx="687"  cy="422" r="3.5" filter="url(#hm-glow-sm)"/><!-- Sibiu -->
+        <circle class="hm-city" style="--i:11" cx="640"  cy="638" r="3.5" filter="url(#hm-glow-sm)"/><!-- Craiova -->
+        <circle class="hm-city" style="--i:12" cx="717"  cy="531" r="3" filter="url(#hm-glow-sm)"/><!-- Rm. Vâlcea -->
+        <circle class="hm-city" style="--i:13" cx="783"  cy="566" r="3" filter="url(#hm-glow-sm)"/><!-- Pitești -->
+        <circle class="hm-city" style="--i:14" cx="869"  cy="444" r="3.5" filter="url(#hm-glow-sm)"/><!-- Brașov -->
+        <circle class="hm-city" style="--i:15" cx="1022" cy="143" r="3" filter="url(#hm-glow-sm)"/><!-- Botoșani -->
+        <circle class="hm-city" style="--i:16" cx="967"  cy="153" r="3.5" filter="url(#hm-glow-sm)"/><!-- Suceava -->
+        <circle class="hm-city" style="--i:17" cx="983"  cy="260" r="3" filter="url(#hm-glow-sm)"/><!-- Piatra Neamț -->
+        <circle class="hm-city" style="--i:18" cx="947"  cy="621" r="4" filter="url(#hm-glow-sm)"/><!-- București -->
+        <circle class="hm-city" style="--i:19" cx="937"  cy="547" r="3" filter="url(#hm-glow-sm)"/><!-- Ploiești -->
+        <circle class="hm-city" style="--i:20" cx="1147" cy="224" r="3.5" filter="url(#hm-glow-sm)"/><!-- Iași -->
+        <circle class="hm-city" style="--i:21" cx="1090" cy="444" r="3" filter="url(#hm-glow-sm)"/><!-- Focșani -->
+        <circle class="hm-city" style="--i:22" cx="1043" cy="522" r="3" filter="url(#hm-glow-sm)"/><!-- Buzău -->
+        <circle class="hm-city" style="--i:23" cx="1207" cy="474" r="3.5" filter="url(#hm-glow-sm)"/><!-- Galați -->
+        <circle class="hm-city" style="--i:24" cx="1287" cy="657" r="3.5" filter="url(#hm-glow-sm)"/><!-- Constanța -->
+        <circle class="hm-city" style="--i:25" cx="1307" cy="519" r="3" filter="url(#hm-glow-sm)"/><!-- Tulcea -->
+
+        <!-- ── Edge anchor dots ── -->
+        <circle class="hm-city hm-city--edge" style="--i:26" cx="400"  cy="30"  r="2"/>
+        <circle class="hm-city hm-city--edge" style="--i:27" cx="1200" cy="30"  r="2"/>
+        <circle class="hm-city hm-city--edge" style="--i:28" cx="80"   cy="60"  r="2"/>
+        <circle class="hm-city hm-city--edge" style="--i:29" cx="1520" cy="80"  r="2"/>
+        <circle class="hm-city hm-city--edge" style="--i:30" cx="80"   cy="400" r="2"/>
+        <circle class="hm-city hm-city--edge" style="--i:31" cx="1520" cy="400" r="2"/>
+        <circle class="hm-city hm-city--edge" style="--i:32" cx="350"  cy="770" r="2"/>
+        <circle class="hm-city hm-city--edge" style="--i:33" cx="1250" cy="770" r="2"/>
+        <circle class="hm-city hm-city--edge" style="--i:34" cx="80"   cy="720" r="2"/>
+        <circle class="hm-city hm-city--edge" style="--i:35" cx="1520" cy="720" r="2"/>
+
+        <!-- ── Bacău — home base ── -->
+        <circle class="hm-home-ring2" cx="1055" cy="310" r="34"/>
+        <circle class="hm-home-ring"  cx="1055" cy="310" r="20"/>
+        <circle class="hm-home-dot"   cx="1055" cy="310" r="7" filter="url(#hm-glow)"/>
+        <circle class="hm-home-core"  cx="1055" cy="310" r="3"/>
       </g>
     </svg>
   </div>
