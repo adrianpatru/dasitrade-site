@@ -504,6 +504,82 @@ img { max-width: 100%; display: block; }
 }
 .hero__bottom > div { text-align: center; }
 
+/* ── Hero map — Romania coverage SVG ── */
+.hero__map {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero__map-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Romania border */
+.hm-border {
+  fill: none;
+  stroke: oklch(72% 0.11 155 / 0.18);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+/* Curved lines from Bacău → cities */
+.hm-line {
+  fill: none;
+  stroke: oklch(72% 0.11 155 / 0.55);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-dasharray: 1800;
+  stroke-dashoffset: 1800;
+  animation: hm-draw 1.2s calc(var(--i) * 0.11s + 0.6s) cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes hm-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* City dots — appear after their line finishes */
+.hm-city {
+  fill: oklch(72% 0.11 155 / 0.75);
+  opacity: 0;
+  animation: hm-dot 0.4s calc(var(--i) * 0.11s + 1.8s) ease forwards;
+}
+@keyframes hm-dot {
+  0%   { opacity: 0; r: 1; }
+  60%  { opacity: 1; r: 5; }
+  100% { opacity: 1; r: 3.5; }
+}
+
+/* Bacău — pulsing rings */
+.hm-home-ring {
+  fill: none;
+  stroke: oklch(72% 0.11 155 / 0.45);
+  stroke-width: 1;
+  transform-origin: 553px 183px;
+  animation: hm-pulse 3s 2.2s ease-out infinite;
+}
+.hm-home-ring2 {
+  fill: none;
+  stroke: oklch(72% 0.11 155 / 0.2);
+  stroke-width: 0.8;
+  transform-origin: 553px 183px;
+  animation: hm-pulse 3s 2.8s ease-out infinite;
+}
+@keyframes hm-pulse {
+  0%   { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.hm-home-dot {
+  fill: oklch(72% 0.11 155);
+}
+.hm-home-core {
+  fill: #ffffff;
+}
+
 /* Band — mission statement, light */
 .band {
   background: var(--paper);
