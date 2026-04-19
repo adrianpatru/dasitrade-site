@@ -1128,38 +1128,137 @@ img { max-width: 100%; display: block; }
   .job-card__reqs ul { grid-template-columns: 1fr; }
   .apply-form__row { grid-template-columns: 1fr; gap: 32px; }
   .apply-form__actions { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .auth-gallery { grid-template-columns: repeat(2, 1fr); }
+  .auth-gallery { grid-template-columns: repeat(2, 1fr); gap: 2px; }
 }
 
 /* ── Authorization gallery ── */
 .auth-gallery {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
+  gap: 3px;
   margin-top: 60px;
-  background: var(--line);
+  background: var(--line-strong);
 }
+
+/* Entry: items start hidden; revealed when parent gets is-revealed */
 .auth-gallery__item {
+  position: relative;
   display: block;
   text-decoration: none;
   color: inherit;
-  background: var(--paper-warm);
+  background: var(--paper);
   overflow: hidden;
-  transition: background 200ms;
+  outline: 1px solid transparent;
+  outline-offset: -1px;
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease,
+    outline-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
-.auth-gallery__item:hover { background: var(--paper-deep); }
+.auth-gallery.is-revealed .auth-gallery__item          { opacity: 1; transform: none; }
+.auth-gallery.is-revealed .auth-gallery__item:nth-child(2) { transition-delay: 0.09s; }
+.auth-gallery.is-revealed .auth-gallery__item:nth-child(3) { transition-delay: 0.18s; }
+.auth-gallery.is-revealed .auth-gallery__item:nth-child(4) { transition-delay: 0.27s; }
+.auth-gallery.is-revealed .auth-gallery__item:nth-child(5) { transition-delay: 0.36s; }
+.auth-gallery.is-revealed .auth-gallery__item:nth-child(6) { transition-delay: 0.45s; }
+.auth-gallery.is-revealed .auth-gallery__item:nth-child(7) { transition-delay: 0.54s; }
+
+/* Hover: accent border glow */
+.auth-gallery__item:hover {
+  outline-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), inset 0 0 40px oklch(72% 0.11 155 / 0.04);
+  z-index: 2;
+}
+
+/* Document image */
 .auth-gallery__img {
   width: 100%;
   aspect-ratio: 3/4;
   background-size: cover;
   background-position: center top;
   background-color: var(--paper-deep);
-  transition: transform 350ms ease;
+  filter: grayscale(25%) brightness(0.92);
+  transition: filter 0.45s ease, transform 0.5s ease;
 }
-.auth-gallery__item:hover .auth-gallery__img { transform: scale(1.03); }
+.auth-gallery__item:hover .auth-gallery__img {
+  filter: grayscale(0%) brightness(1.04);
+  transform: scale(1.04);
+}
+
+/* Scan line sweep on hover — uses ::after on the item, clipped to img area */
+.auth-gallery__scan {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  /* height matches the img aspect ratio 3/4 = 75% of width */
+  height: 75%;
+  overflow: hidden;
+  pointer-events: none;
+}
+.auth-gallery__scan::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255,255,255,0.08) 50%,
+    transparent
+  );
+  transform: translateY(-100%);
+}
+.auth-gallery__item:hover .auth-gallery__scan::after {
+  animation: auth-scan 0.8s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+@keyframes auth-scan {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(280%); }
+}
+
+/* Bottom accent line */
+.auth-gallery__item::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.auth-gallery__item:hover::after { transform: scaleX(1); }
+
+/* Caption */
 .auth-gallery__caption {
-  padding: 16px;
+  padding: 16px 18px 20px;
   border-top: 1px solid var(--line);
+  background: var(--paper);
+  transition: background 0.25s ease;
+}
+.auth-gallery__item:hover .auth-gallery__caption { background: var(--paper-warm); }
+.auth-gallery__num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.auth-gallery__label {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--fg);
+  font-weight: 400;
+}
+.auth-gallery__date {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--fg-faint);
+  margin-top: 6px;
+  letter-spacing: 0.1em;
 }
 
 /* ── GDPR document ── */
