@@ -145,6 +145,36 @@
         <circle class="hm-city hm-city--edge" style="--i:34" cx="80"   cy="720" r="2"/>
         <circle class="hm-city hm-city--edge" style="--i:35" cx="1520" cy="720" r="2"/>
 
+        <!-- ── City labels — JS-cycled ── -->
+        <g id="hm-label-layer" style="pointer-events:none">
+          <text class="hm-label" id="hm-lbl-0"  x="517"  y="149"/>
+          <text class="hm-label" id="hm-lbl-1"  x="608"  y="167"/>
+          <text class="hm-label" id="hm-lbl-2"  x="390"  y="251"/>
+          <text class="hm-label" id="hm-lbl-3"  x="310"  y="382"/>
+          <text class="hm-label" id="hm-lbl-4"  x="297"  y="443"/>
+          <text class="hm-label" id="hm-lbl-5"  x="488"  y="596"/>
+          <text class="hm-label" id="hm-lbl-6"  x="612"  y="295"/>
+          <text class="hm-label" id="hm-lbl-7"  x="520"  y="424"/>
+          <text class="hm-label" id="hm-lbl-8"  x="610"  y="395"/>
+          <text class="hm-label" id="hm-lbl-9"  x="740"  y="328"/>
+          <text class="hm-label" id="hm-lbl-10" x="687"  y="436"/>
+          <text class="hm-label" id="hm-lbl-11" x="640"  y="652"/>
+          <text class="hm-label" id="hm-lbl-12" x="717"  y="545"/>
+          <text class="hm-label" id="hm-lbl-13" x="783"  y="580"/>
+          <text class="hm-label" id="hm-lbl-14" x="869"  y="458"/>
+          <text class="hm-label" id="hm-lbl-15" x="1022" y="157"/>
+          <text class="hm-label" id="hm-lbl-16" x="967"  y="167"/>
+          <text class="hm-label" id="hm-lbl-17" x="983"  y="274"/>
+          <text class="hm-label" id="hm-lbl-18" x="947"  y="635"/>
+          <text class="hm-label" id="hm-lbl-19" x="937"  y="561"/>
+          <text class="hm-label" id="hm-lbl-20" x="1147" y="238"/>
+          <text class="hm-label" id="hm-lbl-21" x="1090" y="458"/>
+          <text class="hm-label" id="hm-lbl-22" x="1043" y="536"/>
+          <text class="hm-label" id="hm-lbl-23" x="1207" y="488"/>
+          <text class="hm-label" id="hm-lbl-24" x="1287" y="671"/>
+          <text class="hm-label" id="hm-lbl-25" x="1307" y="533"/>
+        </g>
+
         <!-- ── Bacău — home base ── -->
         <circle class="hm-home-ring2" cx="1055" cy="310" r="34"/>
         <circle class="hm-home-ring"  cx="1055" cy="310" r="20"/>
@@ -360,6 +390,51 @@
     };
     tick(); setInterval(tick, 1000);
   })();
+  /* ── Map city labels: random cycling ── */
+  (function(){
+    var CITIES = [
+      'ALBA','ARAD','ARGEȘ','BACĂU','BIHOR','BISTRIȚA-N.','BOTOȘANI',
+      'BRĂILA','BRAȘOV','BUZĂU','CĂLĂRAȘI','CLUJ','CONSTANȚA','COVASNA',
+      'DÂMBOVIȚA','DOLJ','GALAȚI','GIURGIU','GORJ','HARGHITA','HUNEDOARA',
+      'IALOMIȚA','IAȘI','ILFOV','MARAMUREȘ','MEHEDINȚI','MUREȘ','NEAMȚ',
+      'OLT','PRAHOVA','SATU MARE','SĂLAJ','SIBIU','SUCEAVA','TELEORMAN',
+      'TIMIȘ','TULCEA','VÂLCEA','VASLUI','VRANCEA',
+      'TIMIȘOARA','CLUJ-NAPOCA','CRAIOVA','PLOIEȘTI','ORADEA',
+      'PITEȘTI','TÂRGU MUREȘ','BAIA MARE','RÂM. VÂLCEA',
+      'PIATRA NEAMȚ','DEVA','ALBA IULIA','FOCȘANI','REȘIȚA',
+      'ZALĂU','ALEXANDRIA','ROMAN','SF. GHEORGHE','M. CIUC',
+      'TURDA','BISTRIȚA','DROBETA-T.S.','CÂMPULUNG','MEDIAȘ',
+      'DEJ','BÂRLAD','TECUCI','ADJUD','ONEȘTI','MOINEȘTI','COMĂNEȘTI'
+    ];
+    var labels = Array.from(document.querySelectorAll('.hm-label'));
+    if (!labels.length) return;
+    var VISIBLE = 5, SHOW_MS = 5000, FADE_MS = 650;
+    var active = new Set(), deck = [], di = 0;
+    function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a; }
+    function nextCity(){ if(di>=deck.length){deck=shuffle(CITIES.slice());di=0;} return deck[di++]; }
+    function spawn(){
+      var free=[];
+      for(var i=0;i<labels.length;i++){ if(!active.has(i)) free.push(i); }
+      if(!free.length) return;
+      var idx=free[Math.floor(Math.random()*free.length)];
+      active.add(idx);
+      var el=labels[idx];
+      el.textContent=nextCity();
+      el.style.opacity='1';
+      setTimeout(function(){
+        el.style.opacity='0';
+        setTimeout(function(){
+          active.delete(idx);
+          setTimeout(spawn, 200+Math.random()*600);
+        }, FADE_MS);
+      }, SHOW_MS);
+    }
+    /* wait for map draw animation (~2.5s), then stagger initial labels */
+    setTimeout(function(){
+      for(var i=0;i<VISIBLE;i++) setTimeout(spawn, i*550);
+    }, 2600);
+  })();
+
   /* ── Capability bubbles: random cycling positions ── */
   (function(){
     var bubbles = Array.from(document.querySelectorAll('.cap-bubble'));

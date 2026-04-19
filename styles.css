@@ -542,6 +542,15 @@ img { max-width: 100%; display: block; }
   opacity: 0;
   animation: hm-dot 0.35s calc(var(--i) * 0.055s + 1.6s) ease forwards;
 }
+.hm-label {
+  fill: oklch(72% 0.11 155 / 0.9);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9.5;
+  letter-spacing: 1.4;
+  text-anchor: middle;
+  opacity: 0;
+  transition: opacity 0.65s ease;
+}
 .hm-city--edge {
   fill: oklch(72% 0.11 155 / 0.3);
 }
