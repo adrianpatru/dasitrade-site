@@ -185,6 +185,12 @@ img { max-width: 100%; display: block; }
   cursor: pointer;
   transition: background 180ms ease, color 180ms ease;
 }
+.btn:disabled,
+.btn[aria-busy="true"] {
+  opacity: 0.55;
+  cursor: wait;
+  pointer-events: none;
+}
 .btn:hover { background: currentColor; }
 .btn:hover > * { mix-blend-mode: difference; }
 .btn--primary {
@@ -1457,11 +1463,14 @@ img { max-width: 100%; display: block; }
 .apply-form__feedback {
   padding: 28px 32px;
   border: 1px solid var(--line-strong);
+  font-size: 17px;
+  color: var(--fg-dim);
+  line-height: 1.7;
 }
 .form-feedback p,
 .apply-form__feedback p {
-  font-size: 17px;
-  color: var(--fg-dim);
+  font-size: inherit;
+  color: inherit;
   margin: 0;
 }
 .form-feedback--ok,

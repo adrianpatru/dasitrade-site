@@ -178,11 +178,8 @@
         <p class="apply-form__note">cv-ul ajunge direct la echipa Dasitrade · răspuns în 5 zile</p>
       </div>
 
-      <div id="af-success" class="apply-form__feedback apply-form__feedback--ok" style="display:none;">
-        <div class="mono" style="color:var(--accent); font-size:11px; letter-spacing:0.28em; text-transform:uppercase; margin-bottom:12px;">// Transmis cu succes</div>
-        <p>Aplicația a fost primită. Te vom contacta în maximum 5 zile lucrătoare.</p>
-      </div>
-      <div id="af-error" class="apply-form__feedback apply-form__feedback--err" style="display:none;">
+      <output id="af-success" class="apply-form__feedback apply-form__feedback--ok" style="display:none;" aria-live="polite"><span class="mono" style="display:block;color:var(--accent); font-size:11px; letter-spacing:0.28em; text-transform:uppercase; margin-bottom:12px;">// Transmis cu succes</span><span style="display:block;">Aplicația a fost primită. Te vom contacta în maximum 5 zile lucrătoare.</span></output>
+      <div id="af-error" class="apply-form__feedback apply-form__feedback--err" style="display:none;" aria-live="assertive" role="alert">
         <div class="mono" style="color:#e05c5c; font-size:11px; letter-spacing:0.28em; text-transform:uppercase; margin-bottom:12px;">// Eroare la trimitere</div>
         <p>A apărut o problemă. Trimite CV-ul direct la <a href="mailto:office@dasitrade.ro" style="border-bottom:1px solid currentColor;">office@dasitrade.ro</a>.</p>
       </div>
@@ -324,6 +321,8 @@
     const error = document.getElementById('af-error');
 
     btn.disabled = true;
+  btn.setAttribute('aria-busy', 'true');
+  this.setAttribute('aria-busy', 'true');
     label.textContent = 'Se trimite...';
     error.style.display = 'none';
 
@@ -348,6 +347,8 @@
       console.warn('Form submit error:', err);
       error.style.display = 'block';
       btn.disabled = false;
+      btn.setAttribute('aria-busy', 'false');
+      this.setAttribute('aria-busy', 'false');
       label.textContent = 'Trimite aplicația →';
     }
   });

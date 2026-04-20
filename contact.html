@@ -101,10 +101,8 @@
             <button type="submit" class="btn btn--primary" id="cf-submit"><span id="cf-submit-label">Trimite brief →</span></button>
             <p class="form-note">răspuns comercial în maximum 48h lucrătoare</p>
           </div>
-          <div id="cf-success" class="form-feedback form-feedback--ok" style="display:none;" aria-live="polite">
-            <p>Brief-ul a fost transmis. Revenim către dumneavoastră în maximum 48h lucrătoare.</p>
-          </div>
-          <div id="cf-error" class="form-feedback form-feedback--err" style="display:none;" aria-live="polite">
+          <output id="cf-success" class="form-feedback form-feedback--ok" style="display:none;" aria-live="polite">Brief-ul a fost transmis. Revenim către dumneavoastră în maximum 48h lucrătoare.</output>
+          <div id="cf-error" class="form-feedback form-feedback--err" style="display:none;" aria-live="assertive" role="alert">
             <p>A apărut o problemă la trimitere. Ne puteți scrie direct la <a href="mailto:office@dasitrade.ro" style="border-bottom:1px solid currentColor;">office@dasitrade.ro</a> sau suna la 0334 401 092.</p>
           </div>
         </form>
@@ -208,6 +206,8 @@
       success.style.display = 'none';
       error.style.display = 'none';
       submit.disabled = true;
+      submit.setAttribute('aria-busy', 'true');
+      form.setAttribute('aria-busy', 'true');
       submitLabel.textContent = 'Se trimite...';
 
       try {
@@ -232,6 +232,8 @@
         reveal(error);
       } finally {
         submit.disabled = false;
+        submit.setAttribute('aria-busy', 'false');
+        form.setAttribute('aria-busy', 'false');
         submitLabel.textContent = 'Trimite brief →';
       }
     });
