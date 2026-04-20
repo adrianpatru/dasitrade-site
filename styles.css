@@ -774,18 +774,20 @@ img { max-width: 100%; display: block; }
 /* ── Servicii list (full) ────────────────────────────────────────── */
 .service-page__item {
   display: grid;
-  grid-template-columns: 120px 1fr 1fr 200px;
+  grid-template-columns: 120px 1fr 1fr;
   gap: 48px;
-  padding: 80px 0;
+  padding: 80px 0 0;
   border-top: 1px solid var(--line);
   align-items: start;
 }
 .service-page__thumb {
+  grid-column: 1 / -1;
   width: 100%;
-  aspect-ratio: 4/5;
+  aspect-ratio: 21/9;
   background-size: cover;
   background-position: center;
-  filter: grayscale(0.45) contrast(1.05);
+  filter: grayscale(0.35) contrast(1.08);
+  margin-bottom: 80px;
 }
 .service-page__item:last-child { border-bottom: 1px solid var(--line); }
 .service-page__num {
@@ -1360,8 +1362,8 @@ img { max-width: 100%; display: block; }
   .principles__grid { grid-template-columns: 1fr; }
   .voices__grid { grid-template-columns: 1fr; }
   .cta__tier { grid-template-columns: 1fr; }
-  .service-page__item { grid-template-columns: 1fr; gap: 24px; padding: 48px 0; }
-  .service-page__thumb { aspect-ratio: 16/10; order: -1; }
+  .service-page__item { grid-template-columns: 1fr; gap: 24px; padding: 48px 0 0; }
+  .service-page__thumb { aspect-ratio: 16/9; grid-column: 1; margin-bottom: 48px; }
   .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
   .portfolio-item, .portfolio-item--wide { grid-column: span 2; }
   .contact-grid { grid-template-columns: 1fr; gap: 60px; padding: 80px 0; }
