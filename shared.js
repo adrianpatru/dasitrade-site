@@ -265,6 +265,162 @@
     els.forEach(el => io.observe(el));
   }
 
+  function mountMediaGalleries({ selector = '.media-gallery', galleries = {}, autoplayMs = 3600 } = {}) {
+    const hosts = document.querySelectorAll(selector);
+    if (!hosts.length) return;
+
+    hosts.forEach((host, hostIndex) => {
+      const key = host.dataset.galleryKey;
+      const items = galleries[key];
+      if (!Array.isArray(items) || !items.length) return;
+
+      const outerSlide = host.closest('.svc-slide, .port-slide');
+      const label = host.dataset.galleryLabel || `Galerie imagini ${hostIndex + 1}`;
+      let current = 0;
+      let timer = null;
+      let startX = 0;
+
+      host.innerHTML = '';
+      host.setAttribute('role', 'group');
+      host.setAttribute('aria-roledescription', 'carousel');
+      host.setAttribute('aria-label', label);
+
+      const slidesEl = h('div', { class: 'media-gallery__slides' });
+      const controlsEl = h('div', { class: 'media-gallery__chrome' });
+      const prevBtn = h('button', {
+        class: 'media-gallery__arrow media-gallery__arrow--prev',
+        type: 'button',
+        'aria-label': 'Imagine anterioara'
+      });
+      prevBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M12.5 4.5L7 10l5.5 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+      const nextBtn = h('button', {
+        class: 'media-gallery__arrow media-gallery__arrow--next',
+        type: 'button',
+        'aria-label': 'Imagine urmatoare'
+      });
+      nextBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M7.5 4.5L13 10l-5.5 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+      const metaEl = h('div', { class: 'media-gallery__meta' });
+      const countEl = h('span', { class: 'media-gallery__count' });
+      const dotsEl = h('div', { class: 'media-gallery__dots' });
+      metaEl.appendChild(countEl);
+      metaEl.appendChild(dotsEl);
+      controlsEl.appendChild(prevBtn);
+      controlsEl.appendChild(metaEl);
+      controlsEl.appendChild(nextBtn);
+
+      const slides = items.map((item, index) => {
+        const src = typeof item === 'string' ? item : item.src;
+        const alt = typeof item === 'string' ? '' : (item.alt || '');
+        const slide = h('div', {
+          class: `media-gallery__slide${index === 0 ? ' is-active' : ''}`,
+          'aria-hidden': index === 0 ? 'false' : 'true'
+        });
+        const img = h('img', {
+          class: 'media-gallery__image',
+          src,
+          alt,
+          loading: index === 0 ? 'eager' : 'lazy',
+          decoding: 'async'
+        });
+        slide.appendChild(img);
+        slidesEl.appendChild(slide);
+        return slide;
+      });
+
+      const dots = items.map((_, index) => {
+        const dot = h('button', {
+          class: `media-gallery__dot${index === 0 ? ' is-active' : ''}`,
+          type: 'button',
+          'aria-label': `Imagine ${index + 1}`
+        });
+        dot.addEventListener('click', event => {
+          event.stopPropagation();
+          goTo(index, true);
+        });
+        dotsEl.appendChild(dot);
+        return dot;
+      });
+
+      host.appendChild(slidesEl);
+      if (items.length > 1) {
+        host.appendChild(controlsEl);
+      }
+
+      function isVisible() {
+        return !outerSlide || outerSlide.classList.contains('is-active');
+      }
+
+      function refreshCounter() {
+        countEl.textContent = `${String(current + 1).padStart(2, '0')} / ${String(items.length).padStart(2, '0')}`;
+      }
+
+      function goTo(index, restartAutoplay = false) {
+        slides[current].classList.remove('is-active');
+        slides[current].setAttribute('aria-hidden', 'true');
+        dots[current].classList.remove('is-active');
+
+        current = ((index % slides.length) + slides.length) % slides.length;
+
+        slides[current].classList.add('is-active');
+        slides[current].setAttribute('aria-hidden', 'false');
+        dots[current].classList.add('is-active');
+        refreshCounter();
+
+        if (restartAutoplay) startAutoplay();
+      }
+
+      function stopAutoplay() {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      function startAutoplay() {
+        stopAutoplay();
+        if (slides.length < 2) return;
+        timer = setInterval(() => {
+          if (!isVisible()) return;
+          goTo(current + 1);
+        }, autoplayMs);
+      }
+
+      prevBtn.addEventListener('click', event => {
+        event.stopPropagation();
+        goTo(current - 1, true);
+      });
+
+      nextBtn.addEventListener('click', event => {
+        event.stopPropagation();
+        goTo(current + 1, true);
+      });
+
+      host.addEventListener('mouseenter', stopAutoplay);
+      host.addEventListener('mouseleave', startAutoplay);
+      host.addEventListener('focusin', stopAutoplay);
+      host.addEventListener('focusout', startAutoplay);
+      host.addEventListener('touchstart', event => {
+        startX = event.touches[0].clientX;
+        stopAutoplay();
+        event.stopPropagation();
+      }, { passive: true });
+      host.addEventListener('touchend', event => {
+        const dx = event.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 40) {
+          goTo(dx < 0 ? current + 1 : current - 1, true);
+        } else {
+          startAutoplay();
+        }
+        event.stopPropagation();
+      });
+
+      refreshCounter();
+      startAutoplay();
+    });
+  }
+
   globalThis.DasitradeSite = {
     init({ current, navVariant = 'dark' } = {}) {
       maybeSplash();
@@ -274,6 +430,9 @@
       mountReveal();
       mountCookieBanner();
       mountWhatsApp();
+    },
+    mountMediaGalleries(options) {
+      mountMediaGalleries(options);
     }
   };
 })();
