@@ -1,47 +1,61 @@
 <!doctype html>
-<html lang="en">
+<html lang="ro">
 <head>
 <meta charset="utf-8"/>
-<title>Dasitrade — System Intro</title>
+<title>Dasitrade · Secure Boot Intro</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="Intro cinematic Dasitrade pentru experiența de brand a noului site."/>
+<meta name="theme-color" content="#050709"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  html, body { margin: 0; padding: 0; height: 100%; background: #000; overflow: hidden; }
-  #root { position: fixed; inset: 0; }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="intro.css"/>
 </head>
 <body>
-<div id="root"></div>
+<main class="intro-shell" id="intro-root" aria-label="Secvență introductivă Dasitrade">
+  <div class="intro-vignette" aria-hidden="true"></div>
+  <div class="intro-grain" aria-hidden="true"></div>
+  <div class="intro-scanline" aria-hidden="true"></div>
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <div class="intro-corners" aria-hidden="true">
+    <span class="intro-corner intro-corner--tl"></span>
+    <span class="intro-corner intro-corner--tr"></span>
+    <span class="intro-corner intro-corner--bl"></span>
+    <span class="intro-corner intro-corner--br"></span>
+  </div>
 
-<script type="text/babel" src="animations.jsx"></script>
-<script type="text/babel" src="scenes.jsx"></script>
+  <header class="intro-topbar">
+    <div class="intro-topbar__item">[ SECURE BOOT ]</div>
+    <div class="intro-topbar__item">BACĂU · DIN 2006</div>
+    <div class="intro-topbar__item" data-intro-clock>SYS · --:--:--</div>
+  </header>
 
-<script type="text/babel">
-  function App() {
-    return (
-      <div id="video-root" data-screen-label="t=0.00s" style={{ position: 'absolute', inset: 0 }}>
-        <Stage
-          width={1920}
-          height={1080}
-          duration={3.75}
-          background="#000"
-          loop={true}
-          autoplay={true}
-          persistKey="dasitrade-intro"
-          showControls={false}
-        >
-          <BootScene/>
-        </Stage>
-      </div>
-    );
-  }
-  ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
-</script>
+  <section class="intro-center">
+    <div class="intro-kicker">CURENȚI SLABI · SISTEME DE SECURITATE</div>
+    <h1 class="intro-title">DASITRADE SYSTEM</h1>
+    <p class="intro-version">enterprise intro protocol · v2.0</p>
+    <div class="intro-divider" aria-hidden="true"></div>
+    <div class="intro-access" data-intro-access>
+      <span class="intro-access__dot"></span>
+      <span>ACCESS GRANTED</span>
+    </div>
+  </section>
+
+  <section class="intro-terminal" aria-live="polite" aria-label="Stare boot secvență introductivă">
+    <div class="intro-terminal__head">
+      <span>CORE INITIALIZATION</span>
+      <span data-intro-status>STANDBY</span>
+    </div>
+    <div class="intro-terminal__lines" id="intro-lines"></div>
+  </section>
+
+  <footer class="intro-footer">
+    <div class="intro-footer__item">Bld. Unirii, Nr. 92 B · Bacău</div>
+    <div class="intro-footer__item">DISPECERAT 24/7 · 0334 401 092</div>
+    <div class="intro-footer__item">www.dasitrade.ro</div>
+  </footer>
+</main>
+
+<script src="intro.js"></script>
 </body>
 </html>

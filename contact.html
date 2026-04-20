@@ -4,7 +4,12 @@
 <meta charset="utf-8"/>
 <title>Contact · Dasitrade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="Contact Dasitrade Bacău: ofertare, proiectare, service și dispecerat 24/7 pentru curenți slabi și sisteme de securitate."/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<meta name="theme-color" content="#0a0f14"/>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+<link rel="canonical" href="https://www.dasitrade.ro/contact.html"/>
+<link rel="manifest" href="site.webmanifest"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500&family=Newsreader:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
@@ -12,11 +17,14 @@
 <meta property="og:type"        content="website"/>
 <meta property="og:locale"      content="ro_RO"/>
 <meta property="og:site_name"   content="Dasitrade"/>
-<meta property="og:url"         content="https://dasitrade.ro/contact.html"/>
+<meta property="og:url"         content="https://www.dasitrade.ro/contact.html"/>
 <meta property="og:title"       content="Contact · Dasitrade — Dispecerat 24/7"/>
-<meta property="og:description" content="Contactează Dasitrade: 0334 401 092, office@dasitrade.ro. Ofertă în 48h sau evaluare gratuită pe teren."/>
-<meta property="og:image"       content="https://dasitrade.ro/assets/og-image.jpg"/>
+<meta property="og:description" content="Contactează Dasitrade pentru ofertare, proiectare sau service 24/7 în Bacău și la nivel național."/>
+<meta property="og:image"       content="https://www.dasitrade.ro/assets/img/hero-contact.jpg"/>
 <meta name="twitter:card"       content="summary_large_image"/>
+<meta name="twitter:title"      content="Contact · Dasitrade — Dispecerat 24/7"/>
+<meta name="twitter:description" content="Ofertare și suport tehnic pentru curenți slabi și sisteme de securitate. Răspuns comercial în 48h."/>
+<meta name="twitter:image"      content="https://www.dasitrade.ro/assets/img/hero-contact.jpg"/>
 </head>
 <body>
 
@@ -24,7 +32,7 @@
 
 <section class="page-hero" style="min-height:52vh;" data-screen-label="contact.hero">
   <div class="page-hero__img">
-    <img src="assets/img/hero-contact.jpg" alt="" loading="eager"/>
+    <img src="assets/img/hero-contact.jpg" alt="Punctul de contact Dasitrade pentru ofertare, proiectare și service 24/7" loading="eager"/>
   </div>
   <div class="grain"></div>
   <div class="page-hero__content">
@@ -47,24 +55,29 @@
         <div class="eyebrow" style="margin-bottom:24px;">§ 01 / Brief proiect</div>
         <h2 class="heading-lg" style="margin-bottom:48px;">Trimite datele.<br/>Ofertă în 48h.</h2>
 
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('Mulțumim. Te vom contacta în maxim 48h.');">
+        <form id="contact-form" class="contact-form" action="submit-contact.php" method="post">
+          <div class="form-honeypot" aria-hidden="true">
+            <label for="cf-company-site">Nu completa acest câmp</label>
+            <input type="text" id="cf-company-site" name="website" tabindex="-1" autocomplete="off"/>
+          </div>
           <div>
             <label for="cf-name">Nume / Companie</label>
-            <input type="text" id="cf-name" required placeholder="SC Exemplu SRL"/>
+            <input type="text" id="cf-name" name="name" required autocomplete="organization" placeholder="SC Exemplu SRL"/>
           </div>
           <div class="grid-2" style="gap:40px;">
             <div>
               <label for="cf-email">Email</label>
-              <input type="email" id="cf-email" required placeholder="contact@..."/>
+              <input type="email" id="cf-email" name="email" required autocomplete="email" placeholder="contact@..."/>
             </div>
             <div>
               <label for="cf-phone">Telefon</label>
-              <input type="tel" id="cf-phone" placeholder="+40 ..."/>
+              <input type="tel" id="cf-phone" name="phone" autocomplete="tel" placeholder="+40 ..."/>
             </div>
           </div>
           <div>
             <label for="cf-type">Tip proiect</label>
-            <select id="cf-type">
+            <select id="cf-type" name="project_type" required>
+              <option value="">— Selectează —</option>
               <option>Securitate electronică · efracție</option>
               <option>Detecție / stingere incendiu</option>
               <option>CCTV · supraveghere video</option>
@@ -78,10 +91,21 @@
           </div>
           <div>
             <label for="cf-desc">Descriere obiectiv</label>
-            <textarea id="cf-desc" rows="4" placeholder="Suprafață, tip clădire, constrângeri, termen dorit..."></textarea>
+            <textarea id="cf-desc" name="message" rows="4" required placeholder="Suprafață, tip clădire, constrângeri, termen dorit..."></textarea>
           </div>
-          <div style="margin-top:16px;">
-            <button type="submit" class="btn btn--primary">Trimite brief →</button>
+          <div class="form-consent">
+            <input type="checkbox" id="cf-privacy" name="privacy_ack" value="1" required/>
+            <label for="cf-privacy">Am citit <a href="gdpr.html">politica de confidențialitate</a> și sunt de acord să fiu contactat în legătură cu solicitarea trimisă.</label>
+          </div>
+          <div class="contact-form__actions">
+            <button type="submit" class="btn btn--primary" id="cf-submit"><span id="cf-submit-label">Trimite brief →</span></button>
+            <p class="form-note">răspuns comercial în maximum 48h lucrătoare</p>
+          </div>
+          <div id="cf-success" class="form-feedback form-feedback--ok" style="display:none;" aria-live="polite">
+            <p>Brief-ul a fost transmis. Revenim către dumneavoastră în maximum 48h lucrătoare.</p>
+          </div>
+          <div id="cf-error" class="form-feedback form-feedback--err" style="display:none;" aria-live="polite">
+            <p>A apărut o problemă la trimitere. Ne puteți scrie direct la <a href="mailto:office@dasitrade.ro" style="border-bottom:1px solid currentColor;">office@dasitrade.ro</a> sau suna la 0334 401 092.</p>
           </div>
         </form>
 
@@ -121,7 +145,8 @@
         <div class="contact-sidebar-block">
           <h4>§ Sediu</h4>
           <p style="font-family:var(--serif);font-size:20px;line-height:1.35;">Bld. Unirii, Nr. 92 B<br/>Bacău, România</p>
-          <p class="mono" style="font-size:11px;color:var(--fg-faint);letter-spacing:0.22em;text-transform:uppercase;margin-top:12px;">46.569°N · 26.913°E</p>
+          <p class="contact-sidebar-block__aux">punct operațional și corespondență</p>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Bulevardul+Unirii+92+B+Bacau" target="_blank" rel="noopener" style="margin-top:10px;font-family:var(--mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);">Deschide în Google Maps →</a>
         </div>
 
         <div class="contact-sidebar-block">
@@ -155,13 +180,61 @@
     tick(); setInterval(tick, 1000);
     const nav = document.querySelector('[data-nav]');
     const hero = document.querySelector('.page-hero');
-    if (!nav || !hero) return;
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('cf-success');
+    const error = document.getElementById('cf-error');
+    const submit = document.getElementById('cf-submit');
+    const submitLabel = document.getElementById('cf-submit-label');
+
+    const reveal = (node) => {
+      node.style.display = 'block';
+      node.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+
+    const status = new URLSearchParams(globalThis.location.search).get('status');
+    if (status === 'success') reveal(success);
+    if (status === 'error') reveal(error);
+
+    if (!nav || !hero || !form) return;
     nav.classList.remove('nav--light'); nav.classList.add('nav--dark');
     const io = new IntersectionObserver(([e]) => {
       if (e.isIntersecting) { nav.classList.add('nav--dark'); nav.classList.remove('nav--light'); }
       else { nav.classList.add('nav--light'); nav.classList.remove('nav--dark'); }
     }, { rootMargin: '-80px 0px 0px 0px' });
     io.observe(hero);
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      success.style.display = 'none';
+      error.style.display = 'none';
+      submit.disabled = true;
+      submitLabel.textContent = 'Se trimite...';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+          body: new FormData(form)
+        });
+        const payload = await response.json();
+
+        if (!response.ok || !payload.success) {
+          throw new Error(payload.message || 'Eroare la trimitere');
+        }
+
+        form.reset();
+        reveal(success);
+      } catch (submitError) {
+        console.warn('Contact form submit error:', submitError);
+        reveal(error);
+      } finally {
+        submit.disabled = false;
+        submitLabel.textContent = 'Trimite brief →';
+      }
+    });
   })();
 </script>
 </body>

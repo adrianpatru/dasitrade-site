@@ -5,7 +5,11 @@
 <title>Cariere · Dasitrade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="description" content="Locuri de muncă la Dasitrade SRL. Alătură-te echipei de tehnicieni și ingineri în securitate integrată din Bacău."/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<meta name="theme-color" content="#0a0f14"/>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+<link rel="canonical" href="https://www.dasitrade.ro/cariere.html"/>
+<link rel="manifest" href="site.webmanifest"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500&family=Newsreader:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
@@ -13,11 +17,14 @@
 <meta property="og:type"        content="website"/>
 <meta property="og:locale"      content="ro_RO"/>
 <meta property="og:site_name"   content="Dasitrade"/>
-<meta property="og:url"         content="https://dasitrade.ro/cariere.html"/>
+<meta property="og:url"         content="https://www.dasitrade.ro/cariere.html"/>
 <meta property="og:title"       content="Cariere · Dasitrade — Construiește cu cei serioși"/>
 <meta property="og:description" content="Locuri de muncă la Dasitrade Bacău. Tehnicieni și ingineri sisteme securitate. Certificări plătite, proiecte reale, echipă stabilă."/>
-<meta property="og:image"       content="https://dasitrade.ro/assets/og-image.jpg"/>
+<meta property="og:image"       content="https://www.dasitrade.ro/assets/img/hero-cariere.jpg"/>
 <meta name="twitter:card"       content="summary_large_image"/>
+<meta name="twitter:title"      content="Cariere · Dasitrade — Construiește cu cei serioși"/>
+<meta name="twitter:description" content="Echipă stabilă, proiecte reale și colegi cu peste 15 ani vechime în companie."/>
+<meta name="twitter:image"      content="https://www.dasitrade.ro/assets/img/hero-cariere.jpg"/>
 </head>
 <body>
 
@@ -25,7 +32,7 @@
 
 <section class="page-hero" style="min-height:60vh;" data-screen-label="cariere.hero">
   <div class="page-hero__img">
-    <img src="assets/img/hero-cariere.jpg" alt="" loading="eager"/>
+    <img src="assets/img/hero-cariere.jpg" alt="Echipa Dasitrade în teren, pe proiecte de curenți slabi și sisteme de securitate" loading="eager"/>
   </div>
   <div class="grain"></div>
   <div class="page-hero__content">
@@ -65,7 +72,7 @@
       <div data-reveal>
         <div class="principle__num">· 03</div>
         <h3 class="principle__title">Echipă stabilă</h3>
-        <p class="principle__body">Mulți colegi sunt cu noi de peste 8 ani. Nu suntem o firmă cu rotație rapidă — dacă ești bun, rămâi.</p>
+        <p class="principle__body">Avem colegi cu peste 15 ani vechime în companie. Nu suntem o firmă cu rotație rapidă — dacă ești bun, rămâi.</p>
       </div>
     </div>
   </div>
@@ -109,29 +116,28 @@
       </p>
     </div>
 
-    <form id="apply-form" class="apply-form" enctype="multipart/form-data">
-      <!-- Web3Forms — obții cheia gratuită la web3forms.com cu emailul companiei -->
-      <input type="hidden" name="access_key" value="REPLACE_WITH_WEB3FORMS_KEY"/>
-      <input type="hidden" name="subject" id="form-subject" value="Aplicație Cariere · Dasitrade"/>
-      <input type="hidden" name="from_name" value="Dasitrade Cariere"/>
-      <input type="hidden" name="redirect" value="false"/>
-      <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1"/>
+    <form id="apply-form" class="apply-form" action="submit-careers.php" method="post" enctype="multipart/form-data">
+      <div class="form-honeypot" aria-hidden="true">
+        <label for="af-website">Nu completa acest câmp</label>
+        <input type="text" id="af-website" name="website" tabindex="-1" autocomplete="off"/>
+      </div>
+      <input type="hidden" name="position_label" id="form-position-label" value=""/>
 
       <div class="apply-form__row">
         <div class="apply-form__field">
           <label for="af-name">Nume complet</label>
-          <input type="text" id="af-name" name="name" required placeholder="Ion Popescu"/>
+          <input type="text" id="af-name" name="name" required autocomplete="name" placeholder="Ion Popescu"/>
         </div>
         <div class="apply-form__field">
           <label for="af-email">Email</label>
-          <input type="email" id="af-email" name="email" required placeholder="ion@email.com"/>
+          <input type="email" id="af-email" name="email" required autocomplete="email" placeholder="ion@email.com"/>
         </div>
       </div>
 
       <div class="apply-form__row">
         <div class="apply-form__field">
           <label for="af-phone">Telefon</label>
-          <input type="tel" id="af-phone" name="phone" placeholder="+40 7xx xxx xxx"/>
+          <input type="tel" id="af-phone" name="phone" autocomplete="tel" placeholder="+40 7xx xxx xxx"/>
         </div>
         <div class="apply-form__field">
           <label for="af-position">Postul vizat</label>
@@ -160,11 +166,16 @@
         <textarea id="af-letter" name="message" rows="5" placeholder="De ce Dasitrade, ce experiență ai, ce îți dorești..."></textarea>
       </div>
 
+      <div class="form-consent">
+        <input type="checkbox" id="af-privacy" name="privacy_consent" value="1" required/>
+        <label for="af-privacy">Sunt de acord ca datele și documentele trimise să fie folosite exclusiv pentru procesul de recrutare, conform <a href="gdpr.html">politicii de confidențialitate</a>.</label>
+      </div>
+
       <div class="apply-form__actions">
         <button type="submit" class="btn btn--primary" id="af-submit">
           <span id="af-submit-label">Trimite aplicația →</span>
         </button>
-        <p class="apply-form__note">Datele sunt folosite exclusiv pentru procesul de recrutare.</p>
+        <p class="apply-form__note">cv-ul ajunge direct la echipa Dasitrade · răspuns în 5 zile</p>
       </div>
 
       <div id="af-success" class="apply-form__feedback apply-form__feedback--ok" style="display:none;">
@@ -197,7 +208,7 @@
   })();
 
   // Load positions from jobs.json
-  (async function() {
+  const loadJobs = async () => {
     const list = document.getElementById('jobs-list');
     const empty = document.getElementById('jobs-empty');
     const select = document.getElementById('af-position');
@@ -278,22 +289,33 @@
       empty.style.display = 'block';
       addOption('spontana', 'Candidatură spontană');
     }
-  })();
+  };
+
+  loadJobs();
 
   // File input — update label
   document.getElementById('af-cv').addEventListener('change', function() {
     document.getElementById('af-cv-name').textContent = this.files[0]?.name || 'Alege fișierul';
   });
 
-  // Position select → sync email subject
+  // Position select → sync selected label
   document.getElementById('af-position').addEventListener('change', function() {
     const label = this.options[this.selectedIndex]?.text || '';
-    document.getElementById('form-subject').value = label
-      ? `Aplicație: ${label} · Dasitrade`
-      : 'Aplicație Cariere · Dasitrade';
+    document.getElementById('form-position-label').value = label;
   });
 
-  // Form submit via Web3Forms
+  const status = new URLSearchParams(globalThis.location.search).get('status');
+  if (status === 'success') {
+    document.getElementById('apply-form').style.display = 'none';
+    document.getElementById('af-success').style.display = 'block';
+    document.getElementById('af-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  if (status === 'error') {
+    document.getElementById('af-error').style.display = 'block';
+    document.getElementById('af-error').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Form submit via PHP endpoint
   document.getElementById('apply-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = document.getElementById('af-submit');
@@ -306,8 +328,12 @@
     error.style.display = 'none';
 
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch(this.action, {
         method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
         body: new FormData(this),
       });
       const json = await res.json();

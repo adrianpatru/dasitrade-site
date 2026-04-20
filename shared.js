@@ -92,7 +92,7 @@
         <div>
           <img src="assets/logo.jpg" alt="Dasitrade" class="footer__logo"/>
           <p style="margin-top:16px; color:var(--fg-dark-dim); font-size:14px; line-height:1.6; max-width:34ch;">
-            Sisteme integrate de securitate, operând din Bacău din 2006. Proiectare, instalare, mentenanță — fără ferestre oarbe.
+            Integrator de curenți slabi și sisteme de securitate, operând din Bacău din 2006. Proiectare, instalare, mentenanță și service 24/7 — fără ferestre oarbe.
           </p>
         </div>
         <div class="footer__col">
@@ -223,27 +223,51 @@
     try {
       if (sessionStorage.getItem('dasitrade_splash_seen') === '1') return;
       if (!document.body.dataset.splash) return;
+      if (globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+        sessionStorage.setItem('dasitrade_splash_seen', '1');
+        return;
+      }
+
       const overlay = h('div', {}, []);
       overlay.style.cssText = `
         position: fixed; inset: 0; z-index: 9999;
         background: #000;
         opacity: 1;
         transition: opacity 500ms ease;
+        cursor: pointer;
       `;
       const iframe = h('iframe', {
         src: 'intro.html',
+        title: 'Dasitrade secure boot intro',
+        'aria-hidden': 'true',
         style: 'width:100%;height:100%;border:0;display:block;',
       });
       overlay.appendChild(iframe);
       document.body.appendChild(overlay);
-      // 1.5s intro + 0.2s buffer, then fade
-      setTimeout(() => {
+
+      let dismissed = false;
+      let fallbackTimer = null;
+
+      const dismiss = () => {
+        if (dismissed) return;
+        dismissed = true;
         overlay.style.opacity = '0';
         setTimeout(() => {
           overlay.remove();
           sessionStorage.setItem('dasitrade_splash_seen', '1');
         }, 500);
-      }, 3900);
+        globalThis.removeEventListener('message', onMessage);
+        if (fallbackTimer) clearTimeout(fallbackTimer);
+      };
+
+      const onMessage = (event) => {
+        if (event?.data?.type !== 'dasitrade:intro-complete') return;
+        dismiss();
+      };
+
+      overlay.addEventListener('click', dismiss);
+      globalThis.addEventListener('message', onMessage);
+      fallbackTimer = setTimeout(dismiss, 4600);
     } catch {}
   }
 
@@ -276,6 +300,7 @@
 
       const outerSlide = host.closest('.svc-slide, .port-slide');
       const label = host.dataset.galleryLabel || `Galerie imagini ${hostIndex + 1}`;
+      const normalizedLabel = label.replace(/^Galerie\s*/i, '').trim() || `galerie ${hostIndex + 1}`;
       let current = 0;
       let timer = null;
       let startX = 0;
@@ -312,7 +337,8 @@
 
       const slides = items.map((item, index) => {
         const src = typeof item === 'string' ? item : item.src;
-        const alt = typeof item === 'string' ? '' : (item.alt || '');
+        const fallbackAlt = `${normalizedLabel} · imaginea ${index + 1}`;
+        const alt = typeof item === 'string' ? fallbackAlt : (item.alt || fallbackAlt);
         const slide = h('div', {
           class: `media-gallery__slide${index === 0 ? ' is-active' : ''}`,
           'aria-hidden': index === 0 ? 'false' : 'true'

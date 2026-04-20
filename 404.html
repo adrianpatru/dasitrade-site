@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8"/>
+<title>404 · Pagina nu a fost găsită · Dasitrade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="Pagina solicitată nu a fost găsită. Revino în zona publică Dasitrade pentru servicii, portofoliu și contact."/>
+<meta name="robots" content="noindex,follow"/>
+<meta name="theme-color" content="#0a0f14"/>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+<link rel="manifest" href="site.webmanifest"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500&family=Newsreader:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<header data-nav></header>
+
+<section class="page-hero" style="min-height:100vh;">
+  <div class="page-hero__img">
+    <img src="assets/img/hero-index.jpg" alt="Fundal Dasitrade pentru pagina 404" loading="eager"/>
+  </div>
+  <div class="grain"></div>
+  <div class="page-hero__content">
+    <div class="page-hero__meta">
+      <span>§ / ERROR</span>
+      <span>404 · ROUTE NOT FOUND</span>
+      <span>CLASIF · PUBLIC</span>
+    </div>
+    <div class="eyebrow eyebrow--dark" style="margin-bottom:24px;">Ruta solicitată nu există</div>
+    <h1 class="heading-xl" style="color:var(--fg-dark); max-width:14ch;">Pagina căutată<br/>nu este <em style="color:var(--accent);font-style:italic;">în index.</em></h1>
+    <p class="lede lede--dark" style="margin-top:32px;max-width:48ch;">Poți reveni în hub-ul principal, consulta serviciile sau trimite direct o cerere pentru ofertare și suport tehnic.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:36px;">
+      <a href="index.html" class="btn btn--primary">Înapoi la homepage →</a>
+      <a href="servicii.html" class="btn">Vezi serviciile</a>
+      <a href="contact.html" class="btn">Contact</a>
+    </div>
+  </div>
+</section>
+
+<footer data-footer></footer>
+<script src="shared.js"></script>
+<script>
+  DasitradeSite.init({ current: '', navVariant: 'light' });
+  (function(){
+    const nav = document.querySelector('[data-nav]');
+    const hero = document.querySelector('.page-hero');
+    if (!nav || !hero) return;
+    nav.classList.remove('nav--light');
+    nav.classList.add('nav--dark');
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        nav.classList.add('nav--dark');
+        nav.classList.remove('nav--light');
+      } else {
+        nav.classList.add('nav--light');
+        nav.classList.remove('nav--dark');
+      }
+    }, { rootMargin: '-80px 0px 0px 0px' });
+    io.observe(hero);
+  })();
+</script>
+</body>
+</html>
