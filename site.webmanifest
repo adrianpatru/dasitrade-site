@@ -15,7 +15,7 @@
       "purpose": "any"
     },
     {
-      "src": "/assets/favicon.svg",
+      "src": "/assets/favicon.svg?v=20260421-logo",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
