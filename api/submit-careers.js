@@ -28,7 +28,8 @@ async function handler(req, res) {
   let parsed;
   try {
     parsed = await parseMultipart(req);
-  } catch {
+  } catch (error) {
+    console.error('Careers form parse error:', error);
     sendFormResponse(req, res, false, 'Aplicatia nu a putut fi procesata.', 'cariere.html');
     return;
   }

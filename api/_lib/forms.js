@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
-const formidable = require('formidable');
+const { formidable } = require('formidable');
 const nodemailer = require('nodemailer');
 
 const config = require('./config');
