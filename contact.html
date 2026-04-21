@@ -387,6 +387,10 @@
     const submitLabel = document.getElementById('cf-submit-label');
     const track = globalThis.DasitradeSite?.track;
 
+    if (globalThis.location.hostname.endsWith('vercel.app')) {
+      form.action = '/api/submit-contact';
+    }
+
     const setErrorMessage = (message = '') => {
       if (!errorMessage) return;
       const copy = typeof message === 'string' ? message.trim() : '';
