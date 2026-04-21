@@ -486,6 +486,7 @@
       <output id="af-success" class="apply-form__feedback apply-form__feedback--ok" aria-live="polite" hidden><span class="mono apply-form__feedback-kicker">// Transmis cu succes</span><span class="apply-form__feedback-copy">Aplicația a fost primită. Te vom contacta în maximum 5 zile lucrătoare.</span></output>
       <div id="af-error" class="apply-form__feedback apply-form__feedback--err" aria-live="assertive" role="alert" hidden>
         <div class="mono apply-form__feedback-kicker apply-form__feedback-kicker--error">// Eroare la trimitere</div>
+        <p id="af-error-message" hidden></p>
         <p>A apărut o problemă. Trimite CV-ul direct la <a href="mailto:tehnic@dasitrade.ro" class="contact-inline-link">tehnic@dasitrade.ro</a>.</p>
       </div>
     </form>
@@ -699,14 +700,23 @@
     const label = document.getElementById('af-submit-label');
     const success = document.getElementById('af-success');
     const error = document.getElementById('af-error');
+    const errorMessage = document.getElementById('af-error-message');
     const track = globalThis.DasitradeSite?.track;
     const position = document.getElementById('af-position')?.value || '';
+
+    const setErrorMessage = (message = '') => {
+      if (!errorMessage) return;
+      const copy = typeof message === 'string' ? message.trim() : '';
+      errorMessage.hidden = copy === '';
+      errorMessage.textContent = copy;
+    };
 
     btn.disabled = true;
   btn.setAttribute('aria-busy', 'true');
   this.setAttribute('aria-busy', 'true');
     label.textContent = 'Se trimite...';
     error.hidden = true;
+    setErrorMessage('');
 
     track?.('career_submit_attempt', {
       formId: 'apply-form',
@@ -723,6 +733,7 @@
         body: new FormData(this),
       });
       const json = await res.json();
+      const serverMessage = typeof json.message === 'string' ? json.message : '';
       if (json.success) {
         this.hidden = true;
         success.hidden = false;
@@ -732,7 +743,8 @@
         });
         success.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
-        throw new Error(json.message || 'Unknown error');
+        setErrorMessage(serverMessage);
+        throw new Error(serverMessage || 'Unknown error');
       }
     } catch(err) {
       console.warn('Form submit error:', err);

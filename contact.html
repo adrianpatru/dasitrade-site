@@ -148,6 +148,7 @@
           </div>
           <output id="cf-success" class="form-feedback form-feedback--ok" aria-live="polite" hidden>Brief-ul a fost transmis. Revenim către dumneavoastră în maximum 48h lucrătoare.</output>
           <div id="cf-error" class="form-feedback form-feedback--err" aria-live="assertive" role="alert" hidden>
+            <p id="cf-error-message" hidden></p>
             <p>A apărut o problemă la trimitere. Ne puteți scrie direct la <a href="mailto:tehnic@dasitrade.ro" class="contact-inline-link">tehnic@dasitrade.ro</a> sau suna la 0334 401 092.</p>
           </div>
         </form>
@@ -381,9 +382,17 @@
     const form = document.getElementById('contact-form');
     const success = document.getElementById('cf-success');
     const error = document.getElementById('cf-error');
+    const errorMessage = document.getElementById('cf-error-message');
     const submit = document.getElementById('cf-submit');
     const submitLabel = document.getElementById('cf-submit-label');
     const track = globalThis.DasitradeSite?.track;
+
+    const setErrorMessage = (message = '') => {
+      if (!errorMessage) return;
+      const copy = typeof message === 'string' ? message.trim() : '';
+      errorMessage.hidden = copy === '';
+      errorMessage.textContent = copy;
+    };
 
     const reveal = (node) => {
       node.hidden = false;
@@ -425,6 +434,7 @@
       event.preventDefault();
       success.hidden = true;
       error.hidden = true;
+      setErrorMessage('');
       submit.disabled = true;
       submit.setAttribute('aria-busy', 'true');
       form.setAttribute('aria-busy', 'true');
@@ -446,9 +456,11 @@
           body: new FormData(form)
         });
         const payload = await response.json();
+        const serverMessage = typeof payload.message === 'string' ? payload.message : '';
 
         if (!response.ok || !payload.success) {
-          throw new Error(payload.message || 'Eroare la trimitere');
+          setErrorMessage(serverMessage);
+          throw new Error(serverMessage || 'Eroare la trimitere');
         }
 
         form.reset();

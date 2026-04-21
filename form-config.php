@@ -453,7 +453,12 @@ function dasitradeSendMail(string $to, string $subject, string $htmlBody, ?strin
         }
     }
 
-    return dasitradeSendMailViaPhpMail($to, $subject, $htmlBody, $replyTo, $attachment);
+    $sent = dasitradeSendMailViaPhpMail($to, $subject, $htmlBody, $replyTo, $attachment);
+    if (!$sent) {
+        dasitradeLogMailError('mail() fallback send failed.');
+    }
+
+    return $sent;
 }
 
 function dasitradeValidateHoneypot(): bool
