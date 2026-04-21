@@ -112,6 +112,7 @@ function dasitradeSmtpConfig(): array
         'password' => (string) ($smtp['password'] ?? ''),
         'auth' => !array_key_exists('auth', $smtp) || (bool) $smtp['auth'],
         'timeout' => $timeout > 0 ? $timeout : 15,
+        'options' => is_array($smtp['options'] ?? null) ? $smtp['options'] : [],
     ];
 }
 
@@ -435,6 +436,7 @@ function dasitradeSendMailViaSmtp(string $to, string $subject, string $htmlBody,
         $mailer->Username = $smtp['username'];
         $mailer->Password = $smtp['password'];
         $mailer->SMTPAutoTLS = true;
+        $mailer->SMTPOptions = $smtp['options'];
 
         if ($smtp['security'] === 'ssl') {
             $mailer->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;

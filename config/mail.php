@@ -19,5 +19,12 @@ return [
         'password' => 'Door_met12.',
         'auth' => true,
         'timeout' => 15,
+        'options' => [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
+            ],
+        ],
     ],
 ];
