@@ -8,6 +8,7 @@
 <meta name="robots" content="noindex,follow"/>
 <meta name="theme-color" content="#0a0f14"/>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
 <link rel="manifest" href="site.webmanifest"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +18,7 @@
 <body>
 <header data-nav></header>
 
-<section class="page-hero" style="min-height:100vh;">
+<section class="page-hero error-hero">
   <div class="page-hero__img">
     <img src="assets/img/hero-index.jpg" alt="Fundal Dasitrade pentru pagina 404" loading="eager"/>
   </div>
@@ -28,10 +29,10 @@
       <span>404 · ROUTE NOT FOUND</span>
       <span>CLASIF · PUBLIC</span>
     </div>
-    <div class="eyebrow eyebrow--dark" style="margin-bottom:24px;">Ruta solicitată nu există</div>
-    <h1 class="heading-xl" style="color:var(--fg-dark); max-width:14ch;">Pagina căutată<br/>nu este <em style="color:var(--accent);font-style:italic;">în index.</em></h1>
-    <p class="lede lede--dark" style="margin-top:32px;max-width:48ch;">Poți reveni în hub-ul principal, consulta serviciile sau trimite direct o cerere pentru ofertare și suport tehnic.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:36px;">
+    <div class="eyebrow eyebrow--dark error-hero__eyebrow">Ruta solicitată nu există</div>
+    <h1 class="heading-xl error-hero__title">Pagina căutată<br/>nu este <em class="error-hero__accent">în index.</em></h1>
+    <p class="lede lede--dark error-hero__lede">Poți reveni în hub-ul principal, consulta serviciile sau trimite direct o cerere pentru ofertare și suport tehnic.</p>
+    <div class="error-hero__actions">
       <a href="index.html" class="btn btn--primary">Înapoi la homepage →</a>
       <a href="servicii.html" class="btn">Vezi serviciile</a>
       <a href="contact.html" class="btn">Contact</a>

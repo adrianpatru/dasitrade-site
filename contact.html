@@ -4,10 +4,11 @@
 <meta charset="utf-8"/>
 <title>Contact · Dasitrade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Contact Dasitrade Bacău: ofertare, proiectare, service și dispecerat 24/7 pentru curenți slabi și sisteme de securitate."/>
+<meta name="description" content="Contact SC DASITRADE SRL: call-center, telefon și office@dasitrade.ro pentru securitate, incendiu, telecomunicații și toate sistemele de curenți slabi."/>
 <meta name="robots" content="index,follow,max-image-preview:large"/>
 <meta name="theme-color" content="#0a0f14"/>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
 <link rel="canonical" href="https://www.dasitrade.ro/contact.html"/>
 <link rel="manifest" href="site.webmanifest"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,18 +20,58 @@
 <meta property="og:site_name"   content="Dasitrade"/>
 <meta property="og:url"         content="https://www.dasitrade.ro/contact.html"/>
 <meta property="og:title"       content="Contact · Dasitrade — Dispecerat 24/7"/>
-<meta property="og:description" content="Contactează Dasitrade pentru ofertare, proiectare sau service 24/7 în Bacău și la nivel național."/>
+<meta property="og:description" content="Contactează SC DASITRADE SRL pentru ofertare, proiectare sau mentenanță în securitate, telecomunicații și sisteme de curenți slabi."/>
 <meta property="og:image"       content="https://www.dasitrade.ro/assets/img/hero-contact.jpg"/>
 <meta name="twitter:card"       content="summary_large_image"/>
 <meta name="twitter:title"      content="Contact · Dasitrade — Dispecerat 24/7"/>
-<meta name="twitter:description" content="Ofertare și suport tehnic pentru curenți slabi și sisteme de securitate. Răspuns comercial în 48h."/>
+<meta name="twitter:description" content="Call-center, telefon și office@dasitrade.ro pentru securitate, incendiu, telecomunicații și sisteme de curenți slabi. Răspuns comercial în 48h."/>
 <meta name="twitter:image"      content="https://www.dasitrade.ro/assets/img/hero-contact.jpg"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce trebuie sa trimit pentru o oferta initiala?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pentru o prima evaluare sunt suficiente numele companiei, tipul obiectivului, localitatea, suprafata aproximativa, sistemele dorite sau riscul principal si orice plan, schita sau fotografii pe care le aveti deja."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "In cat timp reveniti dupa trimiterea formularului?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pentru solicitarile comerciale revenim de regula in maximum 48 de ore lucratoare. Pentru urgente de service, dispeceratul preia solicitarile 24/7."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Faceti evaluare pe teren?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Da. Pentru fabrici, depozite, spitale, cladiri publice si alte obiective complexe programam evaluare pe teren si revenim cu un concept tehnic si o estimare fundamentata."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Preluati si sisteme deja instalate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Da. Putem face audit tehnic, remediere, standardizare si preluare in mentenanta pentru sisteme existente, daca starea lor permite o exploatare predictibila."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
 <header data-nav></header>
 
-<section class="page-hero" style="min-height:52vh;" data-screen-label="contact.hero">
+<section class="page-hero contact-hero" data-screen-label="contact.hero">
   <div class="page-hero__img">
     <img src="assets/img/hero-contact.jpg" alt="Punctul de contact Dasitrade pentru ofertare, proiectare și service 24/7" loading="eager"/>
   </div>
@@ -41,30 +82,31 @@
       <span>DSP · 24/7 · OPERAȚIONAL</span>
       <span>CLASIF · PUBLIC</span>
     </div>
-    <div class="eyebrow eyebrow--dark" style="margin-bottom:24px;">Trei canale · prioritizate</div>
-    <h1 class="heading-xl" style="color:var(--fg-dark); max-width:18ch;">
-      Hai să stabilim<br/>un <em style="color:var(--accent);font-style:italic;">canal sigur.</em>
+    <div class="eyebrow eyebrow--dark contact-hero__eyebrow">Trei canale · prioritizate</div>
+    <h1 class="heading-xl contact-hero__title">
+      Hai să stabilim<br/>un <em class="contact-hero__accent">canal sigur.</em>
     </h1>
   </div>
 </section>
 
-<section style="background:var(--paper);padding:0 32px;">
+<section class="contact-shell">
   <div class="container">
     <div class="contact-grid">
       <div>
-        <div class="eyebrow" style="margin-bottom:24px;">§ 01 / Brief proiect</div>
-        <h2 class="heading-lg" style="margin-bottom:48px;">Trimite datele.<br/>Ofertă în 48h.</h2>
+        <div class="eyebrow contact-section__eyebrow">§ 01 / Brief proiect</div>
+        <h2 class="heading-lg contact-section__title">Trimite datele.<br/>Ofertă în 48h.</h2>
 
         <form id="contact-form" class="contact-form" action="submit-contact.php" method="post">
           <div class="form-honeypot" aria-hidden="true">
             <label for="cf-company-site">Nu completa acest câmp</label>
             <input type="text" id="cf-company-site" name="website" tabindex="-1" autocomplete="off"/>
           </div>
+          <input type="hidden" id="cf-csrf" name="csrf_token" value=""/>
           <div>
             <label for="cf-name">Nume / Companie</label>
             <input type="text" id="cf-name" name="name" required autocomplete="organization" placeholder="SC Exemplu SRL"/>
           </div>
-          <div class="grid-2" style="gap:40px;">
+          <div class="grid-2 contact-form__row-gap">
             <div>
               <label for="cf-email">Email</label>
               <input type="email" id="cf-email" name="email" required autocomplete="email" placeholder="contact@..."/>
@@ -78,13 +120,17 @@
             <label for="cf-type">Tip proiect</label>
             <select id="cf-type" name="project_type" required>
               <option value="">— Selectează —</option>
+              <option>Detecție, desfumare și stingere incendiu</option>
               <option>Securitate electronică · efracție</option>
-              <option>Detecție / stingere incendiu</option>
               <option>CCTV · supraveghere video</option>
-              <option>Control acces</option>
-              <option>Sonorizare · teleconferințe</option>
-              <option>Voce-date · IT</option>
-              <option>Automatizări porți · bariere</option>
+              <option>Control acces și pontaj</option>
+              <option>Voce-date · rețele · cablare structurată</option>
+              <option>Sonorizare · evacuare vocală · conferințe</option>
+              <option>Telecomunicații · distribuție semnal TV / IPTV</option>
+              <option>Interfoane IP · video interfonie</option>
+              <option>Nurse call · apel asistență</option>
+              <option>LPR · bariere · acces auto</option>
+              <option>BMS · smart building · automatizări</option>
               <option>Sistem integrat · multi-layer</option>
               <option>Altul / consultație</option>
             </select>
@@ -101,21 +147,21 @@
             <button type="submit" class="btn btn--primary" id="cf-submit"><span id="cf-submit-label">Trimite brief →</span></button>
             <p class="form-note">răspuns comercial în maximum 48h lucrătoare</p>
           </div>
-          <output id="cf-success" class="form-feedback form-feedback--ok" style="display:none;" aria-live="polite">Brief-ul a fost transmis. Revenim către dumneavoastră în maximum 48h lucrătoare.</output>
-          <div id="cf-error" class="form-feedback form-feedback--err" style="display:none;" aria-live="assertive" role="alert">
-            <p>A apărut o problemă la trimitere. Ne puteți scrie direct la <a href="mailto:office@dasitrade.ro" style="border-bottom:1px solid currentColor;">office@dasitrade.ro</a> sau suna la 0334 401 092.</p>
+          <output id="cf-success" class="form-feedback form-feedback--ok" aria-live="polite" hidden>Brief-ul a fost transmis. Revenim către dumneavoastră în maximum 48h lucrătoare.</output>
+          <div id="cf-error" class="form-feedback form-feedback--err" aria-live="assertive" role="alert" hidden>
+            <p>A apărut o problemă la trimitere. Ne puteți scrie direct la <a href="mailto:office@dasitrade.ro" class="contact-inline-link">office@dasitrade.ro</a> sau suna la 0334 401 092.</p>
           </div>
         </form>
 
-        <div id="evaluare" style="margin-top:100px;padding-top:60px;border-top:1px solid var(--line);">
-          <div class="eyebrow" style="margin-bottom:16px;">§ 02 / Evaluare pe teren</div>
-          <h3 class="heading-md" style="margin-bottom:16px;">Un inginer la locație.<br/>Fără cost, fără obligație.</h3>
-          <p class="lede" style="font-size:17px;">
+        <div id="evaluare" class="contact-evaluation">
+          <div class="eyebrow contact-evaluation__eyebrow">§ 02 / Evaluare pe teren</div>
+          <h3 class="heading-md contact-evaluation__title">Un inginer la locație.<br/>Fără cost, fără obligație.</h3>
+          <p class="lede contact-evaluation__body">
             Pentru proiecte complexe — fabrici, depozite, clădiri publice — trimitem un inginer
             la locație pentru o evaluare completă. Primești un concept tehnic și o estimare
             fundamentată, în 72h de la vizită.
           </p>
-          <div style="margin-top:32px;">
+          <div class="contact-evaluation__actions">
             <a href="mailto:office@dasitrade.ro?subject=Cerere evaluare pe teren" class="btn btn--primary">Programează evaluare →</a>
           </div>
         </div>
@@ -123,43 +169,139 @@
 
       <aside>
         <div class="contact-sidebar-block">
-          <h4>§ Dispecerat 24/7</h4>
-          <a href="tel:0334401092" style="font-family:var(--serif);font-size:38px;line-height:1.05;letter-spacing:-0.01em;">0334 401 092</a>
-          <a href="tel:0728030268" style="font-family:var(--serif);font-size:28px;line-height:1.1;margin-top:8px;color:var(--fg-dim);">0728 030 268</a>
-          <a href="tel:0234571178" style="font-family:var(--serif);font-size:28px;line-height:1.1;margin-top:8px;color:var(--fg-dim);">0234 571 178</a>
-          <p class="mono" style="font-size:11px;color:var(--fg-faint);letter-spacing:0.22em;text-transform:uppercase;margin-top:16px;">
-            <span style="display:inline-block;width:6px;height:6px;background:var(--accent);border-radius:3px;margin-right:6px;box-shadow:0 0 6px var(--accent-glow);"></span>
+          <h4>§ Telefon / Call-center</h4>
+          <a href="tel:0334401092" class="contact-dispatch__primary">0334 401 092</a>
+          <a href="tel:0728030268" class="contact-dispatch__secondary">0728 030 268</a>
+          <p class="contact-sidebar-block__aux">SC DASITRADE SRL · call-center 24/7</p>
+          <p class="mono contact-live-status">
+            <span class="contact-live-status__dot"></span>
             Operațional · <span data-live-status>--:--:--</span>
           </p>
         </div>
 
         <div class="contact-sidebar-block">
-          <h4>§ Canale email</h4>
-          <a href="mailto:office@dasitrade.ro">office@dasitrade.ro<span style="color:var(--fg-faint);font-size:12px;display:block;font-family:var(--mono);letter-spacing:0.1em;margin-top:2px;">— ofertare, general</span></a>
-          <a href="mailto:tehnic@dasitrade.ro" style="margin-top:16px;">tehnic@dasitrade.ro<span style="color:var(--fg-faint);font-size:12px;display:block;font-family:var(--mono);letter-spacing:0.1em;margin-top:2px;">— proiectare, specificații</span></a>
-          <a href="mailto:service@dasitrade.ro" style="margin-top:16px;">service@dasitrade.ro<span style="color:var(--fg-faint);font-size:12px;display:block;font-family:var(--mono);letter-spacing:0.1em;margin-top:2px;">— intervenții, mentenanță</span></a>
+          <h4>§ Email & web</h4>
+          <a href="mailto:office@dasitrade.ro">office@dasitrade.ro<span class="contact-channel__note">— contact, ofertare, relații clienți</span></a>
+          <a href="https://www.dasitrade.ro" target="_blank" rel="noopener" class="contact-sidebar-link--spaced">www.dasitrade.ro<span class="contact-channel__note">— website principal</span></a>
+          <a href="https://www.sisteme-incendiu.ro" target="_blank" rel="noopener" class="contact-sidebar-link--spaced">www.sisteme-incendiu.ro<span class="contact-channel__note">— specializare sisteme incendiu</span></a>
         </div>
 
         <div class="contact-sidebar-block">
           <h4>§ Sediu</h4>
-          <p style="font-family:var(--serif);font-size:20px;line-height:1.35;">Bld. Unirii, Nr. 92 B<br/>Bacău, România</p>
-          <p class="contact-sidebar-block__aux">punct operațional și corespondență</p>
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Bulevardul+Unirii+92+B+Bacau" target="_blank" rel="noopener" style="margin-top:10px;font-family:var(--mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);">Deschide în Google Maps →</a>
+          <p class="contact-address">Bld. Unirii, Nr. 92 B<br/>Bacău, România</p>
+          <p class="contact-sidebar-block__aux">punct operațional și corespondență · J2006000967048 · CUI RO 18802465</p>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Bulevardul+Unirii+92+B+Bacau" target="_blank" rel="noopener" class="contact-map-link">Deschide în Google Maps →</a>
         </div>
 
         <div class="contact-sidebar-block">
           <h4>§ Program birou</h4>
           <p>Luni – Vineri · 08:00 – 17:00</p>
-          <p style="color:var(--fg-dim);font-size:14px;margin-top:8px;">Dispeceratul preia solicitări 24/7, inclusiv weekend-uri și sărbători.</p>
+          <p class="contact-hours__note">Dispeceratul preia solicitări 24/7, inclusiv weekend-uri și sărbători.</p>
         </div>
 
-        <div class="contact-sidebar-block" style="background:var(--paper-warm); margin-left:-24px; margin-right:-24px; padding-left:24px; padding-right:24px; border-top:2px solid var(--accent);">
-          <div class="mono" style="font-size:10px;letter-spacing:0.28em;color:var(--accent);text-transform:uppercase;margin-bottom:10px;">§ Cariere</div>
-          <p style="font-family:var(--serif);font-size:22px;line-height:1.2;margin-bottom:12px;">Vrei să faci parte din echipă?</p>
-          <p style="font-size:14px;color:var(--fg-dim);margin-bottom:20px;line-height:1.5;">Avem posturi active. Depune CV-ul direct — răspundem în 5 zile.</p>
-          <a href="cariere.html" class="btn btn--primary" style="font-size:11px;">Vezi posturi disponibile →</a>
+        <div class="contact-sidebar-block contact-careers-promo">
+          <div class="mono contact-careers-promo__eyebrow">§ Cariere</div>
+          <p class="contact-careers-promo__title">Vrei să faci parte din echipă?</p>
+          <p class="contact-careers-promo__body">Avem posturi active. Depune CV-ul direct — răspundem în 5 zile.</p>
+          <a href="cariere.html" class="btn btn--primary contact-careers-promo__cta">Vezi posturi disponibile →</a>
         </div>
       </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section process-shell process-shell--warm">
+  <div class="container">
+    <div class="grid-2 process-shell__head">
+      <div>
+        <div class="eyebrow process-shell__eyebrow">§ 03 / Cum răspundem</div>
+        <h2 class="heading-lg process-shell__title">Patru pași simpli,<br/>fără ping-pong inutil.</h2>
+      </div>
+      <p class="lede process-shell__lede">
+        După trimiterea brief-ului filtrăm rapid riscul real, alegem canalul corect
+        și revenim fie cu întrebări de clarificare, fie direct cu direcția tehnică și pașii următori.
+      </p>
+    </div>
+
+    <div class="process-steps process-steps--four">
+      <article class="process-card" data-reveal>
+        <div class="process-card__num">CONTACT · 01</div>
+        <h3 class="process-card__title">Triage comercial</h3>
+        <p class="process-card__body">Separăm cererile de ofertare, proiectare, service și preluare sistem existent, ca să intre direct la echipa potrivită.</p>
+      </article>
+
+      <article class="process-card" data-reveal>
+        <div class="process-card__num">CONTACT · 02</div>
+        <h3 class="process-card__title">Clarificări tehnice</h3>
+        <p class="process-card__body">Dacă lipsesc date critice, cerem strict informațiile care schimbă soluția: suprafață, fluxuri, constrângeri, termene și integrarea dorită.</p>
+      </article>
+
+      <article class="process-card" data-reveal>
+        <div class="process-card__num">CONTACT · 03</div>
+        <h3 class="process-card__title">Concept și buget</h3>
+        <p class="process-card__body">Pentru cererile clare revenim cu direcția tehnică, sistemele obligatorii și un interval realist de buget sau ofertare detaliată.</p>
+      </article>
+
+      <article class="process-card" data-reveal>
+        <div class="process-card__num">CONTACT · 04</div>
+        <h3 class="process-card__title">Vizită în teren</h3>
+        <p class="process-card__body">Pentru obiective complexe trecem în evaluare la locație și stabilim exact fazarea, riscurile și condițiile de execuție.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section faq-shell">
+  <div class="container faq-grid">
+    <div class="faq-intro">
+      <div class="eyebrow faq-intro__eyebrow">§ 04 / Întrebări frecvente</div>
+      <h2 class="heading-lg faq-intro__title">Ce ne întreabă<br/>cel mai des.</h2>
+      <p class="lede faq-intro__lede">
+        Dacă nu ești sigur ce sistem trebuie primul, trimite contextul operațional.
+        Rolul nostru este să separăm ce este critic de ce poate fi etapizat.
+      </p>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item" data-reveal open>
+        <summary>
+          <span class="faq-item__question">Ce informații sunt suficiente pentru o primă ofertă?</span>
+          <span class="faq-item__icon">+</span>
+        </summary>
+        <div class="faq-item__body">
+          <p>Numele companiei, tipul obiectivului, localitatea, suprafața aproximativă, sistemele dorite sau problema principală de rezolvat. Dacă aveți planuri, fotografii sau un caiet de sarcini, ajută, dar nu sunt obligatorii din primul mesaj.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-reveal>
+        <summary>
+          <span class="faq-item__question">În cât timp reveniți după formular?</span>
+          <span class="faq-item__icon">+</span>
+        </summary>
+        <div class="faq-item__body">
+          <p>Pentru solicitările comerciale revenim în mod normal în maximum 48h lucrătoare. Dacă cererea este urgentă și ține de service, dispeceratul poate prelua solicitarea imediat.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-reveal>
+        <summary>
+          <span class="faq-item__question">Faceți evaluare pe teren?</span>
+          <span class="faq-item__icon">+</span>
+        </summary>
+        <div class="faq-item__body">
+          <p>Da. Pentru fabrici, depozite, spitale, clădiri publice și obiective cu integrare multi-sistem programăm vizită în teren și revenim cu un concept tehnic și o estimare fundamentată.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-reveal>
+        <summary>
+          <span class="faq-item__question">Preluați și sisteme deja instalate?</span>
+          <span class="faq-item__icon">+</span>
+        </summary>
+        <div class="faq-item__body">
+          <p>Da. Putem face audit tehnic, remediere, standardizare și preluare în mentenanță pentru sisteme deja montate, inclusiv atunci când documentația este incompletă și trebuie reconstituită operațional.</p>
+        </div>
+      </details>
     </div>
   </div>
 </section>
@@ -183,9 +325,10 @@
     const error = document.getElementById('cf-error');
     const submit = document.getElementById('cf-submit');
     const submitLabel = document.getElementById('cf-submit-label');
+    const track = globalThis.DasitradeSite?.track;
 
     const reveal = (node) => {
-      node.style.display = 'block';
+      node.hidden = false;
       node.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     };
 
@@ -203,12 +346,18 @@
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      success.style.display = 'none';
-      error.style.display = 'none';
+      success.hidden = true;
+      error.hidden = true;
       submit.disabled = true;
       submit.setAttribute('aria-busy', 'true');
       form.setAttribute('aria-busy', 'true');
       submitLabel.textContent = 'Se trimite...';
+
+      const projectType = form.querySelector('[name="project_type"]')?.value || '';
+      track?.('contact_submit_attempt', {
+        formId: 'contact-form',
+        projectType,
+      });
 
       try {
         const response = await fetch(form.action, {
@@ -226,9 +375,17 @@
         }
 
         form.reset();
+        track?.('contact_submit_success', {
+          formId: 'contact-form',
+          projectType,
+        });
         reveal(success);
       } catch (submitError) {
         console.warn('Contact form submit error:', submitError);
+        track?.('contact_submit_error', {
+          formId: 'contact-form',
+          projectType,
+        });
         reveal(error);
       } finally {
         submit.disabled = false;

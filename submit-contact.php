@@ -11,6 +11,18 @@ if (!dasitradeValidateHoneypot()) {
     dasitradeFormResponse(true, 'Solicitare primita.', 'contact.html');
 }
 
+if (!dasitradeHasTrustedNavigationContext()) {
+    dasitradeFormResponse(false, 'Solicitare respinsa dintr-un context invalid.', 'contact.html');
+}
+
+if (!dasitradeValidateCsrfToken()) {
+    dasitradeFormResponse(false, 'Sesiunea formularului nu mai este valida. Reincarca pagina si incearca din nou.', 'contact.html');
+}
+
+if (!dasitradeEnforceRateLimit('contact', 6, 900)) {
+    dasitradeFormResponse(false, 'Au fost trimise prea multe solicitari intr-un interval scurt. Incearca din nou peste cateva minute.', 'contact.html');
+}
+
 $name = dasitradeCleanText(dasitradePost('name'));
 $email = dasitradeCleanEmail(dasitradePost('email'));
 $phone = dasitradeCleanPhone(dasitradePost('phone'));
@@ -43,7 +55,7 @@ $body = dasitradeRenderEmail(
 );
 
 $sent = dasitradeSendMail(
-    DASITRADE_OFFICE_EMAIL . ',' . DASITRADE_TECH_EMAIL,
+    DASITRADE_OFFICE_EMAIL,
     'Contact site Dasitrade',
     $body,
     $email

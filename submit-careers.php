@@ -11,6 +11,18 @@ if (!dasitradeValidateHoneypot()) {
     dasitradeFormResponse(true, 'Aplicatie primita.', 'cariere.html');
 }
 
+if (!dasitradeHasTrustedNavigationContext()) {
+    dasitradeFormResponse(false, 'Aplicatia a fost respinsa dintr-un context invalid.', 'cariere.html');
+}
+
+if (!dasitradeValidateCsrfToken()) {
+    dasitradeFormResponse(false, 'Sesiunea formularului nu mai este valida. Reincarca pagina si incearca din nou.', 'cariere.html');
+}
+
+if (!dasitradeEnforceRateLimit('careers', 4, 1800)) {
+    dasitradeFormResponse(false, 'Au fost trimise prea multe aplicatii intr-un interval scurt. Incearca din nou mai tarziu.', 'cariere.html');
+}
+
 $name = dasitradeCleanText(dasitradePost('name'));
 $email = dasitradeCleanEmail(dasitradePost('email'));
 $phone = dasitradeCleanPhone(dasitradePost('phone'));

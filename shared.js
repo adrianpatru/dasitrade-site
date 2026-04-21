@@ -1,5 +1,27 @@
 // Shared UI — nav, footer, CCTV dispatch widget
 (function () {
+  const FORM_TOKEN_COOKIE = 'dasitrade_form_token';
+  const ANALYTICS = {
+    gtmContainerId: '',
+    ga4MeasurementId: '',
+  };
+  const COMPANY = {
+    legalName: 'SC DASITRADE SRL',
+    slogan: 'Soluții inteligente în telecomunicații',
+    registrationNumber: 'J2006000967048',
+    taxId: 'RO 18802465',
+    addressHtml: 'Bld. Unirii, Nr. 92 B<br/>Bacău, România',
+    callCenterLabel: '0334 401 092',
+    callCenterHref: 'tel:0334401092',
+    phoneLabel: '0728 030 268',
+    phoneHref: 'tel:0728030268',
+    officeEmail: 'office@dasitrade.ro',
+    officeEmailHref: 'mailto:office@dasitrade.ro',
+    primarySiteLabel: 'www.dasitrade.ro',
+    primarySiteHref: 'https://www.dasitrade.ro',
+    secondarySiteLabel: 'www.sisteme-incendiu.ro',
+    secondarySiteHref: 'https://www.sisteme-incendiu.ro',
+  };
 
   // ── Social media links — update these with real account URLs ──────────────
   const SOCIAL = {
@@ -33,6 +55,170 @@
     return el;
   }
 
+  function getCookie(name) {
+    const cookies = document.cookie ? document.cookie.split('; ') : [];
+    for (const cookie of cookies) {
+      const [key, ...rest] = cookie.split('=');
+      if (key === name) {
+        return decodeURIComponent(rest.join('='));
+      }
+    }
+    return '';
+  }
+
+  function randomHex(byteLength = 32) {
+    const bytes = new Uint8Array(byteLength);
+    if (globalThis.crypto?.getRandomValues) {
+      globalThis.crypto.getRandomValues(bytes);
+      return Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+    }
+
+    return Array.from({ length: byteLength * 2 }, () => Math.floor(Math.random() * 16).toString(16)).join('');
+  }
+
+  function ensureFormToken() {
+    const fields = document.querySelectorAll('input[name="csrf_token"]');
+    if (!fields.length) return;
+
+    let token = getCookie(FORM_TOKEN_COOKIE);
+    if (!/^[a-f0-9]{64}$/i.test(token)) {
+      token = randomHex(32);
+      const secure = globalThis.location.protocol === 'https:' ? '; Secure' : '';
+      document.cookie = `${FORM_TOKEN_COOKIE}=${encodeURIComponent(token)}; Max-Age=2592000; Path=/; SameSite=Strict${secure}`;
+    }
+
+    fields.forEach(field => {
+      field.value = token;
+      field.setAttribute('value', token);
+    });
+  }
+
+  function ensureDataLayer() {
+    if (!Array.isArray(globalThis.dataLayer)) {
+      globalThis.dataLayer = [];
+    }
+
+    return globalThis.dataLayer;
+  }
+
+  function loadAnalyticsScript(src) {
+    const existing = document.querySelector(`script[src="${src}"]`);
+    if (existing) return;
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = src;
+    document.head.appendChild(script);
+  }
+
+  function mountAnalytics() {
+    if (globalThis.__dasitradeAnalyticsMounted) return;
+
+    const gtmContainerId = ANALYTICS.gtmContainerId.trim();
+    const ga4MeasurementId = ANALYTICS.ga4MeasurementId.trim();
+
+    if (/^GTM-[A-Z0-9]+$/i.test(gtmContainerId)) {
+      const dataLayer = ensureDataLayer();
+      dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+      loadAnalyticsScript(`https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(gtmContainerId)}`);
+      globalThis.__dasitradeAnalyticsMounted = true;
+      globalThis.__dasitradeAnalyticsMode = 'gtm';
+      return;
+    }
+
+    if (/^G-[A-Z0-9]+$/i.test(ga4MeasurementId)) {
+      ensureDataLayer();
+
+      if (typeof globalThis.gtag !== 'function') {
+        globalThis.gtag = function gtag() {
+          globalThis.dataLayer.push(arguments);
+        };
+      }
+
+      globalThis.gtag('js', new Date());
+      globalThis.gtag('config', ga4MeasurementId, {
+        send_page_view: true,
+        page_path: globalThis.location.pathname || '/',
+        page_title: document.title,
+      });
+      loadAnalyticsScript(`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ga4MeasurementId)}`);
+      globalThis.__dasitradeAnalyticsMounted = true;
+      globalThis.__dasitradeAnalyticsMode = 'ga4';
+    }
+  }
+
+  function normalizeTrackLabel(trigger) {
+    const label = trigger.dataset.trackLabel
+      || trigger.getAttribute('aria-label')
+      || trigger.textContent
+      || trigger.getAttribute('href')
+      || trigger.id
+      || trigger.name
+      || 'unknown';
+
+    return label.replace(/\s+/g, ' ').trim().slice(0, 120);
+  }
+
+  function inferTrackEvent(trigger) {
+    if (trigger.dataset.track) return trigger.dataset.track;
+
+    const href = (trigger.getAttribute('href') || '').toLowerCase();
+    if (href.startsWith('tel:')) return 'click_phone';
+    if (href.startsWith('mailto:')) return 'click_email';
+    if (href.includes('wa.me') || href.includes('whatsapp')) return 'click_whatsapp';
+    if (href.includes('google.com/maps') || href.includes('/maps/search')) return 'click_map';
+    if (trigger.classList.contains('btn')) return 'cta_click';
+
+    return '';
+  }
+
+  function track(eventName, data = {}) {
+    if (!eventName) return;
+
+    const dataLayer = ensureDataLayer();
+
+    const payload = {
+      event: eventName,
+      page: globalThis.location.pathname || '/',
+      timestamp: new Date().toISOString(),
+      ...data,
+    };
+
+    dataLayer.push(payload);
+
+    if (globalThis.__dasitradeAnalyticsMode === 'ga4' && typeof globalThis.gtag === 'function') {
+      const { event, page, timestamp, ...params } = payload;
+      globalThis.gtag('event', eventName, {
+        page_path: page,
+        page_title: document.title,
+        event_time: timestamp,
+        ...params,
+      });
+    }
+
+    globalThis.dispatchEvent(new CustomEvent('dasitrade:track', { detail: payload }));
+  }
+
+  function mountTracking() {
+    if (globalThis.__dasitradeTrackingMounted) return;
+    globalThis.__dasitradeTrackingMounted = true;
+
+    document.addEventListener('click', event => {
+      const trigger = event.target.closest('a,button');
+      if (!trigger) return;
+      if (trigger.matches('button[type="submit"]')) return;
+
+      const eventName = inferTrackEvent(trigger);
+      if (!eventName) return;
+
+      track(eventName, {
+        label: normalizeTrackLabel(trigger),
+        href: trigger.getAttribute('href') || '',
+        location: trigger.dataset.trackLocation || '',
+      });
+    });
+  }
+
   const NAV_ITEMS = [
     { href: 'index.html', label: 'Acasă', key: 'home' },
     { href: 'despre.html', label: 'Despre', key: 'despre' },
@@ -55,7 +241,7 @@
     );
     const status = h('div', { class: 'nav__status' }, [
       h('span', { class: 'nav__dot' }),
-      h('span', {}, 'DISPATCH 24/7'),
+      h('span', {}, 'CALL-CENTER 24/7'),
     ]);
 
     const burger = h('button', { class: 'nav__burger', 'aria-label': 'Meniu', 'aria-expanded': 'false' });
@@ -91,25 +277,28 @@
       <div class="footer__grid">
         <div>
           <img src="assets/logo.jpg" alt="Dasitrade" class="footer__logo"/>
-          <p style="margin-top:16px; color:var(--fg-dark-dim); font-size:14px; line-height:1.6; max-width:34ch;">
-            Integrator de curenți slabi și sisteme de securitate, operând din Bacău din 2006. Proiectare, instalare, mentenanță și service 24/7 — fără ferestre oarbe.
+          <div class="footer__slogan">${COMPANY.slogan}</div>
+          <p class="footer__brand-copy">
+            ${COMPANY.legalName} acoperă securitatea electronică, sistemele de incendiu, telecomunicațiile și infrastructura de curenți slabi, de la analiză și proiectare până la mentenanță și call-center 24/7.
           </p>
         </div>
         <div class="footer__col">
-          <div class="footer__col-label">Sediu</div>
-          <p>Bld. Unirii, Nr. 92 B<br/>Bacău, România</p>
+          <div class="footer__col-label">Date Firmă</div>
+          <p>${COMPANY.legalName}</p>
+          <p>CUI ${COMPANY.taxId}</p>
+          <p>Reg. Com. ${COMPANY.registrationNumber}</p>
         </div>
         <div class="footer__col">
-          <div class="footer__col-label">Dispatch</div>
-          <a href="tel:0334401092">0334 401 092</a>
-          <a href="tel:0728030268">0728 030 268</a>
-          <a href="tel:0234571178">0234 571 178</a>
+          <div class="footer__col-label">Sediu & Telefon</div>
+          <p>${COMPANY.addressHtml}</p>
+          <a href="${COMPANY.callCenterHref}">Call-center: ${COMPANY.callCenterLabel}</a>
+          <a href="${COMPANY.phoneHref}">Telefon: ${COMPANY.phoneLabel}</a>
         </div>
         <div class="footer__col">
-          <div class="footer__col-label">Contact</div>
-          <a href="mailto:office@dasitrade.ro">office@dasitrade.ro</a>
-          <a href="mailto:tehnic@dasitrade.ro">tehnic@dasitrade.ro</a>
-          <a href="mailto:service@dasitrade.ro">service@dasitrade.ro</a>
+          <div class="footer__col-label">Email & Web</div>
+          <a href="${COMPANY.officeEmailHref}">${COMPANY.officeEmail}</a>
+          <a href="${COMPANY.primarySiteHref}" target="_blank" rel="noopener">${COMPANY.primarySiteLabel}</a>
+          <a href="${COMPANY.secondarySiteHref}" target="_blank" rel="noopener">${COMPANY.secondarySiteLabel}</a>
         </div>
       </div>
       <div class="footer__social">
@@ -120,7 +309,7 @@
         <a href="${SOCIAL.whatsapp}"  target="_blank" rel="noopener" class="footer__social-link footer__social-link--wa" aria-label="WhatsApp">${ICONS.whatsapp}</a>
       </div>
       <div class="footer__bottom">
-        <span>© 2006–2026 Dasitrade SRL · CUI RO 18802465</span>
+        <span>© 2006–2026 ${COMPANY.legalName} · ${COMPANY.taxId} · ${COMPANY.registrationNumber}</span>
         <a href="gdpr.html" style="color:var(--fg-dark-dim);font-size:12px;font-family:var(--mono);letter-spacing:0.12em;">Politica de confidențialitate</a>
       </div>
     `;
@@ -304,6 +493,7 @@
       let current = 0;
       let timer = null;
       let startX = 0;
+      let hostInView = !('IntersectionObserver' in globalThis);
 
       host.innerHTML = '';
       host.setAttribute('role', 'group');
@@ -335,6 +525,7 @@
       controlsEl.appendChild(metaEl);
       controlsEl.appendChild(nextBtn);
 
+      const images = [];
       const slides = items.map((item, index) => {
         const src = typeof item === 'string' ? item : item.src;
         const fallbackAlt = `${normalizedLabel} · imaginea ${index + 1}`;
@@ -345,11 +536,12 @@
         });
         const img = h('img', {
           class: 'media-gallery__image',
-          src,
           alt,
-          loading: index === 0 ? 'eager' : 'lazy',
+          loading: 'lazy',
+          'data-src': src,
           decoding: 'async'
         });
+        images.push(img);
         slide.appendChild(img);
         slidesEl.appendChild(slide);
         return slide;
@@ -378,6 +570,36 @@
         return !outerSlide || outerSlide.classList.contains('is-active');
       }
 
+      function shouldHydrate() {
+        return hostInView && isVisible();
+      }
+
+      function loadSlideImage(index, priority = 'auto') {
+        const normalizedIndex = ((index % images.length) + images.length) % images.length;
+        const img = images[normalizedIndex];
+        if (!img) return;
+
+        img.fetchPriority = priority;
+
+        if (!img.getAttribute('src')) {
+          img.setAttribute('src', img.dataset.src || '');
+        }
+      }
+
+      function hydrateAround(index) {
+        if (!shouldHydrate()) return;
+
+        loadSlideImage(index, 'high');
+
+        if (images.length > 1) {
+          loadSlideImage(index + 1, 'low');
+        }
+
+        if (images.length > 2) {
+          loadSlideImage(index - 1, 'low');
+        }
+      }
+
       function refreshCounter() {
         countEl.textContent = `${String(current + 1).padStart(2, '0')} / ${String(items.length).padStart(2, '0')}`;
       }
@@ -392,6 +614,7 @@
         slides[current].classList.add('is-active');
         slides[current].setAttribute('aria-hidden', 'false');
         dots[current].classList.add('is-active');
+        hydrateAround(current);
         refreshCounter();
 
         if (restartAutoplay) startAutoplay();
@@ -442,13 +665,39 @@
         event.stopPropagation();
       });
 
+      if ('IntersectionObserver' in globalThis) {
+        const hostObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            hostInView = entry.isIntersecting;
+            if (shouldHydrate()) {
+              hydrateAround(current);
+            }
+          });
+        }, { rootMargin: '240px 0px' });
+
+        hostObserver.observe(host);
+      }
+
+      if (outerSlide && 'MutationObserver' in globalThis) {
+        const slideObserver = new MutationObserver(() => {
+          if (shouldHydrate()) {
+            hydrateAround(current);
+          }
+        });
+
+        slideObserver.observe(outerSlide, { attributes: true, attributeFilter: ['class'] });
+      }
+
       refreshCounter();
+      hydrateAround(current);
       startAutoplay();
     });
   }
 
   globalThis.DasitradeSite = {
     init({ current, navVariant = 'dark' } = {}) {
+      ensureFormToken();
+      mountAnalytics();
       maybeSplash();
       mountNav(current, navVariant);
       mountFooter();
@@ -456,9 +705,13 @@
       mountReveal();
       mountCookieBanner();
       mountWhatsApp();
+      mountTracking();
     },
     mountMediaGalleries(options) {
       mountMediaGalleries(options);
+    },
+    track(eventName, data) {
+      track(eventName, data);
     }
   };
 })();
