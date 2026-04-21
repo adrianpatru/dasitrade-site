@@ -352,6 +352,33 @@
 
   function mountDispatch() {
     if (globalThis.innerWidth < 900) return;
+    const prefersReducedMotion = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const cameras = [
+      {
+        label: 'CAM-01 · SEDIU',
+        poster: 'assets/img/hero-contact.jpg',
+        video: 'assets/img/dispatch/cam-01-sediu.mp4',
+        scanDelay: '0s',
+      },
+      {
+        label: 'CAM-02 · ACCES',
+        poster: 'assets/img/svc-06-acces.jpg',
+        video: 'assets/img/dispatch/cam-02-acces.mp4',
+        scanDelay: '-1.5s',
+      },
+      {
+        label: 'CAM-03 · PERIMETRU',
+        poster: 'assets/img/svc-04-efractie.jpg',
+        video: 'assets/img/dispatch/cam-03-perimetru.mp4',
+        scanDelay: '-2.8s',
+      },
+      {
+        label: 'CAM-04 · INTERIOR',
+        poster: 'assets/img/port-06.jpg',
+        video: 'assets/img/dispatch/cam-04-interior.mp4',
+        scanDelay: '-3.4s',
+      },
+    ];
     const el = h('div', { class: 'dispatch dispatch--collapsed', 'data-dispatch': '' });
     el.innerHTML = `
       <div class="dispatch__head">
@@ -359,30 +386,17 @@
         <span data-dispatch-toggle>[ EXPAND ]</span>
       </div>
       <div class="dispatch__grid">
+        ${cameras.map(camera => `
         <div class="dispatch__cell">
-          <span class="dispatch__cell-label">CAM-01 · SEDIU</span>
+          <span class="dispatch__cell-label">${camera.label}</span>
           <span class="dispatch__cell-status"></span>
-          <div class="dispatch__cell-fig"></div>
-          <div class="dispatch__cell-scan"></div>
-        </div>
-        <div class="dispatch__cell">
-          <span class="dispatch__cell-label">CAM-02 · ACCES</span>
-          <span class="dispatch__cell-status"></span>
-          <div class="dispatch__cell-fig"></div>
-          <div class="dispatch__cell-scan" style="animation-delay:-1.5s"></div>
-        </div>
-        <div class="dispatch__cell">
-          <span class="dispatch__cell-label">CAM-03 · PERIMETRU</span>
-          <span class="dispatch__cell-status"></span>
-          <div class="dispatch__cell-fig"></div>
-          <div class="dispatch__cell-scan" style="animation-delay:-2.8s"></div>
-        </div>
-        <div class="dispatch__cell">
-          <span class="dispatch__cell-label">CAM-04 · INTERIOR</span>
-          <span class="dispatch__cell-status"></span>
-          <div class="dispatch__cell-fig"></div>
-          <div class="dispatch__cell-scan" style="animation-delay:-3.4s"></div>
-        </div>
+          <div class="dispatch__cell-fig">
+            <video class="dispatch__cell-video" ${prefersReducedMotion ? '' : 'autoplay'} muted loop playsinline preload="metadata" poster="${camera.poster}">
+              <source src="${camera.video}" type="video/mp4"/>
+            </video>
+          </div>
+          <div class="dispatch__cell-scan" style="animation-delay:${camera.scanDelay}"></div>
+        </div>`).join('')}
       </div>
       <div class="dispatch__foot">
         <span>UPTIME <span class="dispatch__foot-val" data-dispatch-uptime>99.98%</span></span>
@@ -397,6 +411,13 @@
       const collapsed = el.classList.toggle('dispatch--collapsed');
       toggle.textContent = collapsed ? '[ EXPAND ]' : '[ MIN ]';
     });
+    if (!prefersReducedMotion) {
+      el.querySelectorAll('.dispatch__cell-video').forEach(video => {
+        const attemptPlay = () => video.play().catch(() => {});
+        attemptPlay();
+        video.addEventListener('loadedmetadata', attemptPlay, { once: true });
+      });
+    }
     const clockEl = el.querySelector('[data-dispatch-clock]');
     const latEl = el.querySelector('[data-dispatch-lat]');
     setInterval(() => {

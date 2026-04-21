@@ -46,6 +46,29 @@
       ]
     },
     {
+      "id": "ing-pif-001",
+      "title": "Inginer Punere în Funcțiune",
+      "department": "Integrare & Service",
+      "type": "Full-time",
+      "location": "Bacău",
+      "posted": "2026-04-21",
+      "active": true,
+      "description": "Preiei sisteme de incendiu, CCTV, control acces și integrare după instalare, le configurezi, le testezi în teren și le aduci la parametrii de exploatare ceruți. Faci diagnoză, reglaje, puneri în funcțiune și documentezi intervențiile tehnice împreună cu echipa de tehnicieni și proiectare.",
+      "requirements": [
+        "Absolvent inginerie electrică, electronică, automatică sau similar",
+        "Experiență în configurare, testare și punere în funcțiune pentru sisteme de securitate sau incendiu",
+        "Capacitate de diagnoză în teren și citire documentație tehnică",
+        "Operare laptop service, software de configurare și instrumente de test",
+        "Permis de conducere categoria B și disponibilitate pentru deplasări"
+      ],
+      "nice_to_have": [
+        "Experiență cu centrale incendiu, VMS, control acces sau integrare BMS",
+        "Atestat IGPR și/sau experiență pe lucrări autorizate ISU",
+        "Cunoaștere rețele IP, VLAN, PoE și comunicații RS-485",
+        "Relație cu producători Bosch, Honeywell, Hikvision, Siemens sau echivalent"
+      ]
+    },
+    {
       "id": "op-disp-001",
       "title": "Operator Dispecerat Securitate",
       "department": "Dispecerat 24/7",
