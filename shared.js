@@ -310,7 +310,7 @@
       </div>
       <div class="footer__bottom">
         <span>© 2006–2026 ${COMPANY.legalName} · ${COMPANY.taxId} · ${COMPANY.registrationNumber}</span>
-        <a href="gdpr.html" style="color:var(--fg-dark-dim);font-size:12px;font-family:var(--mono);letter-spacing:0.12em;">Politica de confidențialitate</a>
+        <a href="gdpr.html" class="footer__legal-link">Confidențialitate & mențiuni legale</a>
       </div>
     `;
   }
@@ -362,11 +362,11 @@
       <p>
         Acest site folosește cookie-uri funcționale necesare pentru funcționarea corectă a paginii.
         Nu colectăm date de urmărire sau publicitate fără consimțământul dumneavoastră.
-        <a href="gdpr.html">Politica de confidențialitate →</a>
+        <a href="gdpr.html">Confidențialitate & mențiuni legale →</a>
       </p>
       <div class="cookie-banner__actions">
-        <button class="btn btn--accent" style="font-size:12px;padding:10px 20px;" data-cookie-accept>Accept</button>
-        <a href="gdpr.html" class="btn btn--ghost-dark" style="font-size:12px;padding:10px 20px;">Detalii</a>
+        <button class="btn btn--accent cookie-banner__btn" data-cookie-accept>Accept</button>
+        <a href="gdpr.html" class="btn btn--ghost-dark cookie-banner__btn">Detalii</a>
       </div>
     `;
     document.body.appendChild(banner);

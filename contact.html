@@ -11,9 +11,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
 <link rel="canonical" href="https://www.dasitrade.ro/contact.html"/>
 <link rel="manifest" href="site.webmanifest"/>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500&family=Newsreader:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/fonts/fonts.css"/>
 <link rel="stylesheet" href="styles.css"/>
 <meta property="og:type"        content="website"/>
 <meta property="og:locale"      content="ro_RO"/>
@@ -254,10 +252,16 @@
       <article class="contact-panel contact-map__panel contact-map__panel--frame" data-reveal>
         <div class="contact-map__frame-head">
           <div class="contact-map__label">Harta sediului</div>
-          <p class="contact-map__frame-copy">Vizualizare directă pentru întâlniri, traseu și verificarea rapidă a punctului operațional.</p>
+          <p class="contact-map__frame-copy">Harta externă se încarcă doar la cerere, pentru a limita transferul de date tehnice către terți.</p>
         </div>
-        <div class="contact-map__frame">
-          <iframe class="contact-map__iframe" title="Harta sediului Dasitrade din Bacău" loading="lazy" src="https://maps.google.com/maps?hl=ro&amp;q=Bulevardul+Unirii+92+B+Bacau&amp;z=15&amp;output=embed"></iframe>
+        <div class="contact-map__frame-shell" data-map-shell data-map-src="https://maps.google.com/maps?hl=ro&amp;q=Bulevardul+Unirii+92+B+Bacau&amp;z=15&amp;output=embed">
+          <div class="contact-map__consent">
+            <div class="contact-map__label">Google Maps</div>
+            <h3 class="heading-md contact-map__consent-title">Încarcă harta doar dacă vrei.</h3>
+            <p class="contact-map__consent-body">Embedul este furnizat de Google Maps și poate transmite către Google date tehnice precum adresa IP, agentul de browser și date de rutare. Harta se încarcă numai după acțiunea ta explicită.</p>
+            <button type="button" class="btn btn--primary contact-map__load" data-load-map>Încarcă Google Maps →</button>
+            <p class="contact-map__privacy">Pentru traseu rapid poți folosi și butoanele externe de mai sus, fără embed în pagină.</p>
+          </div>
         </div>
       </article>
     </div>
@@ -389,6 +393,25 @@
     const status = new URLSearchParams(globalThis.location.search).get('status');
     if (status === 'success') reveal(success);
     if (status === 'error') reveal(error);
+
+    const mapShell = document.querySelector('[data-map-shell]');
+    const mapLoad = document.querySelector('[data-load-map]');
+    if (mapShell && mapLoad) {
+      mapLoad.addEventListener('click', () => {
+        if (mapShell.dataset.loaded === '1') return;
+        const iframe = document.createElement('iframe');
+        iframe.className = 'contact-map__iframe';
+        iframe.title = 'Harta sediului Dasitrade din Bacău';
+        iframe.loading = 'lazy';
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+        iframe.src = mapShell.dataset.mapSrc || '';
+        mapShell.dataset.loaded = '1';
+        mapShell.replaceChildren(iframe);
+        track?.('contact_map_embed_loaded', {
+          location: 'contact_map',
+        });
+      });
+    }
 
     if (!nav || !hero || !form) return;
     nav.classList.remove('nav--light'); nav.classList.add('nav--dark');

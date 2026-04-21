@@ -260,6 +260,67 @@ function dasitradeValidateHoneypot(): bool
     return dasitradePost('website') === '';
 }
 
+function dasitradeUploadedMimeType(string $tmpName): string
+{
+    if (!function_exists('finfo_open')) {
+        return '';
+    }
+
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    if ($finfo === false) {
+        return '';
+    }
+
+    $mime = finfo_file($finfo, $tmpName);
+    finfo_close($finfo);
+
+    return is_string($mime) ? trim($mime) : '';
+}
+
+function dasitradeReadFilePrefix(string $tmpName, int $length): string
+{
+    $handle = @fopen($tmpName, 'rb');
+    if ($handle === false) {
+        return '';
+    }
+
+    $prefix = (string) fread($handle, $length);
+    fclose($handle);
+
+    return $prefix;
+}
+
+function dasitradeValidateAttachmentSignature(string $tmpName, string $extension): bool
+{
+    $extension = strtolower($extension);
+
+    if ($extension === 'pdf') {
+        return str_starts_with(dasitradeReadFilePrefix($tmpName, 4), '%PDF');
+    }
+
+    if ($extension === 'doc') {
+        return bin2hex(dasitradeReadFilePrefix($tmpName, 8)) === 'd0cf11e0a1b11ae1';
+    }
+
+    if ($extension === 'docx') {
+        if (!class_exists('ZipArchive')) {
+            return true;
+        }
+
+        $zip = new ZipArchive();
+        if ($zip->open($tmpName) !== true) {
+            return false;
+        }
+
+        $hasDocument = $zip->locateName('word/document.xml', ZipArchive::FL_NOCASE) !== false;
+        $zip->close();
+
+        return $hasDocument;
+    }
+
+    return false;
+}
+
 function dasitradeUploadedAttachment(string $fieldName): ?array
 {
     if (!isset($_FILES[$fieldName]) || !is_array($_FILES[$fieldName])) {
@@ -289,13 +350,22 @@ function dasitradeUploadedAttachment(string $fieldName): ?array
     $originalName = (string) ($file['name'] ?? 'document');
     $extension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
     $allowed = [
-        'pdf' => 'application/pdf',
-        'doc' => 'application/msword',
-        'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'pdf' => ['application/pdf'],
+        'doc' => ['application/msword', 'application/octet-stream', 'application/CDFV2', 'application/vnd.ms-office', 'application/x-tika-msoffice'],
+        'docx' => ['application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/zip', 'application/octet-stream', 'application/x-tika-ooxml'],
     ];
 
     if (!isset($allowed[$extension])) {
         throw new UploadValidationException('Acceptam doar fisiere PDF, DOC sau DOCX.');
+    }
+
+    $mime = dasitradeUploadedMimeType($tmpName);
+    if ($mime !== '' && !in_array($mime, $allowed[$extension], true)) {
+        throw new UploadValidationException('Fisierul incarcat nu corespunde tipului declarat. Acceptam doar PDF, DOC sau DOCX valide.');
+    }
+
+    if (!dasitradeValidateAttachmentSignature($tmpName, $extension)) {
+        throw new UploadValidationException('Fisierul incarcat nu are structura interna asteptata pentru tipul selectat.');
     }
 
     $safeName = preg_replace('/[^A-Za-z0-9._-]/', '-', basename($originalName)) ?? 'document.' . $extension;
@@ -306,6 +376,6 @@ function dasitradeUploadedAttachment(string $fieldName): ?array
     return [
         'tmp_name' => $tmpName,
         'name' => $safeName,
-        'mime' => $allowed[$extension],
+        'mime' => $allowed[$extension][0],
     ];
 }

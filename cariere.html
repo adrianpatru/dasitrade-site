@@ -11,9 +11,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
 <link rel="canonical" href="https://www.dasitrade.ro/cariere.html"/>
 <link rel="manifest" href="site.webmanifest"/>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500&family=Newsreader:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/fonts/fonts.css"/>
 <link rel="stylesheet" href="styles.css"/>
 <meta property="og:type"        content="website"/>
 <meta property="og:locale"      content="ro_RO"/>
@@ -197,6 +195,7 @@
         te sunăm direct pentru un interviu tehnic scurt — fără birocrație.
       </p>
     </div>
+    <p class="apply-form__legal">CV-ul și documentele transmise sunt folosite exclusiv pentru recrutare, sunt păstrate conform politicii de confidențialitate și nu sunt încărcate în platforme publice de recrutare fără un temei separat.</p>
 
     <form id="apply-form" class="apply-form" action="submit-careers.php" method="post" enctype="multipart/form-data">
       <div class="form-honeypot" aria-hidden="true">
@@ -393,7 +392,7 @@
                 <span>${pos.location}</span>
               </div>
             </div>
-            <a href="#aplica" class="btn btn--primary job-card__cta" onclick="document.getElementById('af-position').value='${pos.id}'">Aplică →</a>
+            <a href="#aplica" class="btn btn--primary job-card__cta" data-position-id="${pos.id}">Aplică →</a>
           </div>
           <p class="job-card__desc">${pos.description}</p>
           <div class="job-card__reqs">
@@ -427,6 +426,17 @@
   };
 
   loadJobs();
+
+  document.getElementById('jobs-list').addEventListener('click', function(event) {
+    const trigger = event.target.closest('[data-position-id]');
+    if (!trigger) return;
+    const select = document.getElementById('af-position');
+    const positionId = trigger.dataset.positionId || '';
+    if (!select || positionId === '') return;
+    select.value = positionId;
+    const label = select.options[select.selectedIndex]?.text || '';
+    document.getElementById('form-position-label').value = label;
+  });
 
   // File input — update label
   document.getElementById('af-cv').addEventListener('change', function() {
