@@ -494,32 +494,72 @@
   </div>
 </section>
 
-<!-- CAPABILITY BUBBLES -->
-<section class="capability-bubbles" id="capabilitati">
-  <div class="capability-bubbles__inner">
-    <div class="capability-bubbles__center">
-      <div class="eyebrow capability-bubbles__eyebrow">§ 04 / Capabilități</div>
-      <h2 class="heading-lg capability-bubbles__title">Securitate, telecom<br/>și curenți slabi.</h2>
-      <a href="servicii.html" class="mono capability-bubbles__link">Vezi toate serviciile →</a>
+<!-- CAPABILITY ATLAS -->
+<section class="section capability-atlas" id="capabilitati">
+  <div class="container">
+    <div class="grid-2 capability-atlas__head">
+      <div>
+        <div class="eyebrow capability-atlas__eyebrow">§ 04 / Capabilități</div>
+        <h2 class="heading-lg capability-atlas__title">Securitate, telecom<br/>și curenți slabi.</h2>
+      </div>
+      <div data-reveal>
+        <p class="lede capability-atlas__lede">
+          Nu venim cu sisteme izolate, ci cu un cadru tehnic coerent: proiectare, instalare,
+          integrare și mentenanță pentru obiective în care siguranța și continuitatea trebuie
+          tratate împreună.
+        </p>
+        <p class="mono capability-atlas__note">familii principale vizibile aici · acoperire completă în pagina servicii</p>
+      </div>
     </div>
 
-    <ul class="capability-bubbles__orbit" aria-label="Sisteme și capabilități Dasitrade">
-      <li class="cap-bubble"><span class="cap-bubble__shell">Detecție incendiu</span></li>
-      <li class="cap-bubble"><span class="cap-bubble__shell">CCTV</span></li>
-      <li class="cap-bubble"><span class="cap-bubble__shell">Control acces</span></li>
-      <li class="cap-bubble"><span class="cap-bubble__shell">LPR · Bariere auto</span></li>
-      <li class="cap-bubble"><span class="cap-bubble__shell">BMS / SMS</span></li>
-      <li class="cap-bubble"><span class="cap-bubble__shell">Sonorizare</span></li>
-      <li class="cap-bubble"><span class="cap-bubble__shell">Cablare structurată</span></li>
-      <li class="cap-bubble"><span class="cap-bubble__shell">Efracție</span></li>
-      <li class="cap-bubble"><span class="cap-bubble__shell">Interfoane video</span></li>
-      <li class="cap-bubble"><span class="cap-bubble__shell">Desfumare</span></li>
-      <li class="cap-bubble cap-bubble--accent"><span class="cap-bubble__shell">Nurse Call</span></li>
-      <li class="cap-bubble"><span class="cap-bubble__shell">Dispecerat 24/7</span></li>
-      <li class="cap-bubble"><span class="cap-bubble__shell">Stingere gaz</span></li>
-      <li class="cap-bubble"><span class="cap-bubble__shell">Sisteme TV</span></li>
-      <li class="cap-bubble"><span class="cap-bubble__shell">Smart Building</span></li>
-    </ul>
+    <div class="grid-3 capability-atlas__grid">
+      <article class="capability-atlas__card" data-reveal>
+        <div class="capability-atlas__num">ATLAS · 01</div>
+        <h3 class="capability-atlas__card-title">Incendiu & siguranță</h3>
+        <p class="capability-atlas__body">Sisteme critice pentru conformare, alarmare și protecția persoanelor în obiective publice, industriale și medicale.</p>
+        <div class="badge-row capability-atlas__badges">
+          <span class="badge">Detecție incendiu</span>
+          <span class="badge">Desfumare</span>
+          <span class="badge">Stingere gaz</span>
+          <span class="badge">Sonorizare</span>
+          <span class="badge">Nurse Call</span>
+        </div>
+      </article>
+
+      <article class="capability-atlas__card" data-reveal>
+        <div class="capability-atlas__num">ATLAS · 02</div>
+        <h3 class="capability-atlas__card-title">Securitate & control</h3>
+        <p class="capability-atlas__body">Control de acces, verificare vizuală, protecție perimetrală și răspuns operațional pentru obiective comerciale, logistice și corporate.</p>
+        <div class="badge-row capability-atlas__badges">
+          <span class="badge">CCTV</span>
+          <span class="badge">Efracție</span>
+          <span class="badge">Control acces</span>
+          <span class="badge">Interfoane video</span>
+          <span class="badge">LPR · Bariere auto</span>
+          <span class="badge">Dispecerat 24/7</span>
+        </div>
+      </article>
+
+      <article class="capability-atlas__card" data-reveal>
+        <div class="capability-atlas__num">ATLAS · 03</div>
+        <h3 class="capability-atlas__card-title">Telecom & integrare</h3>
+        <p class="capability-atlas__body">Infrastructura care le leagă pe toate: comunicații, automatizare și integrare multi-sistem pentru clădiri moderne și obiective complexe.</p>
+        <div class="badge-row capability-atlas__badges">
+          <span class="badge">Cablare structurată</span>
+          <span class="badge">BMS / SMS</span>
+          <span class="badge">Sisteme TV</span>
+          <span class="badge">Smart Building</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="capability-atlas__cta" data-reveal>
+      <div>
+        <div class="capability-atlas__cta-label">Operational layer</div>
+        <p class="capability-atlas__cta-body">Un singur partener pentru evaluare, proiectare, execuție, integrare, mentenanță și intervenție.</p>
+      </div>
+      <a href="servicii.html" class="mono capability-atlas__link">Vezi toate serviciile →</a>
+    </div>
   </div>
 </section>
 
@@ -673,91 +713,6 @@
     setTimeout(function(){
       for(var i=0;i<VISIBLE;i++) setTimeout(spawn, i*1400);
     }, 2600);
-  })();
-
-  /* ── Capability bubbles: random cycling positions ── */
-  (function(){
-    var bubbles = Array.from(document.querySelectorAll('.cap-bubble'));
-    if (!bubbles.length) return;
-
-    /* 28 positions on the perimeter, avoiding center zone (30-70% x, 28-72% y) */
-    var POOL = [
-      /* top strip */
-      [2,5],[14,4],[27,3],[40,3],[53,4],[65,5],[76,4],[86,3],
-      /* right strip */
-      [85,14],[87,26],[87,40],[87,54],[86,66],[84,78],
-      /* bottom strip */
-      [74,88],[60,91],[46,89],[32,88],[18,87],[6,88],
-      /* left strip */
-      [2,76],[2,62],[2,48],[2,33],[2,19],
-      /* corners/extras */
-      [12,12],[77,12],[12,83],[74,83]
-    ];
-
-    var taken = new Set();
-    var MIN_DIST = 20; /* minimum % distance between active bubbles */
-
-    function pdist(a, b){
-      return Math.hypot(POOL[a][0]-POOL[b][0], POOL[a][1]-POOL[b][1]);
-    }
-
-    function pickPos(exclude) {
-      var takenArr = Array.from(taken);
-      var candidates = POOL.reduce(function(acc, p, i){
-        if (taken.has(i) || i === exclude) return acc;
-        var tooClose = takenArr.some(function(ti){ return pdist(i, ti) < MIN_DIST; });
-        if (!tooClose) acc.push(i);
-        return acc;
-      }, []);
-      /* fallback: any non-taken non-excluded */
-      if (!candidates.length) candidates = POOL.reduce(function(acc, p, i){
-        if (!taken.has(i) && i !== exclude) acc.push(i);
-        return acc;
-      }, []);
-      if (!candidates.length) candidates = POOL.map(function(_,i){ return i; });
-      return candidates[Math.floor(Math.random() * candidates.length)];
-    }
-
-    function startBubble(el, initialDelay) {
-      var posIdx = -1;
-      var FADE = 700; /* ms */
-
-      function show() {
-        posIdx = pickPos(posIdx);
-        taken.add(posIdx);
-        var p = POOL[posIdx];
-        el.style.left = p[0] + '%';
-        el.style.top  = p[1] + '%';
-
-        requestAnimationFrame(function(){
-          el.style.opacity = '1';
-          el.style.transform = 'scale(1) translateY(0)';
-        });
-
-        /* stay visible 7–10s */
-        var visible = 7000 + Math.random() * 3000;
-        setTimeout(hide, visible);
-      }
-
-      function hide() {
-        taken.delete(posIdx);
-        el.style.opacity = '0';
-        el.style.transform = 'scale(0.88) translateY(-12px)';
-
-        /* pause 2–4s before reappearing */
-        var pause = 2000 + Math.random() * 2000;
-        setTimeout(show, FADE + pause);
-      }
-
-      /* initial state */
-      el.style.opacity = '0';
-      el.style.transform = 'scale(0.88) translateY(8px)';
-      setTimeout(show, initialDelay);
-    }
-
-    bubbles.forEach(function(el, i){
-      startBubble(el, i * 420);
-    });
   })();
 
   /* ── Nav goes light on scroll past hero ── */
