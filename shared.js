@@ -1,6 +1,8 @@
 // Shared UI — nav, footer, and floating actions
 (function () {
   const FORM_TOKEN_COOKIE = 'dasitrade_form_token';
+  const CONSENT_STORAGE_KEY = 'dasitrade_consent_v1';
+  const LEGACY_COOKIE_ACK_KEY = 'dasitrade_cookies_ok';
   const ANALYTICS = {
     gtmContainerId: '',
     ga4MeasurementId: '',
@@ -15,8 +17,8 @@
     callCenterHref: 'tel:0334401092',
     phoneLabel: '0728 030 268',
     phoneHref: 'tel:0728030268',
-    officeEmail: 'office@dasitrade.ro',
-    officeEmailHref: 'mailto:office@dasitrade.ro',
+    officeEmail: 'tehnic@dasitrade.ro',
+    officeEmailHref: 'mailto:tehnic@dasitrade.ro',
     primarySiteLabel: 'www.dasitrade.ro',
     primarySiteHref: 'https://www.dasitrade.ro',
     secondarySiteLabel: 'www.sisteme-incendiu.ro',
@@ -66,6 +68,46 @@
     return '';
   }
 
+  function normalizeConsent(value = {}) {
+    return {
+      necessary: true,
+      analytics: value.analytics === true,
+      decided: value.decided === true,
+    };
+  }
+
+  function readConsent() {
+    try {
+      const raw = localStorage.getItem(CONSENT_STORAGE_KEY);
+      if (raw) {
+        return normalizeConsent(JSON.parse(raw));
+      }
+
+      if (localStorage.getItem(LEGACY_COOKIE_ACK_KEY) === '1') {
+        const migrated = normalizeConsent({ decided: true, analytics: false });
+        localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(migrated));
+        return migrated;
+      }
+    } catch {}
+
+    return normalizeConsent();
+  }
+
+  function writeConsent(value) {
+    const normalized = normalizeConsent({ ...value, decided: true });
+
+    try {
+      localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(normalized));
+      localStorage.setItem(LEGACY_COOKIE_ACK_KEY, '1');
+    } catch {}
+
+    return normalized;
+  }
+
+  function hasAnalyticsConsent() {
+    return readConsent().analytics === true;
+  }
+
   function randomHex(byteLength = 32) {
     const bytes = new Uint8Array(byteLength);
     if (globalThis.crypto?.getRandomValues) {
@@ -113,6 +155,7 @@
 
   function mountAnalytics() {
     if (globalThis.__dasitradeAnalyticsMounted) return;
+    if (!hasAnalyticsConsent()) return;
 
     const gtmContainerId = ANALYTICS.gtmContainerId.trim();
     const ga4MeasurementId = ANALYTICS.ga4MeasurementId.trim();
@@ -175,8 +218,6 @@
   function track(eventName, data = {}) {
     if (!eventName) return;
 
-    const dataLayer = ensureDataLayer();
-
     const payload = {
       event: eventName,
       page: globalThis.location.pathname || '/',
@@ -184,16 +225,19 @@
       ...data,
     };
 
-    dataLayer.push(payload);
+    if (hasAnalyticsConsent()) {
+      const dataLayer = ensureDataLayer();
+      dataLayer.push(payload);
 
-    if (globalThis.__dasitradeAnalyticsMode === 'ga4' && typeof globalThis.gtag === 'function') {
-      const { event, page, timestamp, ...params } = payload;
-      globalThis.gtag('event', eventName, {
-        page_path: page,
-        page_title: document.title,
-        event_time: timestamp,
-        ...params,
-      });
+      if (globalThis.__dasitradeAnalyticsMode === 'ga4' && typeof globalThis.gtag === 'function') {
+        const { event, page, timestamp, ...params } = payload;
+        globalThis.gtag('event', eventName, {
+          page_path: page,
+          page_title: document.title,
+          event_time: timestamp,
+          ...params,
+        });
+      }
     }
 
     globalThis.dispatchEvent(new CustomEvent('dasitrade:track', { detail: payload }));
@@ -354,24 +398,31 @@
   }
 
   function mountCookieBanner() {
-    try {
-      if (localStorage.getItem('dasitrade_cookies_ok') === '1') return;
-    } catch {}
+    if (readConsent().decided) return;
+
     const banner = h('div', { class: 'cookie-banner', role: 'region', 'aria-label': 'Cookie consent' });
     banner.innerHTML = `
       <p>
         Acest site folosește cookie-uri funcționale necesare pentru funcționarea corectă a paginii.
-        Nu colectăm date de urmărire sau publicitate fără consimțământul dumneavoastră.
+        Statisticile de utilizare rămân inactive până la acordul dumneavoastră explicit.
         <a href="gdpr.html">Confidențialitate & mențiuni legale →</a>
       </p>
       <div class="cookie-banner__actions">
-        <button class="btn btn--accent cookie-banner__btn" data-cookie-accept>Accept</button>
+        <button class="btn btn--accent cookie-banner__btn" data-cookie-analytics>Accept statistice</button>
+        <button class="btn btn--ghost-dark cookie-banner__btn" data-cookie-essential>Doar esențiale</button>
         <a href="gdpr.html" class="btn btn--ghost-dark cookie-banner__btn">Detalii</a>
       </div>
     `;
     document.body.appendChild(banner);
-    banner.querySelector('[data-cookie-accept]').addEventListener('click', () => {
-      try { localStorage.setItem('dasitrade_cookies_ok', '1'); } catch {}
+
+    banner.querySelector('[data-cookie-analytics]').addEventListener('click', () => {
+      writeConsent({ analytics: true });
+      mountAnalytics();
+      banner.classList.add('cookie-banner--hidden');
+    });
+
+    banner.querySelector('[data-cookie-essential]').addEventListener('click', () => {
+      writeConsent({ analytics: false });
       banner.classList.add('cookie-banner--hidden');
     });
   }
@@ -666,12 +717,12 @@
   globalThis.DasitradeSite = {
     init({ current, navVariant = 'dark' } = {}) {
       ensureFormToken();
-      mountAnalytics();
       maybeSplash();
       mountNav(current, navVariant);
       mountFooter();
       mountReveal();
       mountCookieBanner();
+      mountAnalytics();
       mountWhatsApp();
       mountFloatingAvoidFooter();
       mountTracking();

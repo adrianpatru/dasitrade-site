@@ -1,9 +1,13 @@
 <?php
 declare(strict_types=1);
 
-const DASITRADE_OFFICE_EMAIL = 'office@dasitrade.ro';
-const DASITRADE_TECH_EMAIL = 'office@dasitrade.ro';
-const DASITRADE_HR_EMAIL = 'office@dasitrade.ro';
+require_once __DIR__ . '/lib/PHPMailer/src/Exception.php';
+require_once __DIR__ . '/lib/PHPMailer/src/SMTP.php';
+require_once __DIR__ . '/lib/PHPMailer/src/PHPMailer.php';
+
+const DASITRADE_OFFICE_EMAIL = 'tehnic@dasitrade.ro';
+const DASITRADE_TECH_EMAIL = 'tehnic@dasitrade.ro';
+const DASITRADE_HR_EMAIL = 'tehnic@dasitrade.ro';
 const DASITRADE_MAX_UPLOAD_SIZE = 5242880;
 const DASITRADE_CRLF = "\r\n";
 const DASITRADE_BLANK_LINE = "\r\n\r\n";
@@ -11,6 +15,123 @@ const DASITRADE_CSRF_COOKIE = 'dasitrade_form_token';
 
 final class UploadValidationException extends RuntimeException
 {
+}
+
+function dasitradeMergeConfig(array $base, array $override): array
+{
+    foreach ($override as $key => $value) {
+        if (is_array($value) && is_array($base[$key] ?? null)) {
+            $base[$key] = dasitradeMergeConfig($base[$key], $value);
+            continue;
+        }
+
+        $base[$key] = $value;
+    }
+
+    return $base;
+}
+
+function dasitradeMailConfig(): array
+{
+    static $config = null;
+
+    if (is_array($config)) {
+        return $config;
+    }
+
+    $config = [];
+
+    $basePath = __DIR__ . '/config/mail.php';
+    if (is_file($basePath)) {
+        $loaded = require $basePath;
+        if (is_array($loaded)) {
+            $config = $loaded;
+        }
+    }
+
+    $localPath = __DIR__ . '/config/mail.local.php';
+    if (is_file($localPath)) {
+        $loaded = require $localPath;
+        if (is_array($loaded)) {
+            $config = dasitradeMergeConfig($config, $loaded);
+        }
+    }
+
+    return $config;
+}
+
+function dasitradeMailTransport(): string
+{
+    $transport = strtolower(trim((string) (dasitradeMailConfig()['transport'] ?? 'mail')));
+    return in_array($transport, ['mail', 'smtp'], true) ? $transport : 'mail';
+}
+
+function dasitradeMailFallbackEnabled(): bool
+{
+    return (bool) (dasitradeMailConfig()['fallback_to_mail'] ?? true);
+}
+
+function dasitradeMailFromEmail(): string
+{
+    $configured = dasitradeCleanEmail((string) (dasitradeMailConfig()['from_email'] ?? ''));
+    return $configured !== '' ? $configured : DASITRADE_TECH_EMAIL;
+}
+
+function dasitradeMailFromName(): string
+{
+    $configured = dasitradeCleanText((string) (dasitradeMailConfig()['from_name'] ?? 'Dasitrade'), 120);
+    return $configured !== '' ? $configured : 'Dasitrade';
+}
+
+function dasitradeMailRecipient(string $channel, string $fallback): string
+{
+    $recipients = dasitradeMailConfig()['recipients'] ?? [];
+    if (!is_array($recipients)) {
+        return $fallback;
+    }
+
+    $configured = dasitradeCleanEmail((string) ($recipients[$channel] ?? $recipients['default'] ?? ''));
+    return $configured !== '' ? $configured : $fallback;
+}
+
+function dasitradeSmtpConfig(): array
+{
+    $smtp = dasitradeMailConfig()['smtp'] ?? [];
+    if (!is_array($smtp)) {
+        $smtp = [];
+    }
+
+    $port = (int) ($smtp['port'] ?? 587);
+    $timeout = (int) ($smtp['timeout'] ?? 15);
+
+    return [
+        'host' => trim((string) ($smtp['host'] ?? '')),
+        'port' => $port > 0 ? $port : 587,
+        'security' => strtolower(trim((string) ($smtp['security'] ?? 'tls'))),
+        'username' => trim((string) ($smtp['username'] ?? '')),
+        'password' => (string) ($smtp['password'] ?? ''),
+        'auth' => !array_key_exists('auth', $smtp) || (bool) $smtp['auth'],
+        'timeout' => $timeout > 0 ? $timeout : 15,
+    ];
+}
+
+function dasitradeSmtpConfigured(): bool
+{
+    $smtp = dasitradeSmtpConfig();
+    if ($smtp['host'] === '') {
+        return false;
+    }
+
+    if (!$smtp['auth']) {
+        return true;
+    }
+
+    return $smtp['username'] !== '' && $smtp['password'] !== '';
+}
+
+function dasitradeLogMailError(string $message): void
+{
+    error_log('[Dasitrade mail] ' . $message);
 }
 
 function dasitradeIsAjaxRequest(): bool
@@ -215,11 +336,14 @@ function dasitradeRenderEmail(string $title, array $rows, ?string $message = nul
         . '</div></body></html>';
 }
 
-function dasitradeSendMail(string $to, string $subject, string $htmlBody, ?string $replyTo = null, ?array $attachment = null): bool
+function dasitradeSendMailViaPhpMail(string $to, string $subject, string $htmlBody, ?string $replyTo = null, ?array $attachment = null): bool
 {
+    $fromEmail = dasitradeMailFromEmail();
+    $fromName = dasitradeMailFromName();
     $headers = [
         'MIME-Version: 1.0',
-        'From: Dasitrade Site <' . DASITRADE_OFFICE_EMAIL . '>',
+        'From: ' . $fromName . ' <' . $fromEmail . '>',
+        'X-Mailer: DasitradeSite',
     ];
 
     if ($replyTo !== null && $replyTo !== '') {
@@ -253,6 +377,83 @@ function dasitradeSendMail(string $to, string $subject, string $htmlBody, ?strin
     $body .= '--' . $boundary . '--';
 
     return mail($to, $subject, $body, implode(DASITRADE_CRLF, $headers));
+}
+
+function dasitradeSendMailViaSmtp(string $to, string $subject, string $htmlBody, ?string $replyTo = null, ?array $attachment = null): bool
+{
+    $smtp = dasitradeSmtpConfig();
+    $fromEmail = dasitradeMailFromEmail();
+    $fromName = dasitradeMailFromName();
+    $plainText = trim(preg_replace('/\s+/', ' ', strip_tags(str_replace(['<br>', '<br/>', '<br />'], "\n", $htmlBody))) ?? '');
+
+    try {
+        $mailer = new \PHPMailer\PHPMailer\PHPMailer(true);
+        $mailer->CharSet = 'UTF-8';
+        $mailer->Timeout = $smtp['timeout'];
+        $mailer->isSMTP();
+        $mailer->Host = $smtp['host'];
+        $mailer->Port = $smtp['port'];
+        $mailer->SMTPAuth = $smtp['auth'];
+        $mailer->Username = $smtp['username'];
+        $mailer->Password = $smtp['password'];
+        $mailer->SMTPAutoTLS = true;
+
+        if ($smtp['security'] === 'ssl') {
+            $mailer->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+        } elseif ($smtp['security'] === 'tls') {
+            $mailer->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+        }
+
+        $mailer->setFrom($fromEmail, $fromName);
+        $mailer->addAddress($to);
+
+        if ($replyTo !== null && $replyTo !== '' && filter_var($replyTo, FILTER_VALIDATE_EMAIL)) {
+            $mailer->addReplyTo($replyTo);
+        }
+
+        if ($attachment !== null) {
+            $mailer->addAttachment(
+                $attachment['tmp_name'],
+                $attachment['name'],
+                \PHPMailer\PHPMailer\PHPMailer::ENCODING_BASE64,
+                $attachment['mime']
+            );
+        }
+
+        $mailer->isHTML(true);
+        $mailer->Subject = $subject;
+        $mailer->Body = $htmlBody;
+        $mailer->AltBody = $plainText;
+
+        return $mailer->send();
+    } catch (\Throwable $exception) {
+        dasitradeLogMailError('SMTP send failed: ' . $exception->getMessage());
+        return false;
+    }
+}
+
+function dasitradeSendMail(string $to, string $subject, string $htmlBody, ?string $replyTo = null, ?array $attachment = null): bool
+{
+    $transport = dasitradeMailTransport();
+
+    if ($transport === 'smtp') {
+        if (dasitradeSmtpConfigured()) {
+            if (dasitradeSendMailViaSmtp($to, $subject, $htmlBody, $replyTo, $attachment)) {
+                return true;
+            }
+
+            if (!dasitradeMailFallbackEnabled()) {
+                return false;
+            }
+        } else {
+            dasitradeLogMailError('SMTP transport selected but credentials are incomplete. Falling back to mail().');
+            if (!dasitradeMailFallbackEnabled()) {
+                return false;
+            }
+        }
+    }
+
+    return dasitradeSendMailViaPhpMail($to, $subject, $htmlBody, $replyTo, $attachment);
 }
 
 function dasitradeValidateHoneypot(): bool

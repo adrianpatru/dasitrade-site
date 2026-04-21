@@ -55,7 +55,7 @@ $body = dasitradeRenderEmail(
 );
 
 $sent = dasitradeSendMail(
-    DASITRADE_OFFICE_EMAIL,
+    dasitradeMailRecipient('contact', DASITRADE_OFFICE_EMAIL),
     'Contact site Dasitrade',
     $body,
     $email

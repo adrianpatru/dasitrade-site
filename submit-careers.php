@@ -83,7 +83,7 @@ $body = dasitradeRenderEmail(
 );
 
 $sent = dasitradeSendMail(
-    DASITRADE_HR_EMAIL,
+    dasitradeMailRecipient('careers', DASITRADE_HR_EMAIL),
     'Aplicatie cariere Dasitrade',
     $body,
     $email,
