@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/submit-contact.php",
+      "destination": "/api/submit-contact"
+    },
+    {
+      "source": "/submit-careers.php",
+      "destination": "/api/submit-careers"
+    }
+  ]
+}
