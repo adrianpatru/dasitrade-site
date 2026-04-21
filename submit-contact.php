@@ -62,7 +62,7 @@ $sent = dasitradeSendMail(
 );
 
 if (!$sent) {
-    dasitradeFormResponse(false, 'Cererea nu a putut fi trimisa momentan.', 'contact.html');
+    dasitradeFormResponse(false, dasitradePublicMailFailureMessage(), 'contact.html');
 }
 
 dasitradeFormResponse(true, 'Cererea a fost transmisa.', 'contact.html');

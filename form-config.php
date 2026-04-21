@@ -134,6 +134,44 @@ function dasitradeLogMailError(string $message): void
     error_log('[Dasitrade mail] ' . $message);
 }
 
+function dasitradeSetLastMailError(string $message): void
+{
+    $GLOBALS['dasitrade_last_mail_error'] = $message;
+    if ($message !== '') {
+        dasitradeLogMailError($message);
+    }
+}
+
+function dasitradeLastMailError(): string
+{
+    return isset($GLOBALS['dasitrade_last_mail_error']) && is_string($GLOBALS['dasitrade_last_mail_error'])
+        ? $GLOBALS['dasitrade_last_mail_error']
+        : '';
+}
+
+function dasitradePublicMailFailureMessage(): string
+{
+    $error = strtolower(dasitradeLastMailError());
+
+    if ($error === '') {
+        return 'Cererea nu a putut fi trimisa momentan.';
+    }
+
+    if (strpos($error, 'credentials are incomplete') !== false) {
+        return 'Serviciul de email nu este configurat complet pe server. Seteaza DASITRADE_SMTP_PASSWORD sau parola SMTP urmarita in config.';
+    }
+
+    if (strpos($error, 'smtp send failed') !== false) {
+        return 'Conexiunea SMTP a eșuat. Verifică parola, hostul, portul și politica serverului de mail.';
+    }
+
+    if (strpos($error, 'mail() fallback send failed') !== false) {
+        return 'Fallback-ul local de email al serverului nu este activ. Activează SMTP valid sau configurează mail() pe server.';
+    }
+
+    return 'Cererea nu a putut fi trimisa momentan.';
+}
+
 function dasitradeIsAjaxRequest(): bool
 {
     $accept = strtolower((string) ($_SERVER['HTTP_ACCEPT'] ?? ''));
@@ -427,13 +465,14 @@ function dasitradeSendMailViaSmtp(string $to, string $subject, string $htmlBody,
 
         return $mailer->send();
     } catch (\Throwable $exception) {
-        dasitradeLogMailError('SMTP send failed: ' . $exception->getMessage());
+        dasitradeSetLastMailError('SMTP send failed: ' . $exception->getMessage());
         return false;
     }
 }
 
 function dasitradeSendMail(string $to, string $subject, string $htmlBody, ?string $replyTo = null, ?array $attachment = null): bool
 {
+    dasitradeSetLastMailError('');
     $transport = dasitradeMailTransport();
 
     if ($transport === 'smtp') {
@@ -446,7 +485,7 @@ function dasitradeSendMail(string $to, string $subject, string $htmlBody, ?strin
                 return false;
             }
         } else {
-            dasitradeLogMailError('SMTP transport selected but credentials are incomplete. Falling back to mail().');
+            dasitradeSetLastMailError('SMTP transport selected but credentials are incomplete. Falling back to mail().');
             if (!dasitradeMailFallbackEnabled()) {
                 return false;
             }
@@ -455,7 +494,7 @@ function dasitradeSendMail(string $to, string $subject, string $htmlBody, ?strin
 
     $sent = dasitradeSendMailViaPhpMail($to, $subject, $htmlBody, $replyTo, $attachment);
     if (!$sent) {
-        dasitradeLogMailError('mail() fallback send failed.');
+        dasitradeSetLastMailError('mail() fallback send failed.');
     }
 
     return $sent;

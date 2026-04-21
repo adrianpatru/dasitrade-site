@@ -91,7 +91,7 @@ $sent = dasitradeSendMail(
 );
 
 if (!$sent) {
-    dasitradeFormResponse(false, 'Aplicatia nu a putut fi trimisa momentan.', 'cariere.html');
+    dasitradeFormResponse(false, dasitradePublicMailFailureMessage(), 'cariere.html');
 }
 
 dasitradeFormResponse(true, 'Aplicatia a fost transmisa.', 'cariere.html');
