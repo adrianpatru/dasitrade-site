@@ -25,7 +25,7 @@
     },
     {
       "id": "ing-prj-001",
-      "title": "Inginer Proiectant Sisteme Integrate",
+      "title": "Proiectant Sisteme Integrate",
       "department": "Proiectare & Ofertare",
       "type": "Full-time",
       "location": "Bacău",
@@ -41,7 +41,7 @@
       ],
       "nice_to_have": [
         "Experiență anterioară în proiectare sisteme de securitate",
-        "Cunoaștere platforme VMS sau PSIM enterprise",
+        "Cunoaștere platforme VMS sau PSIM pentru operațiuni complexe",
         "Relație cu furnizori Bosch, Honeywell, Axis, Hikvision"
       ]
     },
@@ -52,7 +52,7 @@
       "type": "Full-time · Ture",
       "location": "Bacău",
       "posted": "2026-04-10",
-      "active": true,
+      "active": false,
       "description": "Monitorizezi în timp real sistemele de alarmare ale clienților din portofoliu, gestionezi alertele, dispui intervențiile echipelor de teren și documentezi fiecare eveniment. Lucrezi în ture de 12h.",
       "requirements": [
         "Bacalaureat sau studii superioare (orice profil)",
