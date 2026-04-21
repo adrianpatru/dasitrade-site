@@ -158,7 +158,7 @@ function dasitradePublicMailFailureMessage(): string
     }
 
     if (strpos($error, 'credentials are incomplete') !== false) {
-        return 'Serviciul de email nu este configurat complet pe server. Seteaza DASITRADE_SMTP_PASSWORD sau parola SMTP urmarita in config.';
+        return 'Serviciul de email nu este configurat complet in configul serverului. Verifica setarile SMTP din config/mail.php.';
     }
 
     if (strpos($error, 'smtp send failed') !== false) {
