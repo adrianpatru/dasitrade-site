@@ -92,9 +92,10 @@
 <section class="contact-shell">
   <div class="container">
     <div class="contact-grid">
-      <div>
+      <article class="contact-panel contact-panel--brief" data-reveal>
         <div class="eyebrow contact-section__eyebrow">§ 01 / Brief proiect</div>
         <h2 class="heading-lg contact-section__title">Trimite datele.<br/>Ofertă în 48h.</h2>
+        <p class="contact-panel__lede">Trimite contextul minim al obiectivului și revenim rapid cu direcția potrivită: ofertare, clarificări tehnice sau evaluare în teren.</p>
 
         <form id="contact-form" class="contact-form" action="submit-contact.php" method="post">
           <div class="form-honeypot" aria-hidden="true">
@@ -152,8 +153,58 @@
             <p>A apărut o problemă la trimitere. Ne puteți scrie direct la <a href="mailto:office@dasitrade.ro" class="contact-inline-link">office@dasitrade.ro</a> sau suna la 0334 401 092.</p>
           </div>
         </form>
+      </article>
 
-        <div id="evaluare" class="contact-evaluation">
+      <aside class="contact-panel contact-panel--ops" data-reveal>
+        <div class="eyebrow contact-section__eyebrow">§ 01 / Canale directe</div>
+        <h3 class="heading-md contact-ops__title">Canalul potrivit, fără ping-pong inutil.</h3>
+        <p class="contact-ops__lede">Call-center pentru urgențe și service, email pentru ofertare și documente, sediu pentru întâlniri și corespondență.</p>
+
+        <div class="contact-ops__stack">
+          <div class="contact-ops__card">
+            <div class="contact-ops__label">Telefon / Call-center</div>
+            <a href="tel:0334401092" class="contact-dispatch__primary">0334 401 092</a>
+            <a href="tel:0728030268" class="contact-dispatch__secondary">0728 030 268</a>
+            <p class="contact-sidebar-block__aux">SC DASITRADE SRL · call-center 24/7</p>
+            <p class="mono contact-live-status">
+              <span class="contact-live-status__dot"></span>
+              Operațional · <span data-live-status>--:--:--</span>
+            </p>
+          </div>
+
+          <div class="contact-ops__card">
+            <div class="contact-ops__label">Email & web</div>
+            <a href="mailto:office@dasitrade.ro">office@dasitrade.ro<span class="contact-channel__note">— contact, ofertare, relații clienți</span></a>
+            <a href="https://www.dasitrade.ro" target="_blank" rel="noopener" class="contact-sidebar-link--spaced">www.dasitrade.ro<span class="contact-channel__note">— website principal</span></a>
+            <a href="https://www.sisteme-incendiu.ro" target="_blank" rel="noopener" class="contact-sidebar-link--spaced">www.sisteme-incendiu.ro<span class="contact-channel__note">— specializare sisteme incendiu</span></a>
+          </div>
+
+          <div class="contact-ops__card">
+            <div class="contact-ops__label">Sediu</div>
+            <p class="contact-address">Bld. Unirii, Nr. 92 B<br/>Bacău, România</p>
+            <p class="contact-sidebar-block__aux">punct operațional și corespondență · J2006000967048 · CUI RO 18802465</p>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=Bulevardul+Unirii+92+B+Bacau" target="_blank" rel="noopener" class="contact-map-link">Deschide în Google Maps →</a>
+          </div>
+
+          <div class="contact-ops__card">
+            <div class="contact-ops__label">Program birou</div>
+            <p>Luni – Vineri · 08:00 – 17:00</p>
+            <p class="contact-hours__note">Dispeceratul preia solicitări 24/7, inclusiv weekend-uri și sărbători.</p>
+          </div>
+
+          <div class="contact-ops__card contact-ops__card--promo contact-careers-promo">
+            <div class="mono contact-careers-promo__eyebrow">§ Cariere</div>
+            <p class="contact-careers-promo__title">Vrei să faci parte din echipă?</p>
+            <p class="contact-careers-promo__body">Avem posturi active. Depune CV-ul direct — răspundem în 5 zile.</p>
+            <a href="cariere.html" class="btn btn--primary contact-careers-promo__cta">Vezi posturi disponibile →</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <article id="evaluare" class="contact-panel contact-panel--evaluation contact-evaluation" data-reveal>
+      <div class="grid-2 contact-evaluation__grid">
+        <div>
           <div class="eyebrow contact-evaluation__eyebrow">§ 02 / Evaluare pe teren</div>
           <h3 class="heading-md contact-evaluation__title">Un inginer la locație.<br/>Fără cost, fără obligație.</h3>
           <p class="lede contact-evaluation__body">
@@ -165,55 +216,21 @@
             <a href="mailto:office@dasitrade.ro?subject=Cerere evaluare pe teren" class="btn btn--primary">Programează evaluare →</a>
           </div>
         </div>
+        <div class="contact-evaluation__card">
+          <div class="contact-evaluation__card-label">Când are sens</div>
+          <p class="contact-evaluation__card-title">Obiective cu mai multe subsisteme și constrângeri reale de execuție.</p>
+          <p class="contact-evaluation__card-body">Vizita în teren este utilă când soluția depinde de fluxuri, arhitectură, compartimentări, integrare între sisteme și condiții de exploatare care nu pot fi evaluate corect doar dintr-un email scurt.</p>
+          <p class="contact-evaluation__card-note">vizită tehnică · concept preliminar · estimare fundamentată în 72h de la deplasare</p>
+        </div>
       </div>
-
-      <aside>
-        <div class="contact-sidebar-block">
-          <h4>§ Telefon / Call-center</h4>
-          <a href="tel:0334401092" class="contact-dispatch__primary">0334 401 092</a>
-          <a href="tel:0728030268" class="contact-dispatch__secondary">0728 030 268</a>
-          <p class="contact-sidebar-block__aux">SC DASITRADE SRL · call-center 24/7</p>
-          <p class="mono contact-live-status">
-            <span class="contact-live-status__dot"></span>
-            Operațional · <span data-live-status>--:--:--</span>
-          </p>
-        </div>
-
-        <div class="contact-sidebar-block">
-          <h4>§ Email & web</h4>
-          <a href="mailto:office@dasitrade.ro">office@dasitrade.ro<span class="contact-channel__note">— contact, ofertare, relații clienți</span></a>
-          <a href="https://www.dasitrade.ro" target="_blank" rel="noopener" class="contact-sidebar-link--spaced">www.dasitrade.ro<span class="contact-channel__note">— website principal</span></a>
-          <a href="https://www.sisteme-incendiu.ro" target="_blank" rel="noopener" class="contact-sidebar-link--spaced">www.sisteme-incendiu.ro<span class="contact-channel__note">— specializare sisteme incendiu</span></a>
-        </div>
-
-        <div class="contact-sidebar-block">
-          <h4>§ Sediu</h4>
-          <p class="contact-address">Bld. Unirii, Nr. 92 B<br/>Bacău, România</p>
-          <p class="contact-sidebar-block__aux">punct operațional și corespondență · J2006000967048 · CUI RO 18802465</p>
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Bulevardul+Unirii+92+B+Bacau" target="_blank" rel="noopener" class="contact-map-link">Deschide în Google Maps →</a>
-        </div>
-
-        <div class="contact-sidebar-block">
-          <h4>§ Program birou</h4>
-          <p>Luni – Vineri · 08:00 – 17:00</p>
-          <p class="contact-hours__note">Dispeceratul preia solicitări 24/7, inclusiv weekend-uri și sărbători.</p>
-        </div>
-
-        <div class="contact-sidebar-block contact-careers-promo">
-          <div class="mono contact-careers-promo__eyebrow">§ Cariere</div>
-          <p class="contact-careers-promo__title">Vrei să faci parte din echipă?</p>
-          <p class="contact-careers-promo__body">Avem posturi active. Depune CV-ul direct — răspundem în 5 zile.</p>
-          <a href="cariere.html" class="btn btn--primary contact-careers-promo__cta">Vezi posturi disponibile →</a>
-        </div>
-      </aside>
-    </div>
+    </article>
   </div>
 </section>
 
 <section class="section contact-map-section">
   <div class="container">
     <div class="grid-2 contact-map">
-      <div>
+      <article class="contact-panel contact-map__panel contact-map__panel--copy" data-reveal>
         <div class="eyebrow contact-map__eyebrow">§ 03 / Localizare</div>
         <h2 class="heading-lg contact-map__title">Sediul din Bacău,<br/>gata de găsit.</h2>
         <p class="lede contact-map__lede">
@@ -232,11 +249,17 @@
           </div>
           <p class="contact-map__note">adresă validată pentru întâlniri, corespondență și deplasări tehnice</p>
         </div>
-      </div>
+      </article>
 
-      <div class="contact-map__frame" data-reveal>
-        <iframe class="contact-map__iframe" title="Harta sediului Dasitrade din Bacău" loading="lazy" src="https://maps.google.com/maps?hl=ro&amp;q=Bulevardul+Unirii+92+B+Bacau&amp;z=15&amp;output=embed"></iframe>
-      </div>
+      <article class="contact-panel contact-map__panel contact-map__panel--frame" data-reveal>
+        <div class="contact-map__frame-head">
+          <div class="contact-map__label">Harta sediului</div>
+          <p class="contact-map__frame-copy">Vizualizare directă pentru întâlniri, traseu și verificarea rapidă a punctului operațional.</p>
+        </div>
+        <div class="contact-map__frame">
+          <iframe class="contact-map__iframe" title="Harta sediului Dasitrade din Bacău" loading="lazy" src="https://maps.google.com/maps?hl=ro&amp;q=Bulevardul+Unirii+92+B+Bacau&amp;z=15&amp;output=embed"></iframe>
+        </div>
+      </article>
     </div>
   </div>
 </section>

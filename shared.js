@@ -327,6 +327,32 @@
     document.body.appendChild(btn);
   }
 
+  function mountFloatingAvoidFooter() {
+    const footer = document.querySelector('.footer');
+    if (!footer) return;
+
+    let rafId = 0;
+    const update = () => {
+      rafId = 0;
+      const footerRect = footer.getBoundingClientRect();
+      const shouldRetreat = footerRect.top < globalThis.innerHeight - 72;
+      document.body.classList.toggle('has-footer-overlay-guard', shouldRetreat);
+    };
+    const scheduleUpdate = () => {
+      if (rafId) return;
+      rafId = globalThis.requestAnimationFrame(update);
+    };
+
+    scheduleUpdate();
+    globalThis.addEventListener('scroll', scheduleUpdate, { passive: true });
+    globalThis.addEventListener('resize', scheduleUpdate);
+
+    if ('ResizeObserver' in globalThis) {
+      const observer = new ResizeObserver(scheduleUpdate);
+      observer.observe(footer);
+    }
+  }
+
   function mountCookieBanner() {
     try {
       if (localStorage.getItem('dasitrade_cookies_ok') === '1') return;
@@ -726,6 +752,7 @@
       mountReveal();
       mountCookieBanner();
       mountWhatsApp();
+      mountFloatingAvoidFooter();
       mountTracking();
     },
     mountMediaGalleries(options) {
