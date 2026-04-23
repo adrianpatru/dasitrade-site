@@ -498,7 +498,7 @@
     els.forEach(el => io.observe(el));
   }
 
-  function mountMediaGalleries({ selector = '.media-gallery', galleries = {}, autoplayMs = 3600 } = {}) {
+  function mountMediaGalleries({ selector = '.media-gallery', galleries = {}, autoplayMs = 0 } = {}) {
     const hosts = document.querySelectorAll(selector);
     if (!hosts.length) return;
 
@@ -647,9 +647,13 @@
         }
       }
 
+      function autoplayEnabled() {
+        return Number.isFinite(autoplayMs) && autoplayMs > 0;
+      }
+
       function startAutoplay() {
         stopAutoplay();
-        if (slides.length < 2) return;
+        if (slides.length < 2 || !autoplayEnabled()) return;
         timer = setInterval(() => {
           if (!isVisible()) return;
           goTo(current + 1);
@@ -714,13 +718,75 @@
     });
   }
 
+  function mountSystemMaps() {
+    const hosts = document.querySelectorAll('[data-system-map]');
+    if (!hosts.length) return;
+
+    hosts.forEach(host => {
+      const nodes = Array.from(host.querySelectorAll('[data-system-map-node]'));
+      const codeEl = host.querySelector('[data-system-map-code]');
+      const titleEl = host.querySelector('[data-system-map-title]');
+      const bodyEl = host.querySelector('[data-system-map-body]');
+      const linksEl = host.querySelector('[data-system-map-links]');
+      const ctaEl = host.querySelector('[data-system-map-cta]');
+
+      if (!nodes.length || !codeEl || !titleEl || !bodyEl || !linksEl || !ctaEl) {
+        return;
+      }
+
+      function render(node) {
+        nodes.forEach(item => item.classList.toggle('is-active', item === node));
+
+        codeEl.textContent = node.dataset.mapCode || '';
+        titleEl.textContent = node.dataset.mapTitle || node.textContent.trim();
+        bodyEl.textContent = node.dataset.mapBody || '';
+        linksEl.innerHTML = '';
+
+        const tags = String(node.dataset.mapLinks || '')
+          .split('|')
+          .map(tag => tag.trim())
+          .filter(Boolean);
+
+        tags.forEach(tag => {
+          const badge = document.createElement('span');
+          badge.className = 'badge';
+          badge.textContent = tag;
+          linksEl.appendChild(badge);
+        });
+
+        const target = String(node.dataset.serviceTarget || '').trim();
+        if (target) {
+          ctaEl.href = `#${target}`;
+          ctaEl.textContent = 'Vezi familia în detaliu →';
+        } else {
+          ctaEl.href = 'contact.html';
+          ctaEl.textContent = 'Solicită analiză tehnică →';
+        }
+      }
+
+      nodes.forEach(node => {
+        node.addEventListener('mouseenter', () => render(node));
+        node.addEventListener('focus', () => render(node));
+        node.addEventListener('click', () => {
+          render(node);
+          const target = String(node.dataset.serviceTarget || '').trim();
+          if (target && typeof globalThis.DasitradeSite?.setServiceSlide === 'function') {
+            globalThis.DasitradeSite.setServiceSlide(target);
+          }
+        });
+      });
+
+      render(nodes.find(node => node.dataset.default === 'true') || nodes[0]);
+    });
+  }
+
   globalThis.DasitradeSite = {
     init({ current, navVariant = 'dark' } = {}) {
       ensureFormToken();
-      maybeSplash();
       mountNav(current, navVariant);
       mountFooter();
       mountReveal();
+      mountSystemMaps();
       mountCookieBanner();
       mountAnalytics();
       mountWhatsApp();
@@ -729,6 +795,9 @@
     },
     mountMediaGalleries(options) {
       mountMediaGalleries(options);
+    },
+    mountSystemMaps() {
+      mountSystemMaps();
     },
     track(eventName, data) {
       track(eventName, data);
