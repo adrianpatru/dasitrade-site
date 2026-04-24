@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Dasitrade OG Card</title>
+<link rel="stylesheet" href="../assets/fonts/fonts.css"/>
+<style>
+  :root {
+    color-scheme: dark;
+    --bg-a: #071019;
+    --bg-b: #0b141d;
+    --bg-c: #05080c;
+    --accent: #84d3a6;
+    --accent-2: #92bfff;
+    --accent-3: #e2cc78;
+    --accent-soft: rgba(132, 211, 166, 0.14);
+    --accent-frame: rgba(132, 211, 166, 0.18);
+    --accent-chip: rgba(132, 211, 166, 0.22);
+    --accent-strong: rgba(132, 211, 166, 0.28);
+    --accent-text: rgba(160, 225, 189, 0.95);
+    --accent-glow: rgba(132, 211, 166, 0.56);
+    --line: rgba(255, 255, 255, 0.12);
+    --text: #edf5ff;
+    --muted: rgba(237, 245, 255, 0.72);
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --sans: 'Inter Tight', system-ui, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #05080c;
+  }
+
+  body {
+    font-family: var(--sans);
+    color: var(--text);
+  }
+
+  .card {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding: 42px 48px 40px;
+    background:
+      radial-gradient(circle at 10% 12%, color-mix(in srgb, var(--accent) 14%, transparent) 0%, transparent 24%),
+      radial-gradient(circle at 86% 18%, color-mix(in srgb, var(--accent-2) 12%, transparent) 0%, transparent 28%),
+      linear-gradient(145deg, var(--bg-a) 0%, var(--bg-b) 52%, var(--bg-c) 100%);
+    isolation: isolate;
+  }
+
+  .card::before,
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    pointer-events: none;
+  }
+
+  .card::after {
+    inset: 34px;
+    border-color: var(--accent-soft);
+  }
+
+  .grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 460px;
+    gap: 28px;
+    height: 100%;
+    z-index: 2;
+  }
+
+  .main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+  }
+
+  .topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    min-width: 0;
+  }
+
+  .brand-mark {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--accent-strong);
+    display: grid;
+    place-items: center;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  }
+
+  .brand-mark img {
+    width: 28px;
+    height: 28px;
+    display: block;
+  }
+
+  .brand-copy {
+    display: grid;
+    gap: 3px;
+  }
+
+  .brand-name {
+    font: 500 18px/1 var(--mono);
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+  }
+
+  .brand-slogan {
+    font: 500 12px/1.2 var(--mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    padding: 12px 16px;
+    border: 1px solid var(--accent-chip);
+    border-radius: 999px;
+    background: rgba(6, 10, 14, 0.48);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    font: 500 12px/1 var(--mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .chip-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+    flex: none;
+  }
+
+  .hero {
+    display: grid;
+    gap: 18px;
+    align-self: end;
+    padding-bottom: 10px;
+  }
+
+  .code {
+    font: 500 13px/1 var(--mono);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+  }
+
+  .title {
+    margin: 0;
+    max-width: 660px;
+    font-size: var(--title-size, 76px);
+    line-height: 0.94;
+    letter-spacing: -0.05em;
+  }
+
+  .subtitle {
+    margin: 0;
+    max-width: 700px;
+    font-size: 27px;
+    line-height: 1.22;
+    color: var(--muted);
+  }
+
+  .footer {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .footer-pill {
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(5, 8, 12, 0.55);
+    font: 500 11px/1 var(--mono);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(237, 245, 255, 0.82);
+  }
+
+  .aside {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    min-width: 0;
+  }
+
+  .frame {
+    position: relative;
+    width: 100%;
+    border: 1px solid var(--accent-frame);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0) 22%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0) 58%),
+      rgba(5, 8, 12, 0.28);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+      0 30px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+
+  .frame::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .frame::after {
+    content: '';
+    position: absolute;
+    inset: auto 24px 24px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+  }
+
+  .panel {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  }
+
+  .ring,
+  .line,
+  .grid-dot,
+  .stack,
+  .spine,
+  .bar {
+    position: absolute;
+  }
+
+  .ring {
+    border-radius: 50%;
+    border: 1px solid var(--accent-strong);
+  }
+
+  .line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent-2) 64%, transparent), transparent);
+  }
+
+  .grid-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-text);
+    box-shadow: 0 0 18px var(--accent-glow);
+  }
+
+  .stack,
+  .spine,
+  .bar {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
+  }
+
+  .variant-command .frame {
+    background:
+      radial-gradient(circle at 68% 28%, rgba(146, 191, 255, 0.1) 0%, transparent 26%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0) 22%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0) 58%),
+      rgba(5, 8, 12, 0.28);
+  }
+
+  .variant-systems .frame {
+    background:
+      radial-gradient(circle at 54% 48%, rgba(132, 211, 166, 0.09) 0%, transparent 24%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0) 22%),
+      rgba(5, 8, 12, 0.28);
+  }
+
+  .variant-gallery .frame {
+    background:
+      radial-gradient(circle at 62% 18%, rgba(226, 204, 120, 0.1) 0%, transparent 24%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0) 22%),
+      rgba(5, 8, 12, 0.28);
+  }
+
+  .variant-control .frame {
+    background:
+      radial-gradient(circle at 42% 50%, rgba(132, 211, 166, 0.08) 0%, transparent 22%),
+      radial-gradient(circle at 76% 28%, rgba(226, 204, 120, 0.08) 0%, transparent 20%),
+      rgba(5, 8, 12, 0.28);
+  }
+
+  .variant-crew .frame {
+    background:
+      radial-gradient(circle at 70% 26%, rgba(226, 204, 120, 0.1) 0%, transparent 26%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0) 22%),
+      rgba(5, 8, 12, 0.28);
+  }
+
+  .variant-archive .frame {
+    background:
+      radial-gradient(circle at 62% 16%, rgba(215, 226, 235, 0.12) 0%, transparent 20%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0) 22%),
+      rgba(5, 8, 12, 0.28);
+  }
+</style>
+</head>
+<body>
+  <article class="card variant-command" id="card">
+    <div class="grid">
+      <section class="main">
+        <div class="topline">
+          <div class="brand">
+            <div class="brand-mark">
+              <img src="../assets/favicon.svg" alt=""/>
+            </div>
+            <div class="brand-copy">
+              <div class="brand-name">DASITRADE</div>
+              <div class="brand-slogan">soluții inteligente în telecomunicații</div>
+            </div>
+          </div>
+          <div class="chip" id="chip"><span class="chip-dot"></span><span></span></div>
+        </div>
+
+        <div class="hero">
+          <div class="code" id="code"></div>
+          <h1 class="title" id="title"></h1>
+          <p class="subtitle" id="subtitle"></p>
+        </div>
+
+        <div class="footer" id="footer"></div>
+      </section>
+
+      <aside class="aside">
+        <div class="frame" id="frame"></div>
+      </aside>
+    </div>
+  </article>
+
+  <script>
+    const cards = {
+      home: {
+        variant: 'command',
+        code: 'CORE / ATRIUM',
+        chip: 'nucleu operațional',
+        title: 'Securitate,\nincendiu și telecom',
+        subtitle: 'Proiectare, execuție, mentenanță și dispecerat 24/7 pentru ecosisteme complete.',
+        footer: ['www.dasitrade.ro', 'Bacău · din 2006', 'share / home'],
+        palette: ['#84d3a6', '#92bfff', '#e2cc78'],
+      },
+      servicii: {
+        variant: 'systems',
+        code: 'SYS / MATRIX',
+        chip: 'matrice de sisteme',
+        title: 'Ecosistem tehnic\nfără insule',
+        subtitle: 'De la incendiu și CCTV la voice-data, BMS și integrare, într-un singur flux operațional.',
+        footer: ['/servicii.html', '10 familii + ecosistem complet', 'share / systems'],
+        palette: ['#84d3a6', '#92bfff', '#e2cc78'],
+      },
+      portofoliu: {
+        variant: 'gallery',
+        code: 'CASE / GALLERY',
+        chip: 'cazuri în exploatare',
+        title: 'Obiective reale\nîn exploatare',
+        subtitle: 'Studii de caz pentru industrie, medical, retail, birouri și infrastructură.',
+        footer: ['/portofoliu.html', 'livrat în teren', 'share / gallery'],
+        palette: ['#92bfff', '#84d3a6', '#e2cc78'],
+      },
+      contact: {
+        variant: 'control',
+        code: 'LINK / CONTROL',
+        chip: 'dispecerat și ofertare',
+        title: 'Intri pe\ncanalul corect',
+        subtitle: 'Brief, service sau evaluare în teren. Un singur punct de intrare, răspuns clar.',
+        footer: ['/contact.html', 'dispecerat 24/7', 'share / control'],
+        palette: ['#84d3a6', '#e2cc78', '#92bfff'],
+      },
+      cariere: {
+        variant: 'crew',
+        code: 'CREW / DECK',
+        chip: 'proiecte reale',
+        title: 'Echipă stabilă.\nMuncă reală.',
+        subtitle: 'Roluri tehnice pentru teren, proiectare și punere în funcțiune, cu certificări și ritm clar.',
+        footer: ['/cariere.html', 'roluri tehnice active', 'share / crew'],
+        palette: ['#e2cc78', '#84d3a6', '#92bfff'],
+      },
+      despre: {
+        variant: 'archive',
+        code: 'ORG / ARCHIVE',
+        chip: 'nucleu tehnic',
+        title: 'Nucleu tehnic\ndin 2006',
+        subtitle: 'Echipă, autorizări și capacitate operațională pentru exploatare pe termen lung.',
+        footer: ['/despre.html', 'Bacău · operațional', 'share / archive'],
+        palette: ['#84d3a6', '#d7e2eb', '#e2cc78'],
+      },
+      gdpr: {
+        variant: 'archive',
+        code: 'DATA / GOVERN',
+        chip: 'cadru de politici',
+        title: 'Date. Drepturi.\nUtilizare.',
+        subtitle: 'Cum prelucrăm datele trimise prin site și ce drepturi aveți asupra lor.',
+        footer: ['/gdpr.html', 'cadru public', 'share / policy'],
+        palette: ['#92bfff', '#d7e2eb', '#84d3a6'],
+      },
+    };
+
+    const motifs = {
+      command(frame) {
+        frame.innerHTML = `
+          <div class="panel" style="inset:58px 82px 122px 72px; transform:rotate(12deg);"></div>
+          <div class="panel" style="inset:112px 136px 176px 126px; transform:rotate(12deg);"></div>
+          <div class="panel" style="inset:166px 190px 230px 180px; transform:rotate(12deg);"></div>
+          <div class="line" style="left:48px; right:48px; top:98px;"></div>
+          <div class="line" style="left:86px; right:86px; bottom:110px;"></div>
+          <div class="grid-dot" style="left:90px; bottom:92px;"></div>
+          <div class="grid-dot" style="right:100px; top:118px;"></div>
+        `;
+      },
+      systems(frame) {
+        frame.innerHTML = `
+          <div class="bar" style="left:68px; top:78px; width:28px; height:320px;"></div>
+          <div class="bar" style="left:188px; top:118px; width:34px; height:250px;"></div>
+          <div class="bar" style="left:316px; top:94px; width:30px; height:296px;"></div>
+          <div class="line" style="left:56px; right:42px; top:120px;"></div>
+          <div class="line" style="left:56px; right:42px; top:250px;"></div>
+          <div class="line" style="left:56px; right:42px; top:374px;"></div>
+          <div class="ring" style="width:168px; height:168px; right:76px; top:148px;"></div>
+          <div class="ring" style="width:112px; height:112px; right:104px; top:176px;"></div>
+          <div class="grid-dot" style="right:154px; top:226px;"></div>
+        `;
+      },
+      gallery(frame) {
+        frame.innerHTML = `
+          <div class="stack" style="left:78px; top:88px; width:248px; height:308px; transform:rotate(-8deg);"></div>
+          <div class="stack" style="left:144px; top:124px; width:248px; height:308px; transform:rotate(3deg);"></div>
+          <div class="stack" style="left:212px; top:156px; width:248px; height:308px; transform:rotate(10deg);"></div>
+          <div class="line" style="left:60px; right:58px; top:82px;"></div>
+          <div class="line" style="left:90px; right:82px; bottom:82px;"></div>
+          <div class="grid-dot" style="left:104px; top:110px;"></div>
+          <div class="grid-dot" style="right:98px; bottom:98px;"></div>
+        `;
+      },
+      control(frame) {
+        frame.innerHTML = `
+          <div class="ring" style="width:232px; height:232px; left:114px; top:128px;"></div>
+          <div class="ring" style="width:148px; height:148px; left:156px; top:170px;"></div>
+          <div class="line" style="left:66px; right:66px; top:168px; transform:rotate(-26deg);"></div>
+          <div class="line" style="left:66px; right:66px; top:286px; transform:rotate(24deg);"></div>
+          <div class="bar" style="right:74px; top:92px; width:92px; height:94px;"></div>
+          <div class="bar" style="right:112px; bottom:98px; width:126px; height:124px;"></div>
+          <div class="grid-dot" style="left:222px; top:238px;"></div>
+        `;
+      },
+      crew(frame) {
+        frame.innerHTML = `
+          <div class="bar" style="left:72px; bottom:72px; width:88px; height:112px;"></div>
+          <div class="bar" style="left:180px; bottom:72px; width:88px; height:176px;"></div>
+          <div class="bar" style="left:288px; bottom:72px; width:88px; height:248px;"></div>
+          <div class="panel" style="right:84px; top:96px; width:154px; height:108px;"></div>
+          <div class="panel" style="right:112px; top:228px; width:184px; height:124px;"></div>
+          <div class="panel" style="right:142px; top:384px; width:144px; height:76px;"></div>
+          <div class="line" style="left:58px; right:58px; top:102px;"></div>
+        `;
+      },
+      archive(frame) {
+        frame.innerHTML = `
+          <div class="spine" style="left:82px; top:92px; width:52px; height:304px;"></div>
+          <div class="spine" style="left:146px; top:92px; width:52px; height:304px;"></div>
+          <div class="spine" style="left:210px; top:92px; width:52px; height:304px;"></div>
+          <div class="line" style="left:58px; right:58px; top:118px;"></div>
+          <div class="line" style="left:58px; right:58px; top:178px;"></div>
+          <div class="line" style="left:58px; right:58px; top:238px;"></div>
+          <div class="line" style="left:58px; right:58px; top:298px;"></div>
+          <div class="line" style="left:58px; right:58px; top:358px;"></div>
+          <div class="ring" style="width:130px; height:130px; right:88px; bottom:92px;"></div>
+          <div class="grid-dot" style="right:149px; bottom:153px;"></div>
+        `;
+      },
+    };
+
+    const page = new URLSearchParams(window.location.search).get('page') || 'home';
+    const card = cards[page] || cards.home;
+    const root = document.getElementById('card');
+    const chip = document.querySelector('#chip span:last-child');
+    const code = document.getElementById('code');
+    const title = document.getElementById('title');
+    const subtitle = document.getElementById('subtitle');
+    const footer = document.getElementById('footer');
+    const frame = document.getElementById('frame');
+
+    root.className = `card variant-${card.variant}`;
+    const hexToRgba = (hex, alpha) => {
+      const normalized = hex.replace('#', '');
+      const channels = normalized.length === 3
+        ? normalized.split('').map((channel) => parseInt(channel + channel, 16))
+        : normalized.match(/.{2}/g).map((channel) => parseInt(channel, 16));
+      return `rgba(${channels[0]}, ${channels[1]}, ${channels[2]}, ${alpha})`;
+    };
+
+    root.style.setProperty('--accent', card.palette[0]);
+    root.style.setProperty('--accent-2', card.palette[1] || card.palette[0]);
+    root.style.setProperty('--accent-3', card.palette[2] || card.palette[1] || card.palette[0]);
+    root.style.setProperty('--accent-soft', hexToRgba(card.palette[0], 0.14));
+    root.style.setProperty('--accent-frame', hexToRgba(card.palette[0], 0.18));
+    root.style.setProperty('--accent-chip', hexToRgba(card.palette[0], 0.22));
+    root.style.setProperty('--accent-strong', hexToRgba(card.palette[0], 0.28));
+    root.style.setProperty('--accent-text', hexToRgba(card.palette[0], 0.95));
+    root.style.setProperty('--accent-glow', hexToRgba(card.palette[0], 0.56));
+    chip.textContent = card.chip;
+    code.textContent = card.code;
+    title.innerHTML = card.title.replace(/\n/g, '<br/>');
+    subtitle.textContent = card.subtitle;
+    footer.innerHTML = card.footer.map((item) => `<div class="footer-pill">${item}</div>`).join('');
+    motifs[card.variant](frame);
+  </script>
+</body>
+</html>

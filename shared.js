@@ -399,8 +399,8 @@
   const PAGE_ROUTE_ORBITS = {
     home: {
       code: 'HOME / ORBIT',
-      title: 'Intrare in spatiul tehnic',
-      summary: 'Pagina principala ramane scena de orientare. Rutele de mai jos trimit direct in stratul relevant, fara sa repete aceeasi promisiune.',
+      title: 'Alege ruta.',
+      summary: 'Capabilitati. Servicii. Portofoliu. Contact.',
       sections: [
         { code: 'ATLAS', label: 'capabilitati', meta: 'stack + livrare', href: 'index.html#capabilitati' },
         { code: 'SYS', label: 'servicii', meta: 'ecosistem tehnic', href: 'servicii.html#ecosistem-interactiv' },
@@ -410,8 +410,8 @@
     },
     servicii: {
       code: 'SYS / ROUTE',
-      title: 'Rute clare prin ecosistem',
-      summary: 'Separarea intre ecosistem, familii, normativ, completari si exploatare face pagina mai usor de parcurs si elimina reluarea aceluiasi mesaj.',
+      title: 'Alege stratul.',
+      summary: 'Ecosistem. Familii. Normativ. Complementare. Exploatare.',
       sections: [
         { code: 'MAP', label: 'ecosistem interactiv', meta: 'legaturi intre sisteme', href: 'servicii.html#ecosistem-interactiv' },
         { code: 'FAM', label: 'familii principale', meta: '10 nuclee tehnice', href: 'servicii.html#idsai' },
@@ -422,8 +422,8 @@
     },
     portofoliu: {
       code: 'CASE / ROUTE',
-      title: 'Citire rapida a rezultatelor',
-      summary: 'Portofoliul nu mai concureaza intre galerie si argument. Rutele separa selectiile vizuale, studiile de caz si pasul urmator pentru o fisa completa.',
+      title: 'Cazuri, nu prezentare.',
+      summary: 'Selectii. Studii de caz. Servicii corelate. Cerere NDA.',
       sections: [
         { code: 'SEL', label: 'selectii proiecte', meta: 'index vizual', href: 'portofoliu.html' },
         { code: 'CASE', label: 'studii de caz', meta: 'problema - sistem - rezultat', href: 'portofoliu.html#studii-de-caz' },
@@ -433,8 +433,8 @@
     },
     despre: {
       code: 'ORG / ROUTE',
-      title: 'Organizare citita ca sistem',
-      summary: 'Despre nu trebuie sa repete vanzarea. Rutele duc separat catre identitate, structura operationala, autorizari si canalul de lucru cu clientul.',
+      title: 'Structura interna.',
+      summary: 'Identitate. Autorizari. Livrare. Contact tehnic.',
       sections: [
         { code: 'ORG', label: 'identitate & model', meta: 'structura de baza', href: 'despre.html' },
         { code: 'AUTH', label: 'autorizari', meta: 'documente active', href: 'despre.html#auth-slider' },
@@ -444,8 +444,8 @@
     },
     contact: {
       code: 'LINK / ROUTE',
-      title: 'Canalul corect din prima',
-      summary: 'Contactul trebuie sa trieze, nu sa repete. Fiecare ruta separa brief-ul, canalele directe, evaluarea pe teren si pasii urmatori.',
+      title: 'Canalul corect.',
+      summary: 'Brief. Canale directe. Evaluare. Cariere.',
       sections: [
         { code: 'FORM', label: 'brief proiect', meta: 'oferta in 48h', href: 'contact.html#contact-form' },
         { code: 'CALL', label: 'canale directe', meta: 'call-center + email', href: 'contact.html' },
@@ -455,8 +455,8 @@
     },
     cariere: {
       code: 'CREW / ROUTE',
-      title: 'Drum scurt prin roluri',
-      summary: 'Pagina de cariere trebuie sa se citeasca rapid: de ce conteaza munca, ce roluri sunt deschise si unde trimiti aplicatia fara sa te invarti.',
+      title: 'Roluri deschise.',
+      summary: 'Context. Roluri. Aplicare. Canal direct.',
       sections: [
         { code: 'WHY', label: 'de ce Dasitrade', meta: 'context de lucru', href: 'cariere.html' },
         { code: 'ROLE', label: 'roluri active', meta: 'teren + proiectare', href: 'cariere.html#jobs-list' },
@@ -466,8 +466,8 @@
     },
     gdpr: {
       code: 'DATA / ROUTE',
-      title: 'Politica citita fara blocaje',
-      summary: 'Pagina legala trebuie sa ramana clara. Rutele separa operatorul, datele, drepturile si canalul de solicitare, fara sa amestece limbajul juridic cu restul site-ului.',
+      title: 'Cadru legal.',
+      summary: 'Operator. Date. Drepturi. Solicitare.',
       sections: [
         { code: 'CTRL', label: 'operatorul de date', meta: 'date de identificare', href: 'gdpr.html' },
         { code: 'DATA', label: 'ce date colectam', meta: 'formulare + resurse', href: 'gdpr.html' },
@@ -477,8 +477,8 @@
     },
     error: {
       code: 'SAFE / ROUTE',
-      title: 'Intoarcere rapida in zona publica',
-      summary: 'Pagina 404 nu trebuie sa retina utilizatorul. Rutele de mai jos il duc inapoi in servicii, portofoliu sau contact, fara ramasite de continut redundant.',
+      title: 'Revino rapid.',
+      summary: 'Home. Servicii. Portofoliu. Contact.',
       sections: [
         { code: 'HOME', label: 'pagina principala', meta: 'intrare generala', href: 'index.html' },
         { code: 'SYS', label: 'servicii', meta: 'stack tehnic', href: 'servicii.html#ecosistem-interactiv' },
@@ -488,13 +488,128 @@
     },
     default: {
       code: 'OPS / ROUTE',
-      title: 'Ruteaza clar, nu aglomera',
-      summary: 'Fiecare pagina publica trebuie sa indice stratul corect si sa pastreze restul continutului secundar pana cand este necesar.',
+      title: 'Ruta utila.',
+      summary: 'Intri direct in stratul relevant.',
       sections: [
         { code: 'HOME', label: 'start', meta: 'pagina principala', href: 'index.html' },
         { code: 'SYS', label: 'servicii', meta: 'familii si ecosistem', href: 'servicii.html#ecosistem-interactiv' },
         { code: 'CASE', label: 'portofoliu', meta: 'studii de caz', href: 'portofoliu.html#studii-de-caz' },
         { code: 'LINK', label: 'contact', meta: 'brief tehnic', href: 'contact.html#contact-form' },
+      ],
+    },
+  };
+
+  const PAGE_SPATIAL_FLOWS = {
+    home: {
+      theme: 'command',
+      kicker: 'CORE / ATRIUM',
+      chip: 'command deck',
+      variant: 'command',
+      palette: [
+        'rgba(132, 211, 166, 0.95)',
+        'rgba(146, 191, 255, 0.94)',
+        'rgba(226, 204, 120, 0.92)',
+        'rgba(132, 211, 166, 0.84)',
+        'rgba(146, 191, 255, 0.88)',
+        'rgba(132, 211, 166, 0.9)',
+      ],
+    },
+    servicii: {
+      theme: 'systems',
+      kicker: 'SYS / MATRIX',
+      chip: 'orchestration grid',
+      variant: 'systems',
+      palette: [
+        'rgba(132, 211, 166, 0.95)',
+        'rgba(146, 191, 255, 0.94)',
+        'rgba(226, 204, 120, 0.92)',
+        'rgba(132, 211, 166, 0.84)',
+        'rgba(146, 191, 255, 0.88)',
+      ],
+    },
+    portofoliu: {
+      theme: 'gallery',
+      kicker: 'CASE / GALLERY',
+      chip: 'case vault',
+      variant: 'gallery',
+      palette: [
+        'rgba(146, 191, 255, 0.95)',
+        'rgba(132, 211, 166, 0.88)',
+        'rgba(226, 204, 120, 0.88)',
+        'rgba(146, 191, 255, 0.9)',
+      ],
+    },
+    despre: {
+      theme: 'archive',
+      kicker: 'ORG / ARCHIVE',
+      chip: 'ops archive',
+      variant: 'archive',
+      palette: [
+        'rgba(132, 211, 166, 0.82)',
+        'rgba(146, 191, 255, 0.8)',
+        'rgba(215, 226, 235, 0.82)',
+        'rgba(226, 204, 120, 0.76)',
+      ],
+    },
+    contact: {
+      theme: 'control',
+      kicker: 'LINK / CONTROL',
+      chip: 'response room',
+      variant: 'control',
+      palette: [
+        'rgba(132, 211, 166, 0.95)',
+        'rgba(226, 204, 120, 0.92)',
+        'rgba(146, 191, 255, 0.86)',
+        'rgba(132, 211, 166, 0.84)',
+      ],
+    },
+    cariere: {
+      theme: 'crew',
+      kicker: 'CREW / DECK',
+      chip: 'crew pipeline',
+      variant: 'crew',
+      palette: [
+        'rgba(226, 204, 120, 0.92)',
+        'rgba(132, 211, 166, 0.88)',
+        'rgba(146, 191, 255, 0.82)',
+        'rgba(226, 204, 120, 0.82)',
+      ],
+    },
+    gdpr: {
+      theme: 'archive',
+      kicker: 'DATA / GOVERN',
+      chip: 'policy frame',
+      variant: 'archive',
+      palette: [
+        'rgba(146, 191, 255, 0.8)',
+        'rgba(132, 211, 166, 0.74)',
+        'rgba(215, 226, 235, 0.84)',
+        'rgba(226, 204, 120, 0.72)',
+      ],
+    },
+    error: {
+      theme: 'return',
+      kicker: 'ROUTE / RETURN',
+      chip: 'safe exit',
+      variant: 'command',
+      palette: [
+        'rgba(132, 211, 166, 0.88)',
+        'rgba(146, 191, 255, 0.86)',
+        'rgba(226, 204, 120, 0.82)',
+      ],
+    },
+    default: {
+      theme: 'command',
+      kicker: 'OPS / ATRIUM',
+      chip: 'live layer',
+      variant: 'command',
+      palette: [
+        'rgba(132, 211, 166, 0.95)',
+        'rgba(146, 191, 255, 0.94)',
+        'rgba(226, 204, 120, 0.92)',
+        'rgba(132, 211, 166, 0.84)',
+        'rgba(146, 191, 255, 0.88)',
+        'rgba(132, 211, 166, 0.9)',
       ],
     },
   };
@@ -592,6 +707,10 @@
     return PAGE_ROUTE_ORBITS[pageKey] || PAGE_ROUTE_ORBITS.default;
   }
 
+  function pickPageSpatialFlow(pageKey) {
+    return PAGE_SPATIAL_FLOWS[pageKey] || PAGE_SPATIAL_FLOWS.default;
+  }
+
   function loadTechnicalSceneModule() {
     if (!technicalSceneModulePromise) {
       technicalSceneModulePromise = import('./assets/technical-scene.js')
@@ -632,6 +751,125 @@
   function resolveSectionHeading(section, fallback) {
     const heading = section.querySelector('h1, h2, h3, .eyebrow');
     return collapseWhitespace(heading ? heading.textContent : fallback);
+  }
+
+  function resolveSectionSummary(section, fallback = '') {
+    const summary = Array.from(section.querySelectorAll('p'))
+      .map(paragraph => collapseWhitespace(paragraph.textContent))
+      .find(text => text.length > 26) || collapseWhitespace(fallback);
+
+    if (!summary) return '';
+    if (summary.length <= 108) return summary;
+    return `${summary.slice(0, 105).trim()}...`;
+  }
+
+  function resolveSpatialFlowGeometry(variant, index, count) {
+    const safeCount = Math.max(1, count - 1);
+    const ratio = count === 1 ? 0.5 : index / safeCount;
+    const angle = (-Math.PI * 0.78) + ratio * (Math.PI * 1.56);
+
+    switch (variant) {
+      case 'gallery':
+        return {
+          base: {
+            x: -320 + ratio * 640,
+            y: (index % 2 === 0 ? -92 : 76) + (ratio - 0.5) * 34,
+            z: (index % 2 === 0 ? 164 : -152) + Math.sin(ratio * Math.PI) * 68,
+          },
+          drift: {
+            x: 14 + (index % 3) * 3,
+            y: 10 + (index % 4) * 2,
+            z: 44 + (index % 4) * 8,
+          },
+          ratio,
+        };
+      case 'control':
+        return {
+          base: {
+            x: Math.cos(angle) * 266,
+            y: Math.sin(angle * 1.32) * 108,
+            z: Math.sin(angle) * 208,
+          },
+          drift: {
+            x: 16 + (index % 3) * 4,
+            y: 12 + (index % 2) * 4,
+            z: 58 + (index % 4) * 10,
+          },
+          ratio,
+        };
+      case 'crew':
+        return {
+          base: {
+            x: -250 + ratio * 500,
+            y: index % 2 === 0 ? -68 : 92,
+            z: 220 - ratio * 440,
+          },
+          drift: {
+            x: 12 + (index % 3) * 3,
+            y: 10 + (index % 4) * 2,
+            z: 40 + (index % 4) * 10,
+          },
+          ratio,
+        };
+      case 'archive':
+        return {
+          base: {
+            x: (index % 2 === 0 ? -1 : 1) * (168 + ratio * 96),
+            y: -88 + index * 38,
+            z: 136 - index * 46,
+          },
+          drift: {
+            x: 10 + (index % 2) * 3,
+            y: 8 + (index % 3) * 2,
+            z: 34 + (index % 4) * 8,
+          },
+          ratio,
+        };
+      case 'command':
+      case 'systems':
+      default:
+        return {
+          base: {
+            x: Math.cos(angle) * 340,
+            y: Math.sin(angle) * 164,
+            z: Math.cos(angle * 1.35) * 178,
+          },
+          drift: {
+            x: 18 + (index % 3) * 4,
+            y: 12 + (index % 4) * 3,
+            z: 54 + (index % 5) * 12,
+          },
+          ratio,
+        };
+    }
+  }
+
+  function buildSpatialFlowItems(pageKey, sections = []) {
+    const config = pickPageTelemetry(pageKey);
+    const flowConfig = pickPageSpatialFlow(pageKey);
+    const usableSections = sections.filter(section => !section.matches('.route-orbit, .cta'));
+
+    return usableSections.slice(0, 6).map((section, index, collection) => {
+      const heading = collapseWhitespace(section.querySelector('h1, h2, h3')?.textContent || resolvePrimarySectionToken(section));
+      const eyebrow = collapseWhitespace(section.querySelector('.eyebrow')?.textContent || '');
+      const geometry = resolveSpatialFlowGeometry(flowConfig.variant, index, collection.length);
+      const palette = flowConfig.palette?.length ? flowConfig.palette : TECHNICAL_NODE_COLORS;
+      const code = collapseWhitespace(eyebrow.replace(/^§\s*/i, '').replace(/[\[\]]/g, '')) || `${config.prefix} / ${String(index + 1).padStart(2, '0')}`;
+
+      return {
+        key: `${pageKey}-room-${index + 1}`,
+        code: code.length > 26 ? `${code.slice(0, 23).trim()}...` : code,
+        label: heading,
+        title: heading,
+        body: resolveSectionSummary(section, config.signalTitle),
+        section,
+        color: palette[index % palette.length],
+        packetOffset: index / Math.max(1, collection.length),
+        phase: index * 1.18 + geometry.ratio,
+        base: geometry.base,
+        drift: geometry.drift,
+      };
+    });
   }
 
   function resolveSectionTone(section) {
@@ -1827,12 +2065,12 @@
     const constellation = h('div', { class: 'route-orbit__constellation', 'aria-label': 'Harta paginilor principale' });
 
     top.appendChild(h('div', { class: 'eyebrow route-orbit__eyebrow' }, config.code));
-    top.appendChild(h('div', { class: 'route-orbit__live' }, 'Spatial nav'));
+    top.appendChild(h('div', { class: 'route-orbit__live' }, 'Direct nav'));
 
     panel.appendChild(top);
     panel.appendChild(h('h2', { class: 'route-orbit__title' }, config.title));
     panel.appendChild(h('p', { class: 'route-orbit__body' }, config.summary));
-    constellation.appendChild(h('div', { class: 'route-orbit__constellation-label' }, 'Harta paginilor principale'));
+    constellation.appendChild(h('div', { class: 'route-orbit__constellation-label' }, 'Atlas public'));
 
     NAV_ITEMS.forEach((item, index) => {
       const position = ROUTE_ORBIT_POSITIONS[index % ROUTE_ORBIT_POSITIONS.length];
@@ -1847,13 +2085,13 @@
       const node = h(tag, attrs);
       node.appendChild(h('span', { class: 'route-orbit__page-code' }, item.key === pageKey ? 'LIVE' : String(index + 1).padStart(2, '0')));
       node.appendChild(h('span', { class: 'route-orbit__page-label' }, item.label));
-      node.appendChild(h('span', { class: 'route-orbit__page-meta' }, item.key === pageKey ? 'pagina activa' : 'ruta publica'));
+      node.appendChild(h('span', { class: 'route-orbit__page-meta' }, item.key === pageKey ? 'activ' : 'public'));
       constellation.appendChild(node);
     });
 
     panel.appendChild(constellation);
 
-    links.appendChild(h('div', { class: 'route-orbit__links-label' }, 'Rute fara redundanta'));
+    links.appendChild(h('div', { class: 'route-orbit__links-label' }, 'Acces direct'));
     config.sections.forEach(section => {
       const link = h('a', { class: 'route-orbit__link', href: section.href });
       link.appendChild(h('span', { class: 'route-orbit__link-code' }, section.code));
@@ -1868,13 +2106,284 @@
     hero.insertAdjacentElement('afterend', band);
   }
 
+  function mountSpatialFlow(pageKey) {
+    if (document.querySelector('.spatial-flow')) return;
+
+    const hero = document.querySelector('.hero, .page-hero, .legal-hero');
+    if (!hero) return;
+
+    const sections = [];
+    let node = hero.nextElementSibling;
+
+    while (node) {
+      const current = node;
+      node = current.nextElementSibling;
+
+      if (current.matches?.('footer, [data-site-footer]')) break;
+      if (current.tagName !== 'SECTION') continue;
+      if (current.matches('.cta')) break;
+
+      sections.push(current);
+    }
+
+    if (!sections.length) return;
+
+    const flowItems = buildSpatialFlowItems(pageKey, sections);
+    if (!flowItems.length) return;
+
+    const reducedMotion = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
+    const config = pickPageTelemetry(pageKey);
+    const flowConfig = pickPageSpatialFlow(pageKey);
+    const flow = h('div', {
+      class: `spatial-flow spatial-flow--${flowConfig.theme}`,
+      'data-page-key': pageKey,
+      'data-flow-theme': flowConfig.theme,
+    });
+    const stage = h('div', { class: 'spatial-flow__stage', 'aria-hidden': 'true' });
+    const viewport = h('div', { class: 'spatial-flow__viewport' });
+    const canvas = h('canvas', { class: 'spatial-flow__canvas', 'aria-hidden': 'true' });
+    const grid = h('div', { class: 'spatial-flow__grid' });
+    const glow = h('div', { class: 'spatial-flow__glow' });
+    const scan = h('div', { class: 'spatial-flow__scan' });
+    const beacons = h('div', { class: 'spatial-flow__beacons' });
+    const hud = h('aside', { class: 'spatial-flow__hud' });
+    const hudKicker = h('div', { class: 'eyebrow spatial-flow__hud-kicker' }, flowConfig.kicker || config.signalCode);
+    const hudCode = h('div', { class: 'spatial-flow__hud-code' });
+    const hudTitle = h('h2', { class: 'spatial-flow__hud-title' });
+    const hudBody = h('p', { class: 'spatial-flow__hud-body' });
+    const hudMeta = h('div', { class: 'spatial-flow__hud-meta' });
+    const stack = h('div', { class: 'spatial-flow__stack' });
+    const beaconButtons = [];
+    let activeIndex = 0;
+    let stageController = null;
+
+    hud.appendChild(hudKicker);
+    hud.appendChild(hudCode);
+    hud.appendChild(hudTitle);
+    hud.appendChild(hudBody);
+    hud.appendChild(hudMeta);
+
+    viewport.appendChild(canvas);
+    viewport.appendChild(grid);
+    viewport.appendChild(glow);
+    viewport.appendChild(scan);
+    viewport.appendChild(beacons);
+    viewport.appendChild(hud);
+    stage.appendChild(viewport);
+    flow.appendChild(stage);
+    flow.appendChild(stack);
+
+    sections[0].insertAdjacentElement('beforebegin', flow);
+
+    sections.forEach((section, index) => {
+      section.classList.add('spatial-room');
+      section.dataset.roomIndex = String(index + 1);
+      stack.appendChild(section);
+    });
+
+    function seedBeacons() {
+      const rect = viewport.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+
+      const compact = rect.width < 860;
+      const minX = compact ? 64 : 90;
+      const maxX = rect.width - minX;
+      const minY = compact ? 92 : 118;
+      const maxY = rect.height - (compact ? 84 : 110);
+
+      flowItems.forEach((item, index) => {
+        const button = beaconButtons[index];
+        if (!button) return;
+
+        const x = Math.max(minX, Math.min(maxX, rect.width * (0.5 + item.base.x / 980)));
+        const y = Math.max(minY, Math.min(maxY, rect.height * (0.5 + item.base.y / 560)));
+        const isActive = index === activeIndex;
+
+        button.style.left = `${x}px`;
+        button.style.top = `${y}px`;
+        button.style.opacity = isActive ? '0.98' : '0.76';
+        button.style.transform = `translate(-50%, -50%) scale(${isActive ? 1 : 0.88})`;
+        button.style.zIndex = String(120 + index + (isActive ? 18 : 0));
+      });
+    }
+
+    function setActive(index) {
+      activeIndex = ((index % flowItems.length) + flowItems.length) % flowItems.length;
+      const active = flowItems[activeIndex];
+      if (!active) return;
+
+      hudCode.textContent = active.code;
+      hudTitle.textContent = active.title;
+      hudBody.textContent = active.body;
+      hudMeta.innerHTML = '';
+      hudMeta.appendChild(h('span', { class: 'spatial-flow__hud-chip' }, `${String(activeIndex + 1).padStart(2, '0')} / ${String(flowItems.length).padStart(2, '0')}`));
+      hudMeta.appendChild(h('span', { class: 'spatial-flow__hud-chip' }, flowConfig.chip || config.prefix));
+      hudMeta.appendChild(h('span', { class: 'spatial-flow__hud-chip' }, resolvePrimarySectionToken(active.section)));
+
+      beaconButtons.forEach((button, buttonIndex) => {
+        const isActive = buttonIndex === activeIndex;
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+
+      if (stageController) {
+        stageController.render();
+      } else {
+        seedBeacons();
+      }
+    }
+
+    flowItems.forEach((item, index) => {
+      const button = h('button', {
+        class: 'spatial-flow__beacon',
+        type: 'button',
+        'aria-pressed': 'false'
+      });
+
+      button.innerHTML = `
+        <span class="spatial-flow__beacon-code">${String(index + 1).padStart(2, '0')}</span>
+        <span class="spatial-flow__beacon-label">${item.label}</span>
+      `;
+
+      button.addEventListener('mouseenter', () => setActive(index));
+      button.addEventListener('focus', () => setActive(index));
+      button.addEventListener('click', () => {
+        setActive(index);
+        item.section.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+      });
+
+      beaconButtons.push(button);
+      beacons.appendChild(button);
+    });
+
+    if ('ResizeObserver' in globalThis) {
+      const observer = new ResizeObserver(() => {
+        if (!stageController) {
+          seedBeacons();
+        }
+      });
+      observer.observe(viewport);
+    }
+
+    if ('IntersectionObserver' in globalThis) {
+      const visibility = new Map();
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          visibility.set(entry.target, entry.intersectionRatio);
+        });
+
+        let nextIndex = activeIndex;
+        let bestRatio = 0;
+        flowItems.forEach((item, index) => {
+          const ratio = visibility.get(item.section) || 0;
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            nextIndex = index;
+          }
+        });
+
+        if (bestRatio > 0.14) {
+          setActive(nextIndex);
+        }
+      }, {
+        threshold: [0.15, 0.35, 0.55, 0.75],
+        rootMargin: '-12% 0px -28% 0px'
+      });
+
+      flowItems.forEach(item => observer.observe(item.section));
+    }
+
+    seedBeacons();
+    setActive(0);
+
+    loadTechnicalSceneModule().then(module => {
+      const mountTechnicalScene = module?.mountTechnicalScene;
+      if (!mountTechnicalScene) return;
+
+      stageController = mountTechnicalScene({
+        host: viewport,
+        canvas,
+        items: flowItems.map(item => ({
+          key: item.key,
+          color: item.color,
+          base: item.base,
+          drift: item.drift,
+          phase: item.phase,
+          packetOffset: item.packetOffset,
+          button: beaconButtons[flowItems.indexOf(item)],
+        })),
+        pointerTarget: flow,
+        mode: 'flow',
+        sceneVariant: flowConfig.variant,
+        reducedMotion,
+        useDeviceOrientation: true,
+        getActiveIndex: () => activeIndex,
+        onProject: ({ projections }) => {
+          const compact = viewport.clientWidth < 860;
+          const minX = compact ? 64 : 90;
+          const maxX = viewport.clientWidth - minX;
+          const minY = compact ? 92 : 118;
+          const maxY = viewport.clientHeight - (compact ? 84 : 110);
+
+          projections.forEach(({ item, projection }, order) => {
+            const button = item.button;
+            if (!button) return;
+
+            const beaconIndex = flowItems.findIndex(entry => entry.key === item.key);
+            const isActive = beaconIndex === activeIndex;
+            const x = Math.max(minX, Math.min(maxX, projection.x));
+            const y = Math.max(minY, Math.min(maxY, projection.y));
+
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+            button.style.opacity = `${Math.max(compact ? 0.46 : 0.54, projection.alpha * (isActive ? 1 : 0.9))}`;
+            button.style.transform = `translate(-50%, -50%) scale(${Math.max(compact ? 0.72 : 0.82, Math.min(compact ? 0.96 : 1.08, projection.scale * (isActive ? 1.08 : 0.94)))})`;
+            button.style.zIndex = String(120 + order + (isActive ? 18 : 0));
+          });
+        },
+      });
+
+      setActive(activeIndex);
+    });
+  }
+
   function mountSectionTelemetry(pageKey) {
     const sections = document.querySelectorAll('section');
     if (!sections.length) return;
 
+    const denseSelector = [
+      '.case-study-card',
+      '.job-card',
+      '.process-card',
+      '.faq-item',
+      '.service-extension-card',
+      '.lifecycle-step',
+      '.about-market__card',
+      '.about-certifications__card',
+      '.portfolio-item',
+      '.service-page__item',
+      '.about-ops-card'
+    ].join(', ');
+
+    let contentIndex = 0;
+
     sections.forEach(section => {
       section.classList.add('tech-surface');
       section.dataset.telemetryTone = section.matches('.hero') ? 'dark' : resolveSectionTone(section);
+
+      if (section.matches('.hero, .page-hero, .legal-hero, .route-orbit, .cta')) return;
+
+      section.classList.add('tech-surface--compressed');
+
+      if (contentIndex === 0) {
+        section.classList.add('tech-surface--bridge');
+      }
+
+      if (section.querySelectorAll(denseSelector).length >= 4) {
+        section.classList.add('tech-surface--dense');
+      }
+
+      contentIndex += 1;
     });
   }
 
@@ -1918,16 +2427,18 @@
   globalThis.DasitradeSite = {
     init({ current, navVariant = 'dark' } = {}) {
       const pageKey = inferPageKey(current);
+      maybeSplash();
       ensureFormToken();
       mountNav(current, navVariant);
       mountFooter();
-      mountReveal();
       mountPageHeroTelemetry(pageKey);
       mountRouteOrbit(pageKey);
+      mountSpatialFlow(pageKey);
       mountSectionTelemetry(pageKey);
       mountTechnicalHeroes();
       mountDepthInteractions();
       mountSystemMaps();
+      mountReveal();
       mountCookieBanner();
       mountAnalytics();
       mountWhatsApp();
@@ -1951,6 +2462,9 @@
     },
     mountSectionTelemetry(current) {
       mountSectionTelemetry(inferPageKey(current));
+    },
+    mountSpatialFlow(current) {
+      mountSpatialFlow(inferPageKey(current));
     },
     track(eventName, data) {
       track(eventName, data);

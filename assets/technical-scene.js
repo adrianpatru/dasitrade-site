@@ -76,7 +76,7 @@ function createParticleField({ count, extent, lightMode }) {
 }
 
 function createRings({ lightMode, mode }) {
-  const radius = mode === 'home' ? 70 : 50;
+  const radius = mode === 'home' ? 70 : mode === 'flow' ? 90 : 50;
   const rings = [];
   const color = lightMode ? '#101214' : '#84d3a6';
 
@@ -98,6 +98,127 @@ function createRings({ lightMode, mode }) {
   return rings;
 }
 
+function createArchitecture({ lightMode, mode, variant = 'command' }) {
+  const group = new THREE.Group();
+  const disposables = [];
+  const frameColor = lightMode ? '#101214' : '#84d3a6';
+  const ghostColor = lightMode ? '#1d2126' : '#92bfff';
+  const addWireBox = ({ size, position = [0, 0, 0], rotation = [0, 0, 0], color = frameColor, opacity = 0.08 }) => {
+    const geometry = new THREE.BoxGeometry(...size);
+    const material = new THREE.MeshBasicMaterial({
+      color,
+      wireframe: true,
+      transparent: true,
+      opacity,
+      depthWrite: false,
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(...position);
+    mesh.rotation.set(...rotation);
+    group.add(mesh);
+    disposables.push({ geometry, material, mesh, baseRotation: mesh.rotation.y });
+  };
+
+  const addWireCylinder = ({ radiusTop, radiusBottom, height, radialSegments = 20, position = [0, 0, 0], rotation = [0, 0, 0], color = frameColor, opacity = 0.08 }) => {
+    const geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments, 1, true);
+    const material = new THREE.MeshBasicMaterial({
+      color,
+      wireframe: true,
+      transparent: true,
+      opacity,
+      depthWrite: false,
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(...position);
+    mesh.rotation.set(...rotation);
+    group.add(mesh);
+    disposables.push({ geometry, material, mesh, baseRotation: mesh.rotation.y });
+  };
+
+  const addWireTorus = ({ radius, tube = 1, radialSegments = 12, tubularSegments = 72, position = [0, 0, 0], rotation = [0, 0, 0], color = frameColor, opacity = 0.08 }) => {
+    const geometry = new THREE.TorusGeometry(radius, tube, radialSegments, tubularSegments);
+    const material = new THREE.MeshBasicMaterial({
+      color,
+      wireframe: true,
+      transparent: true,
+      opacity,
+      depthWrite: false,
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(...position);
+    mesh.rotation.set(...rotation);
+    group.add(mesh);
+    disposables.push({ geometry, material, mesh, baseRotation: mesh.rotation.y });
+  };
+
+  if (mode !== 'flow') {
+    addWireBox({ size: [152, 104, 152], position: [0, 0, 0], color: frameColor, opacity: lightMode ? 0.05 : 0.1 });
+    addWireBox({ size: [236, 156, 236], position: [0, 16, 0], rotation: [0, 0.34, 0], color: ghostColor, opacity: lightMode ? 0.04 : 0.08 });
+    return { group, disposables };
+  }
+
+  switch (variant) {
+    case 'gallery':
+      addWireBox({ size: [220, 148, 28], position: [-228, 24, 96], rotation: [0.08, -0.32, 0], color: ghostColor, opacity: lightMode ? 0.05 : 0.1 });
+      addWireBox({ size: [180, 124, 24], position: [0, 64, -136], rotation: [-0.04, 0.18, 0], color: frameColor, opacity: lightMode ? 0.05 : 0.09 });
+      addWireBox({ size: [236, 162, 28], position: [236, 12, 88], rotation: [0.06, 0.34, 0], color: ghostColor, opacity: lightMode ? 0.05 : 0.1 });
+      addWireBox({ size: [520, 16, 520], position: [0, -110, 0], color: frameColor, opacity: lightMode ? 0.03 : 0.06 });
+      addWireBox({ size: [300, 18, 300], position: [0, -74, 0], rotation: [0, 0.24, 0], color: frameColor, opacity: lightMode ? 0.03 : 0.06 });
+      addWireTorus({ radius: 180, tube: 1, position: [0, -40, 0], rotation: [Math.PI / 2, 0, 0], color: ghostColor, opacity: lightMode ? 0.04 : 0.07 });
+      break;
+    case 'control':
+      addWireCylinder({ radiusTop: 188, radiusBottom: 188, height: 28, position: [0, -104, 0], color: frameColor, opacity: lightMode ? 0.04 : 0.08 });
+      addWireCylinder({ radiusTop: 142, radiusBottom: 142, height: 18, position: [0, -48, 0], color: ghostColor, opacity: lightMode ? 0.04 : 0.07 });
+      addWireTorus({ radius: 190, tube: 1, position: [0, -24, 0], rotation: [Math.PI / 2, 0, 0], color: frameColor, opacity: lightMode ? 0.04 : 0.08 });
+      addWireTorus({ radius: 110, tube: 1, position: [0, 34, 0], rotation: [Math.PI / 2, 0, 0], color: ghostColor, opacity: lightMode ? 0.04 : 0.08 });
+      [[-210, -12, 0], [210, -12, 0], [0, -12, -210], [0, -12, 210]].forEach((position, index) => {
+        addWireBox({ size: [18, 172, 18], position, rotation: [0, index * 0.34, 0], color: index % 2 === 0 ? frameColor : ghostColor, opacity: lightMode ? 0.04 : 0.07 });
+      });
+      break;
+    case 'crew':
+      [-240, -80, 80, 240].forEach((z, index) => {
+        addWireBox({ size: [212, 172, 26], position: [0, 4, z], color: index % 2 === 0 ? frameColor : ghostColor, opacity: lightMode ? 0.04 : 0.08 });
+      });
+      addWireBox({ size: [480, 24, 520], position: [0, -108, 0], color: ghostColor, opacity: lightMode ? 0.03 : 0.06 });
+      addWireBox({ size: [420, 18, 420], position: [0, 92, 0], rotation: [0, 0.2, 0], color: frameColor, opacity: lightMode ? 0.03 : 0.05 });
+      break;
+    case 'archive':
+      addWireBox({ size: [420, 32, 260], position: [0, -104, 0], rotation: [0, 0.08, 0], color: frameColor, opacity: lightMode ? 0.04 : 0.08 });
+      addWireBox({ size: [360, 24, 210], position: [0, -48, 0], rotation: [0, -0.16, 0], color: ghostColor, opacity: lightMode ? 0.04 : 0.08 });
+      addWireBox({ size: [300, 20, 180], position: [0, 10, 0], rotation: [0, 0.22, 0], color: frameColor, opacity: lightMode ? 0.03 : 0.06 });
+      addWireBox({ size: [244, 18, 144], position: [0, 62, 0], rotation: [0, -0.24, 0], color: ghostColor, opacity: lightMode ? 0.03 : 0.06 });
+      [[-190, -18, -94], [190, -18, 94]].forEach((position, index) => {
+        addWireBox({ size: [18, 210, 18], position, rotation: [0, index === 0 ? 0.18 : -0.18, 0], color: frameColor, opacity: lightMode ? 0.03 : 0.05 });
+      });
+      break;
+    case 'systems':
+      addWireBox({ size: [560, 18, 320], position: [0, -108, 0], color: frameColor, opacity: lightMode ? 0.03 : 0.06 });
+      addWireBox({ size: [520, 14, 42], position: [0, 84, 0], rotation: [0, 0.18, 0], color: ghostColor, opacity: lightMode ? 0.04 : 0.08 });
+      addWireBox({ size: [520, 12, 34], position: [0, -18, 0], rotation: [0, -0.22, 0], color: frameColor, opacity: lightMode ? 0.04 : 0.08 });
+      addWireBox({ size: [86, 224, 54], position: [-216, -4, 92], rotation: [0.02, -0.22, 0], color: ghostColor, opacity: lightMode ? 0.05 : 0.1 });
+      addWireBox({ size: [94, 246, 58], position: [0, 18, 0], rotation: [-0.04, 0.12, 0], color: frameColor, opacity: lightMode ? 0.05 : 0.1 });
+      addWireBox({ size: [86, 216, 54], position: [216, -10, -96], rotation: [0.03, 0.28, 0], color: ghostColor, opacity: lightMode ? 0.05 : 0.1 });
+      addWireBox({ size: [22, 164, 286], position: [-292, -16, 0], rotation: [0, 0.16, 0], color: frameColor, opacity: lightMode ? 0.03 : 0.06 });
+      addWireBox({ size: [22, 164, 286], position: [292, -16, 0], rotation: [0, -0.16, 0], color: frameColor, opacity: lightMode ? 0.03 : 0.06 });
+      addWireTorus({ radius: 128, tube: 1, position: [0, 26, 0], rotation: [Math.PI / 2, 0, 0], color: ghostColor, opacity: lightMode ? 0.03 : 0.05 });
+      break;
+    case 'command':
+    default:
+      addWireBox({ size: [180, 132, 180], position: [0, 4, 0], color: frameColor, opacity: lightMode ? 0.08 : 0.16 });
+      addWireBox({ size: [320, 212, 320], position: [0, 18, 0], rotation: [0, 0.34, 0], color: ghostColor, opacity: lightMode ? 0.05 : 0.11 });
+      addWireBox({ size: [500, 298, 500], position: [0, 42, 0], rotation: [0, 0.68, 0], color: frameColor, opacity: lightMode ? 0.04 : 0.08 });
+      [[-220, -18, -220], [220, -18, -220], [-220, -18, 220], [220, -18, 220]].forEach((position, index) => {
+        addWireBox({ size: [14, 188, 14], position, rotation: [0, index * 0.28, 0], color: index % 2 === 0 ? frameColor : ghostColor, opacity: lightMode ? 0.04 : 0.08 });
+      });
+      break;
+  }
+
+  return { group, disposables };
+}
+
 function projectToScreen(camera, width, height, worldPosition) {
   TMP_PROJECTED.copy(worldPosition).project(camera);
 
@@ -114,8 +235,10 @@ export function mountTechnicalScene({
   items,
   pointerTarget = host,
   mode = 'home',
+  sceneVariant = 'command',
   lightMode = false,
   reducedMotion = false,
+  useDeviceOrientation = false,
   getActiveIndex = () => 0,
   onProject,
 }) {
@@ -148,13 +271,16 @@ export function mountTechnicalScene({
   scene.add(coreRoot);
   scene.add(fieldRoot);
 
+  const architecture = createArchitecture({ lightMode, mode, variant: sceneVariant });
+  scene.add(architecture.group);
+
   const grid = new THREE.GridHelper(
-    mode === 'home' ? 960 : 720,
-    mode === 'home' ? 14 : 10,
+    mode === 'home' ? 960 : mode === 'flow' ? 1320 : 720,
+    mode === 'home' ? 14 : mode === 'flow' ? 18 : 10,
     lightMode ? '#84d3a6' : '#84d3a6',
     lightMode ? '#1a1d21' : '#d7e2eb'
   );
-  grid.position.y = mode === 'home' ? -160 : -110;
+  grid.position.y = mode === 'home' ? -160 : mode === 'flow' ? -148 : -110;
   setGridOpacity(grid, lightMode ? 0.08 : 0.11);
   root.add(grid);
 
@@ -186,8 +312,8 @@ export function mountTechnicalScene({
   coreRoot.add(coreHalo);
 
   const particleField = createParticleField({
-    count: mode === 'home' ? 220 : 120,
-    extent: mode === 'home' ? 1400 : 980,
+    count: mode === 'home' ? 220 : mode === 'flow' ? 320 : 120,
+    extent: mode === 'home' ? 1400 : mode === 'flow' ? 1840 : 980,
     lightMode,
   });
   fieldRoot.add(particleField.points);
@@ -283,13 +409,19 @@ export function mountTechnicalScene({
     camera.aspect = width / height;
     camera.fov = mode === 'home'
       ? (width < 720 ? 40 : 33)
-      : (width < 420 ? 42 : 36);
+      : mode === 'flow'
+        ? (width < 720 ? 40 : 31)
+        : (width < 420 ? 42 : 36);
     camera.position.set(
-      mode === 'home' ? -18 : (lightMode ? -6 : 10),
-      mode === 'home' ? 68 : (lightMode ? 28 : 36),
-      mode === 'home' ? 760 : 600
+      mode === 'home' ? -18 : mode === 'flow' ? -32 : (lightMode ? -6 : 10),
+      mode === 'home' ? 68 : mode === 'flow' ? 96 : (lightMode ? 28 : 36),
+      mode === 'home' ? 760 : mode === 'flow' ? 920 : 600
     );
-    camera.lookAt(mode === 'home' ? -28 : 24, mode === 'home' ? 6 : -4, 0);
+    camera.lookAt(
+      mode === 'home' ? -28 : mode === 'flow' ? 0 : 24,
+      mode === 'home' ? 6 : mode === 'flow' ? 12 : -4,
+      0
+    );
     camera.updateProjectionMatrix();
   }
 
@@ -311,6 +443,11 @@ export function mountTechnicalScene({
     fieldRoot.rotation.y = time * 0.025;
     fieldRoot.rotation.x = -0.1;
     coreRoot.rotation.y = time * 0.12;
+    architecture.group.rotation.y = time * (mode === 'flow' ? 0.06 : 0.035);
+    architecture.group.rotation.x = -0.04 + Math.cos(time * 0.14) * 0.02;
+    architecture.disposables.forEach(({ mesh, baseRotation }, index) => {
+      mesh.rotation.y = baseRotation + time * (0.012 + index * 0.003);
+    });
     coreHalo.scale.setScalar(1 + Math.sin(time * 1.3) * 0.05);
     rings.forEach(({ ring, baseRotation }, index) => {
       ring.rotation.z = baseRotation + time * (0.08 + index * 0.03);
@@ -401,6 +538,23 @@ export function mountTechnicalScene({
   pointerTarget.addEventListener('pointermove', onPointerMove);
   pointerTarget.addEventListener('pointerleave', onPointerLeave);
 
+  const wantsDeviceOrientation = useDeviceOrientation
+    && 'DeviceOrientationEvent' in globalThis
+    && globalThis.matchMedia?.('(pointer: coarse)').matches === true;
+
+  function onDeviceOrientation(event) {
+    if (typeof event.gamma !== 'number' && typeof event.beta !== 'number') return;
+
+    const gamma = THREE.MathUtils.clamp((event.gamma || 0) / 38, -1, 1);
+    const beta = THREE.MathUtils.clamp(((event.beta || 0) - 42) / 46, -1, 1);
+    pointer.targetX = gamma;
+    pointer.targetY = beta;
+  }
+
+  if (wantsDeviceOrientation) {
+    globalThis.addEventListener('deviceorientation', onDeviceOrientation);
+  }
+
   let resizeObserver = null;
   if ('ResizeObserver' in globalThis) {
     resizeObserver = new ResizeObserver(() => {
@@ -443,6 +597,9 @@ export function mountTechnicalScene({
 
       pointerTarget.removeEventListener('pointermove', onPointerMove);
       pointerTarget.removeEventListener('pointerleave', onPointerLeave);
+      if (wantsDeviceOrientation) {
+        globalThis.removeEventListener('deviceorientation', onDeviceOrientation);
+      }
       resizeObserver?.disconnect();
       intersectionObserver?.disconnect();
 
@@ -466,6 +623,12 @@ export function mountTechnicalScene({
 
       rings.forEach(({ ring, geometry, material }) => {
         ring.removeFromParent();
+        geometry.dispose();
+        material.dispose();
+      });
+
+      architecture.disposables.forEach(({ mesh, geometry, material }) => {
+        mesh.removeFromParent();
         geometry.dispose();
         material.dispose();
       });
