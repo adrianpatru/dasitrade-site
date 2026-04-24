@@ -34,6 +34,16 @@
     whatsapp:  'https://wa.me/40728030268',   // 0728 030 268
   };
 
+  const BRAND_LOCKUP = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 48" class="brand-lockup__svg" aria-hidden="true" focusable="false">
+      <g fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="8" width="32" height="32"></rect>
+        <line x1="2" y1="24" x2="34" y2="24" opacity="0.4"></line>
+      </g>
+      <rect x="10" y="16" width="16" height="16" fill="currentColor"></rect>
+      <text x="48" y="31" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="17" font-weight="500" letter-spacing="4" fill="currentColor">DASITRADE</text>
+    </svg>`;
+
   const TECHNICAL_HERO_SYSTEMS = [
     {
       key: 'idsai',
@@ -134,10 +144,42 @@
       signalTitle: 'Familii tratate ca ecosistem',
       metrics: ['10 familii', 'cadru normativ', 'PIF + service'],
       nodes: [
-        { code: 'FIRE', label: 'alarmare', x: '18%', y: '20%' },
-        { code: 'CCTV', label: 'validare video', x: '82%', y: '26%' },
-        { code: 'ACC', label: 'control acces', x: '70%', y: '70%' },
-        { code: 'BMS', label: 'nucleu comun', x: '24%', y: '72%' },
+        {
+          code: 'FIRE',
+          label: 'alarmare',
+          title: 'Incendiu tratat ca flux critic, nu ca subsistem izolat',
+          body: 'IDSAI, desfumare, stingere si evacuare vocala sunt legate de scenariul real de reactie si exploatare.',
+          href: 'servicii.html#idsai',
+          x: '18%',
+          y: '20%'
+        },
+        {
+          code: 'CCTV',
+          label: 'validare video',
+          title: 'Video-ul valideaza rapid incidentul si scurteaza lantul de decizie',
+          body: 'CCTV, analitice si context de exploatare pentru obiective unde confirmarea rapida conteaza operational.',
+          href: 'servicii.html#cctv',
+          x: '82%',
+          y: '26%'
+        },
+        {
+          code: 'ACC',
+          label: 'control acces',
+          title: 'Acces segmentat pe zone, identitate si traseu auditat',
+          body: 'Controlul accesului devine util cand separa clar fluxurile si lasa urme verificabile in exploatare.',
+          href: 'servicii.html#acces',
+          x: '70%',
+          y: '70%'
+        },
+        {
+          code: 'BMS',
+          label: 'nucleu comun',
+          title: 'Integrarea aduna subsistemele intr-un singur model de operare',
+          body: 'BMS si integrarea reduc fragmentarea intre sisteme si muta exploatarea intr-un dashboard coerent.',
+          href: 'servicii.html#bms',
+          x: '24%',
+          y: '72%'
+        },
       ],
     },
     portofoliu: {
@@ -146,10 +188,42 @@
       signalTitle: 'Rezultat masurat in exploatare',
       metrics: ['12 selectii', 'NDA ready', 'multi-sistem'],
       nodes: [
-        { code: 'IND', label: 'industrial', x: '20%', y: '20%' },
-        { code: 'MED', label: 'medical', x: '82%', y: '28%' },
-        { code: 'PUB', label: 'public', x: '66%', y: '72%' },
-        { code: 'DC', label: 'camere tehnice', x: '24%', y: '74%' },
+        {
+          code: 'IND',
+          label: 'industrial',
+          title: 'Fluxuri industriale unde oprirea sau ambiguitatea nu sunt acceptabile',
+          body: 'Studiile din portofoliu urmaresc problema initiala, constrangerile de executie si rezultatul masurat dupa PIF.',
+          href: 'portofoliu.html#studii-de-caz',
+          x: '20%',
+          y: '20%'
+        },
+        {
+          code: 'MED',
+          label: 'medical',
+          title: 'Scenarii medicale si de incendiu unde raspunsul trebuie sa ramana controlat',
+          body: 'Proiectele selectate arata cum este tratata integrarea in cladiri unde continuitatea si claritatea de reactie sunt critice.',
+          href: 'portofoliu.html#studii-de-caz',
+          x: '82%',
+          y: '28%'
+        },
+        {
+          code: 'PUB',
+          label: 'public',
+          title: 'Control, audit si trasee demonstrabile pentru cladiri publice',
+          body: 'Nu prezentam doar echipamente, ci modul in care sistemele lasa urme clare si sustin exploatarea zilnica.',
+          href: 'portofoliu.html#studii-de-caz',
+          x: '66%',
+          y: '72%'
+        },
+        {
+          code: 'DC',
+          label: 'camere tehnice',
+          title: 'Protectie pentru spatii tehnice unde eroarea are impact mare',
+          body: 'Camere tehnice, stingere gazoasa, detectie aspirativa si integrare pentru infrastructuri cu toleranta minima la risc.',
+          href: 'portofoliu.html#studii-de-caz',
+          x: '24%',
+          y: '74%'
+        },
       ],
     },
     despre: {
@@ -158,10 +232,42 @@
       signalTitle: 'Capacitate structurata operational',
       metrics: ['30+ echipa', 'autorizari active', 'service & dispecerat'],
       nodes: [
-        { code: 'TEAM', label: 'executie', x: '18%', y: '22%' },
-        { code: 'AUTH', label: 'autorizari', x: '82%', y: '24%' },
-        { code: 'PIF', label: 'punere in functiune', x: '70%', y: '70%' },
-        { code: 'OPS', label: 'raspuns 24/7', x: '26%', y: '72%' },
+        {
+          code: 'TEAM',
+          label: 'executie',
+          title: 'Capacitate reala in teren, sustinuta de roluri clare si echipe stabile',
+          body: 'Organizarea dintre proiectare, executie, service si conformitate este ce face livrarea predictibila, nu doar marimea echipei.',
+          href: 'despre.html#auth-slider',
+          x: '18%',
+          y: '22%'
+        },
+        {
+          code: 'AUTH',
+          label: 'autorizari',
+          title: 'Autorizari si trasabilitate care sustin lucrari sensibile',
+          body: 'Documentatia, autorizatiile si cadrul de conformitate sunt tratate ca parte din produsul final, nu ca formalitate separata.',
+          href: 'despre.html#auth-slider',
+          x: '82%',
+          y: '24%'
+        },
+        {
+          code: 'PIF',
+          label: 'punere in functiune',
+          title: 'Punerea in functiune este faza unde sistemul devine exploatabil',
+          body: 'Testarea, integrarea si reglajele finale sunt tratate ca etapa critica pentru obiective care trebuie sa functioneze fara improvizatii.',
+          href: 'servicii.html',
+          x: '70%',
+          y: '70%'
+        },
+        {
+          code: 'OPS',
+          label: 'raspuns 24/7',
+          title: 'Dispeceratul si service-ul inchid bucla operationala dupa livrare',
+          body: 'Raspunsul rapid are sens doar cand este legat de diagnostic, istoric si o echipa care poate interveni coerent.',
+          href: 'contact.html',
+          x: '26%',
+          y: '72%'
+        },
       ],
     },
     contact: {
@@ -170,10 +276,42 @@
       signalTitle: 'Canale tehnice prioritizate',
       metrics: ['oferta in 48h', 'call-center 24/7', 'evaluare teren'],
       nodes: [
-        { code: 'CALL', label: 'urgente', x: '18%', y: '20%' },
-        { code: 'MAIL', label: 'ofertare', x: '82%', y: '24%' },
-        { code: 'MAP', label: 'sediu Bacau', x: '66%', y: '72%' },
-        { code: 'SITE', label: 'rutare publica', x: '24%', y: '72%' },
+        {
+          code: 'CALL',
+          label: 'urgente',
+          title: 'Call-center pentru incidente si escaladare de service',
+          body: 'Canalul telefonic ramane cel mai rapid cand exista o urgenta, un risc operational sau o nevoie de triere imediata.',
+          href: 'tel:0334401092',
+          x: '18%',
+          y: '20%'
+        },
+        {
+          code: 'MAIL',
+          label: 'ofertare',
+          title: 'Email-ul ramane canalul curat pentru brief, documente si ofertare',
+          body: 'Pentru cereri comerciale si date tehnice, emailul pastreaza firul clar si permite intoarcerea rapida cu intrebari sau oferta.',
+          href: 'contact.html#contact-form',
+          x: '82%',
+          y: '24%'
+        },
+        {
+          code: 'MAP',
+          label: 'sediu Bacau',
+          title: 'Sediul operational este punctul pentru intalniri, acte si pornirea evaluarilor',
+          body: 'Localizarea, accesul direct si coordonatele publice sunt pregatite pentru intalniri de proiect si vizite tehnice.',
+          href: 'contact.html#evaluare',
+          x: '66%',
+          y: '72%'
+        },
+        {
+          code: 'SITE',
+          label: 'rutare publica',
+          title: 'Formularul scurteaza traseul dintre context si raspunsul potrivit',
+          body: 'Prin brief-ul din pagina separati imediat ofertarea, evaluarea in teren si preluarea de sisteme existente.',
+          href: 'contact.html#contact-form',
+          x: '24%',
+          y: '72%'
+        },
       ],
     },
     cariere: {
@@ -182,10 +320,42 @@
       signalTitle: 'Roluri pentru teren si inginerie',
       metrics: ['3 roluri active', 'raspuns in 5 zile', 'teren + proiectare'],
       nodes: [
-        { code: 'FIELD', label: 'tehnician', x: '20%', y: '20%' },
-        { code: 'DESIGN', label: 'proiectare', x: '80%', y: '24%' },
-        { code: 'PIF', label: 'punere in functiune', x: '68%', y: '72%' },
-        { code: 'TEAM', label: 'candidatura', x: '24%', y: '72%' },
+        {
+          code: 'FIELD',
+          label: 'tehnician',
+          title: 'Roluri de teren pentru oameni care duc sistemul in exploatare reala',
+          body: 'Pozitiile de tehnician cer disciplina, cablare curata, punere in functie controlata si reactie buna in santier.',
+          href: 'cariere.html#jobs-list',
+          x: '20%',
+          y: '20%'
+        },
+        {
+          code: 'DESIGN',
+          label: 'proiectare',
+          title: 'Proiectarea este tratata ca inginerie aplicata, nu ca desen formal',
+          body: 'Cautam proiectanti care inteleg normativele, integrarea si impactul fiecarei decizii in executie si service.',
+          href: 'cariere.html#jobs-list',
+          x: '80%',
+          y: '24%'
+        },
+        {
+          code: 'PIF',
+          label: 'punere in functiune',
+          title: 'Punerea in functiune cere diagnostic bun si control asupra detaliului',
+          body: 'Rolurile de commissioning fac diferenta dintre un sistem instalat si unul exploatabil, stabil si documentat.',
+          href: 'cariere.html#jobs-list',
+          x: '68%',
+          y: '72%'
+        },
+        {
+          code: 'TEAM',
+          label: 'candidatura',
+          title: 'Aplicarea intra direct in fluxul intern de selectie si raspuns',
+          body: 'Daca profilul este potrivit, pastram traseul simplu: formular, apel scurt, interviu tehnic si raspuns clar.',
+          href: 'cariere.html#aplica',
+          x: '24%',
+          y: '72%'
+        },
       ],
     },
     gdpr: {
@@ -227,6 +397,31 @@
   };
 
   const GENERIC_SECTION_CLASSES = new Set(['section', 'page-hero', 'hero', 'cta', 'band']);
+  const DEPTH_INTERACTION_SELECTOR = [
+    '.home-command-band__card',
+    '.intake-card',
+    '.capability-atlas__card',
+    '.service-page__item',
+    '.service-extension-card',
+    '.lifecycle-step',
+    '.service-assurance__item',
+    '.compliance-card',
+    '.partner-card',
+    '.contact-panel',
+    '.contact-ops__card',
+    '.contact-evaluation__card',
+    '.contact-map__panel',
+    '.contact-map__card',
+    '.about-panel',
+    '.about-certifications__card',
+    '.about-market__card',
+    '.about-ops-card',
+    '.process-card',
+    '.faq-item',
+    '.job-card',
+    '.case-study-card',
+    '.systems-map__panel'
+  ].join(', ');
 
   // ── SVG icons (inline, no external dependency) ───────────────────────────
   const ICONS = {
@@ -537,8 +732,8 @@
   function mountNav(current, variant = 'dark') {
     const host = document.querySelector('[data-nav]');
     if (!host) return;
-    const brand = h('a', { class: 'nav__brand', href: 'index.html' });
-    brand.innerHTML = `<img src="assets/logo.jpg" alt="Dasitrade" class="nav__logo"/>`;
+    const brand = h('a', { class: 'nav__brand', href: 'index.html', 'aria-label': 'Dasitrade' });
+    brand.innerHTML = `<span class="brand-lockup" aria-hidden="true">${BRAND_LOCKUP}</span>`;
     const links = h('nav', { class: 'nav__links' },
       NAV_ITEMS.map(it => h('a', {
         href: it.href,
@@ -582,7 +777,7 @@
     host.innerHTML = `
       <div class="footer__grid">
         <div>
-          <img src="assets/logo.jpg" alt="Dasitrade" class="footer__logo"/>
+          <span class="footer__logo brand-lockup" aria-hidden="true">${BRAND_LOCKUP}</span>
           <div class="footer__slogan">${COMPANY.slogan}</div>
           <p class="footer__brand-copy">
             ${COMPANY.legalName} acoperă securitatea electronică, sistemele de incendiu, telecomunicațiile și infrastructura de curenți slabi, de la analiză și proiectare până la mentenanță și call-center 24/7.
@@ -1058,35 +1253,24 @@
       if (host.dataset.mounted === 'true') return;
       host.dataset.mounted = 'true';
 
+      const hero = host.closest('.hero');
+      const deckHost = hero?.querySelector('[data-hero-command-deck]');
       const canvas = h('canvas', { class: 'technical-hero__canvas', 'aria-hidden': 'true' });
       const nodesLayer = h('div', { class: 'technical-hero__nodes' });
-      const legend = h('div', { class: 'technical-hero__legend' });
-      const legendTitle = h('div', { class: 'technical-hero__legend-title' }, 'Model operațional 3D');
-      const legendBody = h('p', { class: 'technical-hero__legend-body' }, 'Privit dintr-o singură perspectivă: incendiu, CCTV, acces, voice-data și BMS corelate într-un singur nucleu de proiectare și exploatare.');
-      const legendMetrics = h('div', { class: 'technical-hero__legend-metrics' });
-
-      ['6 subsisteme corelate', 'proiectare -> execuție -> PIF', 'service și intervenție 24/7'].forEach(metric => {
-        legendMetrics.appendChild(h('span', { class: 'technical-hero__legend-metric' }, metric));
-      });
-
-      legend.appendChild(legendTitle);
-      legend.appendChild(legendBody);
-      legend.appendChild(legendMetrics);
-
       const panel = h('aside', { class: 'technical-hero__panel' });
-      const panelKicker = h('div', { class: 'technical-hero__panel-kicker' }, 'Sistem activ');
       const panelCode = h('div', { class: 'technical-hero__panel-code' });
       const panelTitle = h('h3', { class: 'technical-hero__panel-title' });
       const panelBody = h('p', { class: 'technical-hero__panel-body' });
-      const panelLinks = h('div', { class: 'badge-row technical-hero__panel-links' });
-      const panelCta = h('a', { class: 'btn btn--ghost-dark technical-hero__cta', href: 'servicii.html' }, 'Vezi familia în detaliu →');
+      let deckCode = null;
+      let deckTitle = null;
+      let deckBody = null;
+      let deckTags = null;
+      let deckLink = null;
+      const deckButtons = [];
 
-      panel.appendChild(panelKicker);
       panel.appendChild(panelCode);
       panel.appendChild(panelTitle);
       panel.appendChild(panelBody);
-      panel.appendChild(panelLinks);
-      panel.appendChild(panelCta);
 
       const systems = TECHNICAL_HERO_SYSTEMS.map((system, index) => {
         const button = h('button', {
@@ -1109,8 +1293,55 @@
         };
       });
 
+      if (deckHost && deckHost.dataset.mounted !== 'true') {
+        deckHost.dataset.mounted = 'true';
+
+        const rail = h('div', { class: 'hero-command-deck__rail', 'aria-label': 'Familii tehnice active' });
+        const display = h('div', { class: 'hero-command-deck__display' });
+        const top = h('div', { class: 'hero-command-deck__top' });
+
+        top.appendChild(h('div', { class: 'eyebrow hero-command-deck__eyebrow' }, '§ 00 / Operations core'));
+        top.appendChild(h('div', { class: 'hero-command-deck__live' }, 'Scene activă · sincronizată'));
+
+        deckCode = h('div', { class: 'hero-command-deck__code' });
+        deckTitle = h('h2', { class: 'hero-command-deck__title' });
+        deckBody = h('p', { class: 'hero-command-deck__body' });
+        deckTags = h('div', { class: 'badge-row hero-command-deck__tags' });
+        deckLink = h('a', { class: 'btn btn--ghost-dark hero-command-deck__cta', href: 'servicii.html' }, 'Deschide familia →');
+
+        display.appendChild(top);
+        display.appendChild(deckCode);
+        display.appendChild(deckTitle);
+        display.appendChild(deckBody);
+        display.appendChild(deckTags);
+        display.appendChild(deckLink);
+
+        systems.forEach((system, index) => {
+          const item = h('button', {
+            class: 'hero-command-deck__rail-item',
+            type: 'button',
+            'aria-pressed': 'false'
+          });
+
+          item.innerHTML = `
+            <span class="hero-command-deck__rail-code">${system.code}</span>
+            <span class="hero-command-deck__rail-label">${system.label}</span>
+            <span class="hero-command-deck__rail-meta">${system.links[0] || system.title}</span>
+          `;
+
+          item.addEventListener('mouseenter', () => setActive(index));
+          item.addEventListener('focus', () => setActive(index));
+          item.addEventListener('click', () => setActive(index));
+
+          deckButtons.push(item);
+          rail.appendChild(item);
+        });
+
+        deckHost.appendChild(rail);
+        deckHost.appendChild(display);
+      }
+
       host.appendChild(canvas);
-      host.appendChild(legend);
       host.appendChild(panel);
       host.appendChild(nodesLayer);
 
@@ -1135,16 +1366,31 @@
           system.button.classList.toggle('is-active', systemIndex === activeIndex);
         });
 
-        panelCode.textContent = active.code;
-        panelTitle.textContent = active.title;
-        panelBody.textContent = active.body;
-        panelLinks.innerHTML = '';
-
-        active.links.forEach(tag => {
-          panelLinks.appendChild(h('span', { class: 'badge' }, tag));
+        deckButtons.forEach((button, buttonIndex) => {
+          const isActive = buttonIndex === activeIndex;
+          button.classList.toggle('is-active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
         });
 
-        panelCta.href = active.href;
+        if (hero) {
+          hero.dataset.activeSystem = active.key;
+        }
+
+        panelCode.textContent = active.code;
+        panelTitle.textContent = active.label;
+        panelBody.textContent = active.title;
+
+        if (deckCode) deckCode.textContent = active.code;
+        if (deckTitle) deckTitle.textContent = active.title;
+        if (deckBody) deckBody.textContent = active.body;
+        if (deckLink) deckLink.href = active.href;
+
+        if (deckTags) {
+          deckTags.innerHTML = '';
+          active.links.forEach(tag => {
+            deckTags.appendChild(h('span', { class: 'badge' }, tag));
+          });
+        }
       }
 
       function resize() {
@@ -1391,31 +1637,10 @@
       host.classList.add('page-hero--technical');
       host.dataset.telemetryTone = host.matches('.legal-hero') ? 'light' : 'dark';
 
-      const content = host.querySelector('.page-hero__content, .container');
-      if (content) {
-        const signal = h('div', { class: 'page-hero__signal', 'aria-hidden': 'true' });
-        signal.appendChild(h('span', { class: 'page-hero__signal-code' }, config.signalCode));
-        signal.appendChild(h('span', { class: 'page-hero__signal-title' }, config.signalTitle));
-
-        const metrics = h('div', { class: 'page-hero__signal-metrics' });
-        config.metrics.forEach(metric => {
-          metrics.appendChild(h('span', { class: 'page-hero__signal-metric' }, metric));
-        });
-        signal.appendChild(metrics);
-
-        const meta = content.querySelector('.page-hero__meta');
-        if (meta && meta.nextSibling) {
-          content.insertBefore(signal, meta.nextSibling);
-        } else if (meta) {
-          meta.insertAdjacentElement('afterend', signal);
-        } else {
-          content.prepend(signal);
-        }
-      }
-
       const stage = h('div', { class: 'page-hero__technical-stage', 'aria-hidden': 'true' });
       stage.appendChild(h('div', { class: 'page-hero__technical-grid' }));
       stage.appendChild(h('div', { class: 'page-hero__technical-core' }));
+      const stageNodes = [];
 
       config.nodes.forEach((node, index) => {
         const item = h('div', {
@@ -1424,49 +1649,134 @@
         });
         item.appendChild(h('span', { class: 'page-hero__technical-node-code' }, node.code));
         item.appendChild(h('span', { class: 'page-hero__technical-node-label' }, node.label));
+        stageNodes.push(item);
         stage.appendChild(item);
       });
+
+      const content = host.matches('.page-hero') ? host.querySelector('.page-hero__content, .container') : null;
+      if (content && config.nodes.some(node => node.title || node.body || node.href)) {
+        const command = h('div', { class: 'page-hero__command' });
+        const display = h('div', { class: 'page-hero__command-display' });
+        const rail = h('div', { class: 'page-hero__command-rail', 'aria-label': 'Noduri operationale active' });
+        const top = h('div', { class: 'page-hero__command-top' });
+        const activeCode = h('div', { class: 'page-hero__command-code' });
+        const activeTitle = h('h2', { class: 'page-hero__command-title' });
+        const activeBody = h('p', { class: 'page-hero__command-body' });
+        const activeTags = h('div', { class: 'badge-row page-hero__command-tags' });
+        const activeLink = h('a', { class: 'btn btn--ghost-dark page-hero__command-cta', href: '#' }, 'Acceseaza →');
+        const railButtons = [];
+
+        top.appendChild(h('div', { class: 'eyebrow page-hero__command-eyebrow' }, '§ / Operational stack'));
+        top.appendChild(h('div', { class: 'page-hero__command-live' }, config.signalCode));
+
+        display.appendChild(top);
+        display.appendChild(activeCode);
+        display.appendChild(activeTitle);
+        display.appendChild(activeBody);
+        display.appendChild(activeTags);
+        display.appendChild(activeLink);
+
+        config.nodes.forEach((node, index) => {
+          const button = h('button', {
+            class: 'page-hero__command-rail-item',
+            type: 'button',
+            'aria-pressed': 'false'
+          });
+
+          button.innerHTML = `
+            <span class="page-hero__command-rail-code">${node.code}</span>
+            <span class="page-hero__command-rail-label">${node.label}</span>
+            <span class="page-hero__command-rail-meta">${node.title || config.signalTitle}</span>
+          `;
+
+          button.addEventListener('mouseenter', () => setActive(index));
+          button.addEventListener('focus', () => setActive(index));
+          button.addEventListener('click', () => setActive(index));
+
+          railButtons.push(button);
+          rail.appendChild(button);
+        });
+
+        function setActive(index) {
+          const active = config.nodes[index] || config.nodes[0];
+          if (!active) return;
+
+          stageNodes.forEach((item, itemIndex) => {
+            item.classList.toggle('is-active', itemIndex === index);
+          });
+
+          railButtons.forEach((button, buttonIndex) => {
+            const isActive = buttonIndex === index;
+            button.classList.toggle('is-active', isActive);
+            button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+          });
+
+          host.dataset.activeNode = active.code;
+          activeCode.textContent = active.code;
+          activeTitle.textContent = active.title || config.signalTitle;
+          activeBody.textContent = active.body || config.signalTitle;
+          activeLink.href = active.href || '#';
+
+          activeTags.innerHTML = '';
+          config.metrics.forEach(metric => {
+            activeTags.appendChild(h('span', { class: 'badge' }, metric));
+          });
+        }
+
+        command.appendChild(display);
+        command.appendChild(rail);
+        content.appendChild(command);
+        setActive(0);
+      }
 
       host.appendChild(stage);
     });
   }
 
   function mountSectionTelemetry(pageKey) {
-    const config = pickPageTelemetry(pageKey);
     const sections = document.querySelectorAll('section');
     if (!sections.length) return;
 
-    let index = 0;
-
     sections.forEach(section => {
-      if (section.matches('.hero')) {
-        section.classList.add('tech-surface');
-        section.dataset.telemetryTone = 'dark';
-        return;
-      }
-
       section.classList.add('tech-surface');
-      section.dataset.telemetryTone = resolveSectionTone(section);
+      section.dataset.telemetryTone = section.matches('.hero') ? 'dark' : resolveSectionTone(section);
+    });
+  }
 
-      if (section.matches('.page-hero, .legal-hero')) return;
-      if (section.dataset.sectionTelemetryMounted === 'true') return;
+  function mountDepthInteractions() {
+    const items = document.querySelectorAll(DEPTH_INTERACTION_SELECTOR);
+    if (!items.length) return;
 
-      section.dataset.sectionTelemetryMounted = 'true';
-      index += 1;
+    const reducedMotion = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
 
-      const token = resolvePrimarySectionToken(section) || 'operational layer';
-      const bar = h('div', { class: 'section-signal', 'aria-hidden': 'true' });
-      bar.appendChild(h('span', { class: 'section-signal__code' }, `${config.prefix} / ${String(index).padStart(2, '0')}`));
-      bar.appendChild(h('span', { class: 'section-signal__label' }, token.toUpperCase()));
-      bar.appendChild(h('span', { class: 'section-signal__line' }));
-      bar.appendChild(h('span', { class: 'section-signal__meta' }, resolveSectionHeading(section, token)));
+    items.forEach(item => {
+      if (item.dataset.depthMounted === 'true') return;
+      item.dataset.depthMounted = 'true';
+      item.classList.add('depth-card');
 
-      const insertion = getSignalInsertion(section);
-      if (insertion.type === 'before' && insertion.before) {
-        insertion.parent.insertBefore(bar, insertion.before);
-      } else {
-        insertion.parent.prepend(bar);
-      }
+      if (reducedMotion) return;
+
+      item.addEventListener('pointermove', event => {
+        const rect = item.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+
+        const offsetX = (event.clientX - rect.left) / rect.width - 0.5;
+        const offsetY = (event.clientY - rect.top) / rect.height - 0.5;
+        const rotateY = Math.max(-10, Math.min(10, offsetX * 14));
+        const rotateX = Math.max(-10, Math.min(10, -offsetY * 14));
+
+        item.style.setProperty('--depth-rotate-x', `${rotateX.toFixed(2)}deg`);
+        item.style.setProperty('--depth-rotate-y', `${rotateY.toFixed(2)}deg`);
+        item.style.setProperty('--depth-glow-x', `${((offsetX + 0.5) * 100).toFixed(2)}%`);
+        item.style.setProperty('--depth-glow-y', `${((offsetY + 0.5) * 100).toFixed(2)}%`);
+      });
+
+      item.addEventListener('pointerleave', () => {
+        item.style.removeProperty('--depth-rotate-x');
+        item.style.removeProperty('--depth-rotate-y');
+        item.style.removeProperty('--depth-glow-x');
+        item.style.removeProperty('--depth-glow-y');
+      });
     });
   }
 
@@ -1480,6 +1790,7 @@
       mountPageHeroTelemetry(pageKey);
       mountSectionTelemetry(pageKey);
       mountTechnicalHeroes();
+      mountDepthInteractions();
       mountSystemMaps();
       mountCookieBanner();
       mountAnalytics();
@@ -1495,6 +1806,9 @@
     },
     mountTechnicalHeroes() {
       mountTechnicalHeroes();
+    },
+    mountDepthInteractions() {
+      mountDepthInteractions();
     },
     mountPageHeroTelemetry(current) {
       mountPageHeroTelemetry(inferPageKey(current));
