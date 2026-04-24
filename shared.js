@@ -396,6 +396,129 @@
     },
   };
 
+  const PAGE_ROUTE_ORBITS = {
+    home: {
+      code: 'HOME / ORBIT',
+      title: 'Intrare in spatiul tehnic',
+      summary: 'Pagina principala ramane scena de orientare. Rutele de mai jos trimit direct in stratul relevant, fara sa repete aceeasi promisiune.',
+      sections: [
+        { code: 'ATLAS', label: 'capabilitati', meta: 'stack + livrare', href: 'index.html#capabilitati' },
+        { code: 'SYS', label: 'servicii', meta: 'ecosistem tehnic', href: 'servicii.html#ecosistem-interactiv' },
+        { code: 'CASE', label: 'portofoliu', meta: 'cazuri reale', href: 'portofoliu.html#studii-de-caz' },
+        { code: 'LINK', label: 'contact', meta: 'brief tehnic', href: 'contact.html#contact-form' },
+      ],
+    },
+    servicii: {
+      code: 'SYS / ROUTE',
+      title: 'Rute clare prin ecosistem',
+      summary: 'Separarea intre ecosistem, familii, normativ, completari si exploatare face pagina mai usor de parcurs si elimina reluarea aceluiasi mesaj.',
+      sections: [
+        { code: 'MAP', label: 'ecosistem interactiv', meta: 'legaturi intre sisteme', href: 'servicii.html#ecosistem-interactiv' },
+        { code: 'FAM', label: 'familii principale', meta: '10 nuclee tehnice', href: 'servicii.html#idsai' },
+        { code: 'LAW', label: 'cadru normativ', meta: 'RO + UE', href: 'servicii.html#cadru-normativ' },
+        { code: 'EXT', label: 'sisteme complementare', meta: 'ecosistem complet', href: 'servicii.html#sisteme-complementare' },
+        { code: 'OPS', label: 'livrare & mentenanta', meta: 'PIF + service', href: 'servicii.html#livrare-mentenanta' },
+      ],
+    },
+    portofoliu: {
+      code: 'CASE / ROUTE',
+      title: 'Citire rapida a rezultatelor',
+      summary: 'Portofoliul nu mai concureaza intre galerie si argument. Rutele separa selectiile vizuale, studiile de caz si pasul urmator pentru o fisa completa.',
+      sections: [
+        { code: 'SEL', label: 'selectii proiecte', meta: 'index vizual', href: 'portofoliu.html' },
+        { code: 'CASE', label: 'studii de caz', meta: 'problema - sistem - rezultat', href: 'portofoliu.html#studii-de-caz' },
+        { code: 'SYS', label: 'servicii corelate', meta: 'stackul tehnic', href: 'servicii.html#ecosistem-interactiv' },
+        { code: 'NDA', label: 'fisa sub NDA', meta: 'contact tehnic', href: 'contact.html#contact-form' },
+      ],
+    },
+    despre: {
+      code: 'ORG / ROUTE',
+      title: 'Organizare citita ca sistem',
+      summary: 'Despre nu trebuie sa repete vanzarea. Rutele duc separat catre identitate, structura operationala, autorizari si canalul de lucru cu clientul.',
+      sections: [
+        { code: 'ORG', label: 'identitate & model', meta: 'structura de baza', href: 'despre.html' },
+        { code: 'AUTH', label: 'autorizari', meta: 'documente active', href: 'despre.html#auth-slider' },
+        { code: 'OPS', label: 'livrare in teren', meta: 'PIF + service', href: 'servicii.html#livrare-mentenanta' },
+        { code: 'LINK', label: 'contact tehnic', meta: 'evaluare si preluare', href: 'contact.html#evaluare' },
+      ],
+    },
+    contact: {
+      code: 'LINK / ROUTE',
+      title: 'Canalul corect din prima',
+      summary: 'Contactul trebuie sa trieze, nu sa repete. Fiecare ruta separa brief-ul, canalele directe, evaluarea pe teren si pasii urmatori.',
+      sections: [
+        { code: 'FORM', label: 'brief proiect', meta: 'oferta in 48h', href: 'contact.html#contact-form' },
+        { code: 'CALL', label: 'canale directe', meta: 'call-center + email', href: 'contact.html' },
+        { code: 'SITE', label: 'evaluare pe teren', meta: 'vizita + concept', href: 'contact.html#evaluare' },
+        { code: 'JOIN', label: 'cariere', meta: 'roluri deschise', href: 'cariere.html#jobs-list' },
+      ],
+    },
+    cariere: {
+      code: 'CREW / ROUTE',
+      title: 'Drum scurt prin roluri',
+      summary: 'Pagina de cariere trebuie sa se citeasca rapid: de ce conteaza munca, ce roluri sunt deschise si unde trimiti aplicatia fara sa te invarti.',
+      sections: [
+        { code: 'WHY', label: 'de ce Dasitrade', meta: 'context de lucru', href: 'cariere.html' },
+        { code: 'ROLE', label: 'roluri active', meta: 'teren + proiectare', href: 'cariere.html#jobs-list' },
+        { code: 'APLY', label: 'formular de aplicare', meta: 'CV + mesaj', href: 'cariere.html#aplica' },
+        { code: 'LINK', label: 'canal operational', meta: 'contact direct', href: 'contact.html#contact-form' },
+      ],
+    },
+    gdpr: {
+      code: 'DATA / ROUTE',
+      title: 'Politica citita fara blocaje',
+      summary: 'Pagina legala trebuie sa ramana clara. Rutele separa operatorul, datele, drepturile si canalul de solicitare, fara sa amestece limbajul juridic cu restul site-ului.',
+      sections: [
+        { code: 'CTRL', label: 'operatorul de date', meta: 'date de identificare', href: 'gdpr.html' },
+        { code: 'DATA', label: 'ce date colectam', meta: 'formulare + resurse', href: 'gdpr.html' },
+        { code: 'RIGHT', label: 'drepturile tale', meta: 'acces, stergere, opozitie', href: 'gdpr.html' },
+        { code: 'MAIL', label: 'solicitare GDPR', meta: 'email direct', href: 'mailto:tehnic@dasitrade.ro?subject=Solicitare%20GDPR' },
+      ],
+    },
+    error: {
+      code: 'SAFE / ROUTE',
+      title: 'Intoarcere rapida in zona publica',
+      summary: 'Pagina 404 nu trebuie sa retina utilizatorul. Rutele de mai jos il duc inapoi in servicii, portofoliu sau contact, fara ramasite de continut redundant.',
+      sections: [
+        { code: 'HOME', label: 'pagina principala', meta: 'intrare generala', href: 'index.html' },
+        { code: 'SYS', label: 'servicii', meta: 'stack tehnic', href: 'servicii.html#ecosistem-interactiv' },
+        { code: 'CASE', label: 'portofoliu', meta: 'rezultate reale', href: 'portofoliu.html#studii-de-caz' },
+        { code: 'LINK', label: 'contact', meta: 'brief si suport', href: 'contact.html#contact-form' },
+      ],
+    },
+    default: {
+      code: 'OPS / ROUTE',
+      title: 'Ruteaza clar, nu aglomera',
+      summary: 'Fiecare pagina publica trebuie sa indice stratul corect si sa pastreze restul continutului secundar pana cand este necesar.',
+      sections: [
+        { code: 'HOME', label: 'start', meta: 'pagina principala', href: 'index.html' },
+        { code: 'SYS', label: 'servicii', meta: 'familii si ecosistem', href: 'servicii.html#ecosistem-interactiv' },
+        { code: 'CASE', label: 'portofoliu', meta: 'studii de caz', href: 'portofoliu.html#studii-de-caz' },
+        { code: 'LINK', label: 'contact', meta: 'brief tehnic', href: 'contact.html#contact-form' },
+      ],
+    },
+  };
+
+  const ROUTE_ORBIT_POSITIONS = [
+    { x: '16%', y: '62%' },
+    { x: '34%', y: '28%' },
+    { x: '52%', y: '66%' },
+    { x: '72%', y: '30%' },
+    { x: '84%', y: '74%' },
+    { x: '28%', y: '80%' },
+  ];
+
+  const TECHNICAL_NODE_COLORS = [
+    'rgba(132, 211, 166, 0.95)',
+    'rgba(146, 191, 255, 0.94)',
+    'rgba(226, 204, 120, 0.92)',
+    'rgba(132, 211, 166, 0.84)',
+    'rgba(146, 191, 255, 0.88)',
+    'rgba(132, 211, 166, 0.9)',
+  ];
+
+  let technicalSceneModulePromise = null;
+
   const GENERIC_SECTION_CLASSES = new Set(['section', 'page-hero', 'hero', 'cta', 'band']);
   const DEPTH_INTERACTION_SELECTOR = [
     '.home-command-band__card',
@@ -420,7 +543,9 @@
     '.faq-item',
     '.job-card',
     '.case-study-card',
-    '.systems-map__panel'
+    '.systems-map__panel',
+    '.route-orbit__panel',
+    '.route-orbit__link'
   ].join(', ');
 
   // ── SVG icons (inline, no external dependency) ───────────────────────────
@@ -461,6 +586,22 @@
 
   function pickPageTelemetry(pageKey) {
     return PAGE_TELEMETRY[pageKey] || PAGE_TELEMETRY.default;
+  }
+
+  function pickPageRouteOrbit(pageKey) {
+    return PAGE_ROUTE_ORBITS[pageKey] || PAGE_ROUTE_ORBITS.default;
+  }
+
+  function loadTechnicalSceneModule() {
+    if (!technicalSceneModulePromise) {
+      technicalSceneModulePromise = import('./assets/technical-scene.js')
+        .catch(error => {
+          console.error('Dasitrade technical scene failed to load.', error);
+          return null;
+        });
+    }
+
+    return technicalSceneModulePromise;
   }
 
   function formatTelemetryToken(value = '') {
@@ -1249,380 +1390,227 @@
 
     const reducedMotion = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
 
-    hosts.forEach(host => {
-      if (host.dataset.mounted === 'true') return;
-      host.dataset.mounted = 'true';
+    loadTechnicalSceneModule().then(module => {
+      const mountTechnicalScene = module?.mountTechnicalScene;
 
-      const hero = host.closest('.hero');
-      const deckHost = hero?.querySelector('[data-hero-command-deck]');
-      const canvas = h('canvas', { class: 'technical-hero__canvas', 'aria-hidden': 'true' });
-      const nodesLayer = h('div', { class: 'technical-hero__nodes' });
-      const panel = h('aside', { class: 'technical-hero__panel' });
-      const panelCode = h('div', { class: 'technical-hero__panel-code' });
-      const panelTitle = h('h3', { class: 'technical-hero__panel-title' });
-      const panelBody = h('p', { class: 'technical-hero__panel-body' });
-      let deckCode = null;
-      let deckTitle = null;
-      let deckBody = null;
-      let deckTags = null;
-      let deckLink = null;
-      const deckButtons = [];
+      hosts.forEach(host => {
+        if (host.dataset.mounted === 'true') return;
+        host.dataset.mounted = 'true';
 
-      panel.appendChild(panelCode);
-      panel.appendChild(panelTitle);
-      panel.appendChild(panelBody);
+        const hero = host.closest('.hero');
+        const deckHost = hero?.querySelector('[data-hero-command-deck]');
+        const canvas = h('canvas', { class: 'technical-hero__canvas', 'aria-hidden': 'true' });
+        const nodesLayer = h('div', { class: 'technical-hero__nodes' });
+        const panel = h('aside', { class: 'technical-hero__panel' });
+        const panelCode = h('div', { class: 'technical-hero__panel-code' });
+        const panelTitle = h('h3', { class: 'technical-hero__panel-title' });
+        const panelBody = h('p', { class: 'technical-hero__panel-body' });
+        let deckCode = null;
+        let deckTitle = null;
+        let deckBody = null;
+        let deckTags = null;
+        let deckLink = null;
+        const deckButtons = [];
+        let activeIndex = 0;
+        let stageController = null;
 
-      const systems = TECHNICAL_HERO_SYSTEMS.map((system, index) => {
-        const button = h('button', {
-          class: 'technical-hero__node',
-          type: 'button',
-          'data-system-key': system.key,
-        });
+        panel.appendChild(panelCode);
+        panel.appendChild(panelTitle);
+        panel.appendChild(panelBody);
 
-        button.innerHTML = `
-          <span class="technical-hero__node-code">${system.code}</span>
-          <span class="technical-hero__node-label">${system.label}</span>
-        `;
-
-        nodesLayer.appendChild(button);
-
-        return {
-          ...system,
-          button,
-          packetOffset: index / TECHNICAL_HERO_SYSTEMS.length,
-        };
-      });
-
-      if (deckHost && deckHost.dataset.mounted !== 'true') {
-        deckHost.dataset.mounted = 'true';
-
-        const rail = h('div', { class: 'hero-command-deck__rail', 'aria-label': 'Familii tehnice active' });
-        const display = h('div', { class: 'hero-command-deck__display' });
-        const top = h('div', { class: 'hero-command-deck__top' });
-
-        top.appendChild(h('div', { class: 'eyebrow hero-command-deck__eyebrow' }, '§ 00 / Nucleu operational'));
-        top.appendChild(h('div', { class: 'hero-command-deck__live' }, 'Sisteme sincronizate'));
-
-        deckCode = h('div', { class: 'hero-command-deck__code' });
-        deckTitle = h('h2', { class: 'hero-command-deck__title' });
-        deckBody = h('p', { class: 'hero-command-deck__body' });
-        deckTags = h('div', { class: 'badge-row hero-command-deck__tags' });
-        deckLink = h('a', { class: 'btn btn--ghost-dark hero-command-deck__cta', href: 'servicii.html' }, 'Vezi familia →');
-
-        display.appendChild(top);
-        display.appendChild(deckCode);
-        display.appendChild(deckTitle);
-        display.appendChild(deckBody);
-        display.appendChild(deckTags);
-        display.appendChild(deckLink);
-
-        systems.forEach((system, index) => {
-          const item = h('button', {
-            class: 'hero-command-deck__rail-item',
+        const systems = TECHNICAL_HERO_SYSTEMS.map((system, index) => {
+          const button = h('button', {
+            class: 'technical-hero__node',
             type: 'button',
-            'aria-pressed': 'false'
+            'data-system-key': system.key,
           });
 
-          item.innerHTML = `
-            <span class="hero-command-deck__rail-code">${system.code}</span>
-            <span class="hero-command-deck__rail-label">${system.label}</span>
-            <span class="hero-command-deck__rail-meta">${system.links[0] || system.title}</span>
+          button.innerHTML = `
+            <span class="technical-hero__node-code">${system.code}</span>
+            <span class="technical-hero__node-label">${system.label}</span>
           `;
 
-          item.addEventListener('mouseenter', () => setActive(index));
-          item.addEventListener('focus', () => setActive(index));
-          item.addEventListener('click', () => setActive(index));
+          nodesLayer.appendChild(button);
 
-          deckButtons.push(item);
-          rail.appendChild(item);
+          return {
+            ...system,
+            color: system.color || TECHNICAL_NODE_COLORS[index % TECHNICAL_NODE_COLORS.length],
+            button,
+            packetOffset: index / TECHNICAL_HERO_SYSTEMS.length,
+          };
         });
 
-        deckHost.appendChild(rail);
-        deckHost.appendChild(display);
-      }
+        function seedButtons() {
+          const rect = host.getBoundingClientRect();
+          if (!rect.width || !rect.height) return;
 
-      host.appendChild(canvas);
-      host.appendChild(panel);
-      host.appendChild(nodesLayer);
+          const compact = rect.width < 720;
+          const layoutScale = Math.min(1, Math.max(0.52, Math.min(rect.width / 840, rect.height / 520)));
+          const centerX = rect.width * (compact ? 0.5 : 0.48);
+          const centerY = rect.height * (compact ? 0.52 : 0.56);
 
-      const context = canvas.getContext('2d');
-      if (!context) return;
-
-      let activeIndex = 0;
-      let width = 0;
-      let height = 0;
-      let deviceScale = 1;
-      let animationFrame = null;
-      let lastSizeKey = '';
-      let inView = true;
-      const pointer = { currentX: 0, currentY: 0, targetX: 0, targetY: 0 };
-      const projectedNodes = new Map();
-
-      function setActive(index) {
-        activeIndex = ((index % systems.length) + systems.length) % systems.length;
-        const active = systems[activeIndex];
-
-        systems.forEach((system, systemIndex) => {
-          system.button.classList.toggle('is-active', systemIndex === activeIndex);
-        });
-
-        deckButtons.forEach((button, buttonIndex) => {
-          const isActive = buttonIndex === activeIndex;
-          button.classList.toggle('is-active', isActive);
-          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-        });
-
-        if (hero) {
-          hero.dataset.activeSystem = active.key;
-        }
-
-        panelCode.textContent = active.code;
-        panelTitle.textContent = active.label;
-        panelBody.textContent = active.title;
-
-        if (deckCode) deckCode.textContent = active.code;
-        if (deckTitle) deckTitle.textContent = active.title;
-        if (deckBody) deckBody.textContent = active.body;
-        if (deckLink) deckLink.href = active.href;
-
-        if (deckTags) {
-          deckTags.innerHTML = '';
-          active.links.forEach(tag => {
-            deckTags.appendChild(h('span', { class: 'badge' }, tag));
+          systems.forEach((system, index) => {
+            system.button.style.left = `${centerX + system.base.x * layoutScale * 0.72}px`;
+            system.button.style.top = `${centerY + system.base.y * layoutScale * 0.72}px`;
+            system.button.style.opacity = `${index === activeIndex ? 0.96 : 0.72}`;
+            system.button.style.transform = `translate(-50%, -50%) scale(${index === activeIndex ? 0.92 : 0.76})`;
+            system.button.style.zIndex = String(100 + index + (index === activeIndex ? 10 : 0));
           });
         }
-      }
 
-      function resize() {
-        const rect = host.getBoundingClientRect();
-        const nextWidth = Math.max(1, Math.round(rect.width));
-        const nextHeight = Math.max(1, Math.round(rect.height));
-        const key = `${nextWidth}x${nextHeight}`;
-        if (key === lastSizeKey) return;
+        function setActive(index) {
+          activeIndex = ((index % systems.length) + systems.length) % systems.length;
+          const active = systems[activeIndex];
 
-        lastSizeKey = key;
-        width = nextWidth;
-        height = nextHeight;
-        deviceScale = Math.min(globalThis.devicePixelRatio || 1, 2);
+          systems.forEach((system, systemIndex) => {
+            system.button.classList.toggle('is-active', systemIndex === activeIndex);
+          });
 
-        canvas.width = Math.floor(width * deviceScale);
-        canvas.height = Math.floor(height * deviceScale);
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
-        context.setTransform(deviceScale, 0, 0, deviceScale, 0, 0);
-      }
+          deckButtons.forEach((button, buttonIndex) => {
+            const isActive = buttonIndex === activeIndex;
+            button.classList.toggle('is-active', isActive);
+            button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+          });
 
-      function rotatePoint(point, angleX, angleY) {
-        const cosY = Math.cos(angleY);
-        const sinY = Math.sin(angleY);
-        const x1 = point.x * cosY - point.z * sinY;
-        const z1 = point.x * sinY + point.z * cosY;
+          if (hero) {
+            hero.dataset.activeSystem = active.key;
+          }
 
-        const cosX = Math.cos(angleX);
-        const sinX = Math.sin(angleX);
-        const y2 = point.y * cosX - z1 * sinX;
-        const z2 = point.y * sinX + z1 * cosX;
+          panelCode.textContent = active.code;
+          panelTitle.textContent = active.label;
+          panelBody.textContent = active.title;
 
-        return { x: x1, y: y2, z: z2 };
-      }
+          if (deckCode) deckCode.textContent = active.code;
+          if (deckTitle) deckTitle.textContent = active.title;
+          if (deckBody) deckBody.textContent = active.body;
+          if (deckLink) deckLink.href = active.href;
 
-      function project(point, centerX, centerY) {
-        const perspective = 980;
-        const depthShift = point.z + 420;
-        const scale = perspective / (perspective + depthShift);
-        return {
-          x: centerX + point.x * scale,
-          y: centerY + point.y * scale,
-          scale,
-          alpha: Math.max(0.26, Math.min(1, 0.18 + scale * 0.98)),
-        };
-      }
+          if (deckTags) {
+            deckTags.innerHTML = '';
+            active.links.forEach(tag => {
+              deckTags.appendChild(h('span', { class: 'badge' }, tag));
+            });
+          }
 
-      function drawGrid(now, angleX, angleY, centerX, centerY, layoutScale) {
-        const planeY = 190 * layoutScale;
-        const spanX = 440 * layoutScale;
-        const spanZStart = -240 * layoutScale;
-        const spanZEnd = 320 * layoutScale;
-        const stepX = Math.max(56, Math.round(88 * layoutScale));
-        const stepZ = Math.max(52, Math.round(72 * layoutScale));
-        context.save();
-        context.lineWidth = 1;
-
-        for (let x = -spanX; x <= spanX; x += stepX) {
-          const from = project(rotatePoint({ x, y: planeY, z: spanZStart }, angleX, angleY), centerX, centerY);
-          const to = project(rotatePoint({ x, y: planeY, z: spanZEnd }, angleX, angleY), centerX, centerY);
-          context.strokeStyle = 'rgba(132, 211, 166, 0.08)';
-          context.beginPath();
-          context.moveTo(from.x, from.y);
-          context.lineTo(to.x, to.y);
-          context.stroke();
+          if (stageController) {
+            stageController.render();
+          } else {
+            seedButtons();
+          }
         }
 
-        for (let z = -220 * layoutScale; z <= 360 * layoutScale; z += stepZ) {
-          const from = project(rotatePoint({ x: -spanX, y: planeY, z }, angleX, angleY), centerX, centerY);
-          const to = project(rotatePoint({ x: spanX, y: planeY, z }, angleX, angleY), centerX, centerY);
-          context.strokeStyle = z === 68 ? 'rgba(146, 191, 255, 0.13)' : 'rgba(132, 211, 166, 0.07)';
-          context.beginPath();
-          context.moveTo(from.x, from.y);
-          context.lineTo(to.x, to.y);
-          context.stroke();
+        if (deckHost && deckHost.dataset.mounted !== 'true') {
+          deckHost.dataset.mounted = 'true';
+
+          const rail = h('div', { class: 'hero-command-deck__rail', 'aria-label': 'Familii tehnice active' });
+          const display = h('div', { class: 'hero-command-deck__display' });
+          const top = h('div', { class: 'hero-command-deck__top' });
+
+          top.appendChild(h('div', { class: 'eyebrow hero-command-deck__eyebrow' }, '§ 00 / Nucleu operational'));
+          top.appendChild(h('div', { class: 'hero-command-deck__live' }, 'Sisteme sincronizate'));
+
+          deckCode = h('div', { class: 'hero-command-deck__code' });
+          deckTitle = h('h2', { class: 'hero-command-deck__title' });
+          deckBody = h('p', { class: 'hero-command-deck__body' });
+          deckTags = h('div', { class: 'badge-row hero-command-deck__tags' });
+          deckLink = h('a', { class: 'btn btn--ghost-dark hero-command-deck__cta', href: 'servicii.html' }, 'Vezi familia →');
+
+          display.appendChild(top);
+          display.appendChild(deckCode);
+          display.appendChild(deckTitle);
+          display.appendChild(deckBody);
+          display.appendChild(deckTags);
+          display.appendChild(deckLink);
+
+          systems.forEach((system, index) => {
+            const item = h('button', {
+              class: 'hero-command-deck__rail-item',
+              type: 'button',
+              'aria-pressed': 'false'
+            });
+
+            item.innerHTML = `
+              <span class="hero-command-deck__rail-code">${system.code}</span>
+              <span class="hero-command-deck__rail-label">${system.label}</span>
+              <span class="hero-command-deck__rail-meta">${system.links[0] || system.title}</span>
+            `;
+
+            item.addEventListener('mouseenter', () => setActive(index));
+            item.addEventListener('focus', () => setActive(index));
+            item.addEventListener('click', () => setActive(index));
+
+            deckButtons.push(item);
+            rail.appendChild(item);
+          });
+
+          deckHost.appendChild(rail);
+          deckHost.appendChild(display);
         }
 
-        const sweep = ((now * 0.035) % 1) * width;
-        const gradient = context.createLinearGradient(sweep - 220, 0, sweep + 220, 0);
-        gradient.addColorStop(0, 'rgba(132, 211, 166, 0)');
-        gradient.addColorStop(0.5, 'rgba(132, 211, 166, 0.08)');
-        gradient.addColorStop(1, 'rgba(132, 211, 166, 0)');
-        context.fillStyle = gradient;
-        context.fillRect(0, 0, width, height);
-        context.restore();
-      }
-
-      function drawCore(now, centerX, centerY, layoutScale) {
-        context.save();
-        context.translate(centerX, centerY);
-
-        context.strokeStyle = 'rgba(132, 211, 166, 0.34)';
-        context.lineWidth = 1;
-        for (let ring = 0; ring < 3; ring++) {
-          context.beginPath();
-          context.arc(0, 0, (72 + ring * 26 + Math.sin(now * 0.0012 + ring) * 3) * layoutScale, 0, Math.PI * 2);
-          context.stroke();
-        }
-
-        context.fillStyle = 'rgba(132, 211, 166, 0.18)';
-        context.beginPath();
-        context.arc(0, 0, 42 * layoutScale, 0, Math.PI * 2);
-        context.fill();
-
-        context.fillStyle = '#f6f8fb';
-        context.beginPath();
-        context.arc(0, 0, Math.max(4.5, 7 * layoutScale), 0, Math.PI * 2);
-        context.fill();
-
-        context.restore();
-      }
-
-      function frame(now) {
-        animationFrame = globalThis.requestAnimationFrame(frame);
-        if (!inView) return;
-
-        resize();
-
-        pointer.currentX += (pointer.targetX - pointer.currentX) * 0.06;
-        pointer.currentY += (pointer.targetY - pointer.currentY) * 0.06;
-
-        context.clearRect(0, 0, width, height);
-        projectedNodes.clear();
-
-        const time = reducedMotion ? 0 : now * 0.001;
-        const compact = width < 720;
-        const layoutScale = Math.min(1, Math.max(0.52, Math.min(width / 840, height / 520)));
-        const depthScale = 0.82 + layoutScale * 0.22;
-        const centerX = width * (compact ? 0.5 : 0.48);
-        const centerY = height * (compact ? 0.52 : 0.56);
-        const angleY = pointer.currentX * 0.3 + Math.sin(time * 0.24) * 0.08;
-        const angleX = -0.16 + pointer.currentY * 0.16 + Math.cos(time * 0.18) * 0.04;
-
-        drawGrid(now, angleX, angleY, centerX, centerY, layoutScale);
-
-        const coreProjection = { x: centerX, y: centerY };
-
-        const runtimeNodes = systems.map(system => {
-          const point = {
-            x: (system.base.x + Math.cos(time * 0.82 + system.phase) * system.drift.x) * layoutScale,
-            y: (system.base.y + Math.sin(time * 0.76 + system.phase) * system.drift.y) * layoutScale,
-            z: (system.base.z + Math.sin(time * 0.58 + system.phase) * system.drift.z) * depthScale,
-          };
-
-          const rotated = rotatePoint(point, angleX, angleY);
-          const projection = project(rotated, centerX, centerY);
-
-          return { system, point: rotated, projection };
-        }).sort((left, right) => left.point.z - right.point.z);
-
-        runtimeNodes.forEach(({ system, projection }) => {
-          projectedNodes.set(system.key, projection);
-
-          context.save();
-          context.strokeStyle = system.color.replace('0.9', '0.22').replace('0.95', '0.22').replace('0.94', '0.22').replace('0.92', '0.22').replace('0.88', '0.22').replace('0.84', '0.22');
-          context.lineWidth = projection.scale > 0.72 ? 1.4 : 1;
-          context.beginPath();
-          context.moveTo(coreProjection.x, coreProjection.y);
-          context.lineTo(projection.x, projection.y);
-          context.stroke();
-
-          const packetProgress = (time * 0.22 + system.packetOffset) % 1;
-          const packetX = coreProjection.x + (projection.x - coreProjection.x) * packetProgress;
-          const packetY = coreProjection.y + (projection.y - coreProjection.y) * packetProgress;
-          context.fillStyle = system.color;
-          context.beginPath();
-          context.arc(packetX, packetY, (2.2 + projection.scale * 1.8) * layoutScale, 0, Math.PI * 2);
-          context.fill();
-
-          context.fillStyle = system.color.replace('0.9', '0.12').replace('0.95', '0.12').replace('0.94', '0.12').replace('0.92', '0.12').replace('0.88', '0.12').replace('0.84', '0.12');
-          context.beginPath();
-          context.arc(projection.x, projection.y, 16 * projection.scale * layoutScale, 0, Math.PI * 2);
-          context.fill();
-
-          context.fillStyle = system.color;
-          context.beginPath();
-          context.arc(projection.x, projection.y, (4.5 + projection.scale * 3.6) * layoutScale, 0, Math.PI * 2);
-          context.fill();
-          context.restore();
-        });
-
-        drawCore(now, centerX, centerY, layoutScale);
+        host.appendChild(canvas);
+        host.appendChild(panel);
+        host.appendChild(nodesLayer);
 
         systems.forEach((system, index) => {
-          const projection = projectedNodes.get(system.key);
-          if (!projection) return;
-
-          system.button.style.left = `${projection.x}px`;
-          system.button.style.top = `${projection.y}px`;
-          system.button.style.opacity = `${Math.max(compact ? 0.3 : 0.42, projection.alpha * (compact ? 0.76 : 1))}`;
-          system.button.style.transform = `translate(-50%, -50%) scale(${Math.max(compact ? 0.58 : 0.74, Math.min(compact ? 0.88 : 1.02, projection.scale * (compact ? 0.86 : 1.04) * layoutScale))})`;
-          system.button.style.zIndex = String(100 + Math.round(projection.scale * 40) + (index === activeIndex ? 20 : 0));
+          system.button.addEventListener('mouseenter', () => setActive(index));
+          system.button.addEventListener('focus', () => setActive(index));
+          system.button.addEventListener('click', () => setActive(index));
         });
-      }
 
-      host.addEventListener('pointermove', event => {
-        const rect = host.getBoundingClientRect();
-        const px = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-        const py = ((event.clientY - rect.top) / rect.height) * 2 - 1;
-        pointer.targetX = Math.max(-1, Math.min(1, px));
-        pointer.targetY = Math.max(-1, Math.min(1, py));
-      });
-
-      host.addEventListener('pointerleave', () => {
-        pointer.targetX = 0;
-        pointer.targetY = 0;
-      });
-
-      systems.forEach((system, index) => {
-        system.button.addEventListener('mouseenter', () => setActive(index));
-        system.button.addEventListener('focus', () => setActive(index));
-        system.button.addEventListener('click', () => setActive(index));
-      });
-
-      if ('ResizeObserver' in globalThis) {
-        const observer = new ResizeObserver(resize);
-        observer.observe(host);
-      }
-
-      if ('IntersectionObserver' in globalThis) {
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            inView = entry.isIntersecting;
+        if ('ResizeObserver' in globalThis) {
+          const observer = new ResizeObserver(() => {
+            if (!stageController) seedButtons();
           });
-        }, { threshold: 0.01 });
+          observer.observe(host);
+        }
 
-        observer.observe(host);
-      }
+        seedButtons();
+        setActive(0);
 
-      setActive(0);
-      resize();
-      animationFrame = globalThis.requestAnimationFrame(frame);
+        if (!mountTechnicalScene) return;
+
+        stageController = mountTechnicalScene({
+          host,
+          canvas,
+          items: systems.map(system => ({
+            key: system.key,
+            color: system.color,
+            base: system.base,
+            drift: system.drift,
+            phase: system.phase,
+            packetOffset: system.packetOffset,
+            button: system.button,
+          })),
+          pointerTarget: hero || host,
+          mode: 'home',
+          reducedMotion,
+          getActiveIndex: () => activeIndex,
+          onProject: ({ projections }) => {
+            const compact = host.clientWidth < 720;
+            const maxX = host.clientWidth - (compact ? 56 : 72);
+            const maxY = host.clientHeight - (compact ? 44 : 58);
+
+            projections.forEach(({ item, projection }, order) => {
+              const button = item.button;
+              if (!button) return;
+
+              const isActive = item.key === systems[activeIndex]?.key;
+              const clampedX = Math.max(compact ? 56 : 72, Math.min(maxX, projection.x));
+              const clampedY = Math.max(compact ? 42 : 54, Math.min(maxY, projection.y));
+
+              button.style.left = `${clampedX}px`;
+              button.style.top = `${clampedY}px`;
+              button.style.opacity = `${Math.max(compact ? 0.34 : 0.42, projection.alpha * (isActive ? 1 : 0.9))}`;
+              button.style.transform = `translate(-50%, -50%) scale(${Math.max(compact ? 0.58 : 0.74, Math.min(compact ? 0.9 : 1.04, projection.scale * (isActive ? 1.08 : 0.96)))})`;
+              button.style.zIndex = String(100 + order + (isActive ? 18 : 0));
+            });
+          },
+        });
+
+        if (stageController) {
+          setActive(activeIndex);
+        }
+      });
     });
   }
 
@@ -1631,106 +1619,253 @@
     const hosts = document.querySelectorAll('.page-hero, .legal-hero');
     if (!hosts.length) return;
 
-    hosts.forEach(host => {
-      if (host.dataset.pageTelemetryMounted === 'true') return;
-      host.dataset.pageTelemetryMounted = 'true';
-      host.classList.add('page-hero--technical');
-      host.dataset.telemetryTone = host.matches('.legal-hero') ? 'light' : 'dark';
+    const reducedMotion = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
 
-      const stage = h('div', { class: 'page-hero__technical-stage', 'aria-hidden': 'true' });
-      stage.appendChild(h('div', { class: 'page-hero__technical-grid' }));
-      stage.appendChild(h('div', { class: 'page-hero__technical-core' }));
-      const stageNodes = [];
+    loadTechnicalSceneModule().then(module => {
+      const mountTechnicalScene = module?.mountTechnicalScene;
 
-      config.nodes.forEach((node, index) => {
-        const item = h('div', {
-          class: 'page-hero__technical-node',
-          style: `--x:${node.x}; --y:${node.y}; --delay:${index * 140}ms;`
-        });
-        item.appendChild(h('span', { class: 'page-hero__technical-node-code' }, node.code));
-        item.appendChild(h('span', { class: 'page-hero__technical-node-label' }, node.label));
-        stageNodes.push(item);
-        stage.appendChild(item);
-      });
+      hosts.forEach(host => {
+        if (host.dataset.pageTelemetryMounted === 'true') return;
+        host.dataset.pageTelemetryMounted = 'true';
+        host.classList.add('page-hero--technical');
+        host.dataset.telemetryTone = host.matches('.legal-hero') ? 'light' : 'dark';
 
-      const content = host.matches('.page-hero') ? host.querySelector('.page-hero__content, .container') : null;
-      if (content && config.nodes.some(node => node.title || node.body || node.href)) {
-        const command = h('div', { class: 'page-hero__command' });
-        const display = h('div', { class: 'page-hero__command-display' });
-        const rail = h('div', { class: 'page-hero__command-rail', 'aria-label': 'Noduri operationale active' });
-        const top = h('div', { class: 'page-hero__command-top' });
-        const activeCode = h('div', { class: 'page-hero__command-code' });
-        const activeTitle = h('h2', { class: 'page-hero__command-title' });
-        const activeBody = h('p', { class: 'page-hero__command-body' });
-        const activeTags = h('div', { class: 'badge-row page-hero__command-tags' });
-        const activeLink = h('a', { class: 'btn btn--ghost-dark page-hero__command-cta', href: '#' }, 'Vezi detaliu →');
+        const lightStage = host.matches('.legal-hero');
+        const stage = h('div', { class: 'page-hero__technical-stage', 'aria-hidden': 'true' });
+        const canvas = h('canvas', { class: 'page-hero__technical-canvas', 'aria-hidden': 'true' });
+        const stageGrid = h('div', { class: 'page-hero__technical-grid' });
+        const stageCore = h('div', { class: 'page-hero__technical-core' });
+        stage.appendChild(canvas);
+        stage.appendChild(stageGrid);
+        stage.appendChild(stageCore);
+
+        const stageNodes = [];
+        let activeIndex = 0;
+        let activeCode = null;
+        let activeTitle = null;
+        let activeBody = null;
+        let activeTags = null;
+        let activeLink = null;
+        let stageController = null;
         const railButtons = [];
 
-        top.appendChild(h('div', { class: 'eyebrow page-hero__command-eyebrow' }, '§ / Nucleu operational'));
-        top.appendChild(h('div', { class: 'page-hero__command-live' }, config.signalCode));
-
-        display.appendChild(top);
-        display.appendChild(activeCode);
-        display.appendChild(activeTitle);
-        display.appendChild(activeBody);
-        display.appendChild(activeTags);
-        display.appendChild(activeLink);
-
-        config.nodes.forEach((node, index) => {
-          const button = h('button', {
-            class: 'page-hero__command-rail-item',
-            type: 'button',
-            'aria-pressed': 'false'
+        const runtimeNodes = config.nodes.map((node, index) => {
+          const item = h('div', {
+            class: 'page-hero__technical-node',
+            style: `--x:${node.x}; --y:${node.y}; --delay:${index * 140}ms;`
           });
+          item.appendChild(h('span', { class: 'page-hero__technical-node-code' }, node.code));
+          item.appendChild(h('span', { class: 'page-hero__technical-node-label' }, node.label));
+          stageNodes.push(item);
+          stage.appendChild(item);
 
-          button.innerHTML = `
-            <span class="page-hero__command-rail-code">${node.code}</span>
-            <span class="page-hero__command-rail-label">${node.label}</span>
-            <span class="page-hero__command-rail-meta">${node.title || config.signalTitle}</span>
-          `;
+          const x = Math.max(0.08, Math.min(0.92, (parseFloat(node.x) || 50) / 100));
+          const y = Math.max(0.12, Math.min(0.88, (parseFloat(node.y) || 50) / 100));
 
-          button.addEventListener('mouseenter', () => setActive(index));
-          button.addEventListener('focus', () => setActive(index));
-          button.addEventListener('click', () => setActive(index));
-
-          railButtons.push(button);
-          rail.appendChild(button);
+          return {
+            ...node,
+            color: node.color || TECHNICAL_NODE_COLORS[index % TECHNICAL_NODE_COLORS.length],
+            item,
+            packetOffset: index / Math.max(1, config.nodes.length),
+            phase: index * 1.12 + x,
+            base: {
+              x: (x - 0.5) * 520,
+              y: (y - 0.5) * 300,
+              z: (index % 2 === 0 ? 1 : -1) * (72 + Math.abs(0.5 - x) * 160)
+            },
+            drift: {
+              x: 14 + (index % 4) * 3,
+              y: 10 + (index % 3) * 2,
+              z: 52 + (index % 5) * 10
+            }
+          };
         });
 
         function setActive(index) {
-          const active = config.nodes[index] || config.nodes[0];
-          if (!active) return;
+          if (!runtimeNodes.length) return;
+
+          activeIndex = ((index % runtimeNodes.length) + runtimeNodes.length) % runtimeNodes.length;
+          const active = runtimeNodes[activeIndex];
 
           stageNodes.forEach((item, itemIndex) => {
-            item.classList.toggle('is-active', itemIndex === index);
+            item.classList.toggle('is-active', itemIndex === activeIndex);
           });
 
           railButtons.forEach((button, buttonIndex) => {
-            const isActive = buttonIndex === index;
+            const isActive = buttonIndex === activeIndex;
             button.classList.toggle('is-active', isActive);
             button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
           });
 
           host.dataset.activeNode = active.code;
-          activeCode.textContent = active.code;
-          activeTitle.textContent = active.title || config.signalTitle;
-          activeBody.textContent = active.body || config.signalTitle;
-          activeLink.href = active.href || '#';
 
-          activeTags.innerHTML = '';
-          config.metrics.forEach(metric => {
-            activeTags.appendChild(h('span', { class: 'badge' }, metric));
-          });
+          if (activeCode) activeCode.textContent = active.code;
+          if (activeTitle) activeTitle.textContent = active.title || config.signalTitle;
+          if (activeBody) activeBody.textContent = active.body || config.signalTitle;
+          if (activeLink) activeLink.href = active.href || '#';
+
+          if (activeTags) {
+            activeTags.innerHTML = '';
+            config.metrics.forEach(metric => {
+              activeTags.appendChild(h('span', { class: 'badge' }, metric));
+            });
+          }
+
+          if (stageController) {
+            stageController.render();
+          }
         }
 
-        command.appendChild(display);
-        command.appendChild(rail);
-        content.appendChild(command);
-        setActive(0);
-      }
+        const content = host.matches('.page-hero') ? host.querySelector('.page-hero__content, .container') : null;
+        if (content && runtimeNodes.some(node => node.title || node.body || node.href)) {
+          const command = h('div', { class: 'page-hero__command' });
+          const display = h('div', { class: 'page-hero__command-display' });
+          const rail = h('div', { class: 'page-hero__command-rail', 'aria-label': 'Noduri operationale active' });
+          const top = h('div', { class: 'page-hero__command-top' });
+          activeCode = h('div', { class: 'page-hero__command-code' });
+          activeTitle = h('h2', { class: 'page-hero__command-title' });
+          activeBody = h('p', { class: 'page-hero__command-body' });
+          activeTags = h('div', { class: 'badge-row page-hero__command-tags' });
+          activeLink = h('a', { class: 'btn btn--ghost-dark page-hero__command-cta', href: '#' }, 'Vezi detaliu →');
 
-      host.appendChild(stage);
+          top.appendChild(h('div', { class: 'eyebrow page-hero__command-eyebrow' }, '§ / Nucleu operational'));
+          top.appendChild(h('div', { class: 'page-hero__command-live' }, config.signalCode));
+
+          display.appendChild(top);
+          display.appendChild(activeCode);
+          display.appendChild(activeTitle);
+          display.appendChild(activeBody);
+          display.appendChild(activeTags);
+          display.appendChild(activeLink);
+
+          runtimeNodes.forEach((node, index) => {
+            const button = h('button', {
+              class: 'page-hero__command-rail-item',
+              type: 'button',
+              'aria-pressed': 'false'
+            });
+
+            button.innerHTML = `
+              <span class="page-hero__command-rail-code">${node.code}</span>
+              <span class="page-hero__command-rail-label">${node.label}</span>
+              <span class="page-hero__command-rail-meta">${node.title || config.signalTitle}</span>
+            `;
+
+            button.addEventListener('mouseenter', () => setActive(index));
+            button.addEventListener('focus', () => setActive(index));
+            button.addEventListener('click', () => setActive(index));
+
+            railButtons.push(button);
+            rail.appendChild(button);
+          });
+
+          command.appendChild(display);
+          command.appendChild(rail);
+          content.appendChild(command);
+        }
+
+        host.appendChild(stage);
+        setActive(0);
+
+        if (!mountTechnicalScene) return;
+
+        stageController = mountTechnicalScene({
+          host: stage,
+          canvas,
+          items: runtimeNodes.map(node => ({
+            key: node.code,
+            color: node.color,
+            base: node.base,
+            drift: node.drift,
+            phase: node.phase,
+            packetOffset: node.packetOffset,
+            item: node.item,
+          })),
+          pointerTarget: host,
+          mode: 'page',
+          lightMode: lightStage,
+          reducedMotion,
+          getActiveIndex: () => activeIndex,
+          onProject: ({ projections, core }) => {
+            const compact = stage.clientWidth < 360;
+            stageCore.style.left = `${core.x}px`;
+            stageCore.style.top = `${core.y}px`;
+
+            projections.forEach(({ item, projection }, order) => {
+              const nodeEl = item.item;
+              if (!nodeEl) return;
+
+              const isActive = item.key === runtimeNodes[activeIndex]?.code;
+              nodeEl.style.left = `${projection.x}px`;
+              nodeEl.style.top = `${projection.y}px`;
+              nodeEl.style.opacity = `${Math.max(compact ? 0.42 : 0.5, projection.alpha * (isActive ? 1 : 0.88))}`;
+              nodeEl.style.transform = `translate(-50%, -50%) scale(${Math.max(compact ? 0.6 : 0.72, Math.min(compact ? 0.92 : 1.02, projection.scale * (isActive ? 1.04 : 0.94)))})`;
+              nodeEl.style.zIndex = String(100 + order + (isActive ? 12 : 0));
+            });
+          },
+        });
+
+        if (stageController) {
+          setActive(activeIndex);
+        }
+      });
     });
+  }
+
+  function mountRouteOrbit(pageKey) {
+    const config = pickPageRouteOrbit(pageKey);
+    const hero = document.querySelector('.hero, .page-hero, .legal-hero');
+    if (!hero || hero.dataset.routeOrbitMounted === 'true') return;
+
+    hero.dataset.routeOrbitMounted = 'true';
+
+    const band = h('section', { class: 'section section--tight route-orbit' });
+    const container = h('div', { class: 'container route-orbit__container' });
+    const panel = h('div', { class: 'route-orbit__panel' });
+    const top = h('div', { class: 'route-orbit__top' });
+    const links = h('div', { class: 'route-orbit__links' });
+    const constellation = h('div', { class: 'route-orbit__constellation', 'aria-label': 'Harta paginilor principale' });
+
+    top.appendChild(h('div', { class: 'eyebrow route-orbit__eyebrow' }, config.code));
+    top.appendChild(h('div', { class: 'route-orbit__live' }, 'Spatial nav'));
+
+    panel.appendChild(top);
+    panel.appendChild(h('h2', { class: 'route-orbit__title' }, config.title));
+    panel.appendChild(h('p', { class: 'route-orbit__body' }, config.summary));
+    constellation.appendChild(h('div', { class: 'route-orbit__constellation-label' }, 'Harta paginilor principale'));
+
+    NAV_ITEMS.forEach((item, index) => {
+      const position = ROUTE_ORBIT_POSITIONS[index % ROUTE_ORBIT_POSITIONS.length];
+      const tag = item.key === pageKey ? 'span' : 'a';
+      const attrs = {
+        class: `route-orbit__page${item.key === pageKey ? ' is-active' : ''}`,
+        style: `--orbit-x:${position.x}; --orbit-y:${position.y}; --delay:${index * 120}ms;`
+      };
+
+      if (tag === 'a') attrs.href = item.href;
+
+      const node = h(tag, attrs);
+      node.appendChild(h('span', { class: 'route-orbit__page-code' }, item.key === pageKey ? 'LIVE' : String(index + 1).padStart(2, '0')));
+      node.appendChild(h('span', { class: 'route-orbit__page-label' }, item.label));
+      node.appendChild(h('span', { class: 'route-orbit__page-meta' }, item.key === pageKey ? 'pagina activa' : 'ruta publica'));
+      constellation.appendChild(node);
+    });
+
+    panel.appendChild(constellation);
+
+    links.appendChild(h('div', { class: 'route-orbit__links-label' }, 'Rute fara redundanta'));
+    config.sections.forEach(section => {
+      const link = h('a', { class: 'route-orbit__link', href: section.href });
+      link.appendChild(h('span', { class: 'route-orbit__link-code' }, section.code));
+      link.appendChild(h('span', { class: 'route-orbit__link-label' }, section.label));
+      link.appendChild(h('span', { class: 'route-orbit__link-meta' }, section.meta));
+      links.appendChild(link);
+    });
+
+    container.appendChild(panel);
+    container.appendChild(links);
+    band.appendChild(container);
+    hero.insertAdjacentElement('afterend', band);
   }
 
   function mountSectionTelemetry(pageKey) {
@@ -1788,6 +1923,7 @@
       mountFooter();
       mountReveal();
       mountPageHeroTelemetry(pageKey);
+      mountRouteOrbit(pageKey);
       mountSectionTelemetry(pageKey);
       mountTechnicalHeroes();
       mountDepthInteractions();

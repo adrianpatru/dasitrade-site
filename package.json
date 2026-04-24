@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "formidable": "^3.5.4",
-    "nodemailer": "^6.9.16"
+    "nodemailer": "^6.9.16",
+    "three": "^0.165.0"
   }
 }
