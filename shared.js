@@ -49,8 +49,8 @@
       key: 'idsai',
       code: '01 / FIRE-DET',
       label: 'Incendiu',
-      title: 'Detecție, alarmare și scenarii de evacuare',
-      body: 'IDSAI, desfumare, stingere și evacuare vocală tratate ca un singur lanț critic de comandă.',
+      title: 'Detecție, alarmare și evacuare',
+      body: 'IDSAI, desfumare și stingere într-un singur lanț critic.',
       links: ['EN54', 'desfumare', 'stingere'],
       href: 'servicii.html#idsai',
       color: 'rgba(132, 211, 166, 0.95)',
@@ -62,8 +62,8 @@
       key: 'cctv',
       code: '05 / SEC-CCTV',
       label: 'CCTV',
-      title: 'Video, verificare și context operațional',
-      body: 'Fluxuri video, analitice și audit pentru validarea incidentelor și decizii rapide în exploatare.',
+      title: 'Video și context operațional',
+      body: 'Analitice și audit pentru validare rapidă în exploatare.',
       links: ['VMS', 'LPR', 'analiză video'],
       href: 'servicii.html#cctv',
       color: 'rgba(146, 191, 255, 0.94)',
@@ -75,8 +75,8 @@
       key: 'efractie',
       code: '04 / SEC-ELC',
       label: 'Efracție',
-      title: 'Perimetru, prealarmă și filtrare evenimente',
-      body: 'Detecția la efracție devine utilă când este corelată cu accesul, video-ul și dispeceratul.',
+      title: 'Perimetru și prealarmă',
+      body: 'Detecție corelată cu acces, video și dispecerat.',
       links: ['grad 2-4', 'partiții', 'dispecerat'],
       href: 'servicii.html#efractie',
       color: 'rgba(132, 211, 166, 0.84)',
@@ -88,8 +88,8 @@
       key: 'acces',
       code: '06 / SEC-ACC',
       label: 'Control acces',
-      title: 'Fluxuri controlate și identitate legată de traseu',
-      body: 'Accesul corect proiectat separă zone, reduce ambiguitatea și leagă evenimentul de persoană.',
+      title: 'Identitate și traseu auditat',
+      body: 'Separă zonele și leagă evenimentul de persoană.',
       links: ['RFID', 'biometrie', 'audit trail'],
       href: 'servicii.html#acces',
       color: 'rgba(226, 204, 120, 0.92)',
@@ -101,8 +101,8 @@
       key: 'voce-date',
       code: '07 / IT-INF',
       label: 'Voice-data',
-      title: 'Backbone-ul pe care rulează restul ecosistemului',
-      body: 'Fibră, cupru, PoE, rack-uri și backbone de date care susțin subsistemele critice fără improvizații.',
+      title: 'Backbone pentru ecosistem',
+      body: 'Fibră, cupru și PoE pentru subsistemele critice.',
       links: ['Cat6A', 'fibră', 'PoE'],
       href: 'servicii.html#voce-date',
       color: 'rgba(146, 191, 255, 0.88)',
@@ -114,8 +114,8 @@
       key: 'bms',
       code: '10 / BMS-INT',
       label: 'BMS & integrare',
-      title: 'Un strat comun de comandă pentru exploatare reală',
-      body: 'BMS-ul și integrarea adună stări, comenzi și scenarii într-un singur model de operare și mentenanță.',
+      title: 'Un strat comun de comandă',
+      body: 'Integrarea adună stări și scenarii într-un singur punct.',
       links: ['BACnet', 'Modbus', 'dashboard'],
       href: 'servicii.html#bms',
       color: 'rgba(132, 211, 166, 0.9)',
@@ -147,8 +147,8 @@
         {
           code: 'FIRE',
           label: 'alarmare',
-          title: 'Incendiu tratat ca flux critic, nu ca subsistem izolat',
-          body: 'IDSAI, desfumare, stingere si evacuare vocala sunt legate de scenariul real de reactie si exploatare.',
+          title: 'Incendiu tratat ca scenariu complet',
+          body: 'Detectie, desfumare, stingere si evacuare vocala intr-un singur flux.',
           href: 'servicii.html#idsai',
           x: '18%',
           y: '20%'
@@ -156,8 +156,8 @@
         {
           code: 'CCTV',
           label: 'validare video',
-          title: 'Video-ul valideaza rapid incidentul si scurteaza lantul de decizie',
-          body: 'CCTV, analitice si context de exploatare pentru obiective unde confirmarea rapida conteaza operational.',
+          title: 'Video pentru confirmare rapida',
+          body: 'CCTV si analitice care scurteaza decizia in exploatare.',
           href: 'servicii.html#cctv',
           x: '82%',
           y: '26%'
@@ -165,8 +165,8 @@
         {
           code: 'ACC',
           label: 'control acces',
-          title: 'Acces segmentat pe zone, identitate si traseu auditat',
-          body: 'Controlul accesului devine util cand separa clar fluxurile si lasa urme verificabile in exploatare.',
+          title: 'Acces segmentat si auditabil',
+          body: 'Zone, identitate si evenimente urmaribile fara ambiguitate.',
           href: 'servicii.html#acces',
           x: '70%',
           y: '70%'
@@ -174,8 +174,8 @@
         {
           code: 'BMS',
           label: 'nucleu comun',
-          title: 'Integrarea aduna subsistemele intr-un singur model de operare',
-          body: 'BMS si integrarea reduc fragmentarea intre sisteme si muta exploatarea intr-un dashboard coerent.',
+          title: 'Integrare intr-un singur punct de comanda',
+          body: 'BMS-ul reduce fragmentarea si ordoneaza exploatarea.',
           href: 'servicii.html#bms',
           x: '24%',
           y: '72%'
@@ -191,8 +191,8 @@
         {
           code: 'IND',
           label: 'industrial',
-          title: 'Fluxuri industriale unde oprirea sau ambiguitatea nu sunt acceptabile',
-          body: 'Studiile din portofoliu urmaresc problema initiala, constrangerile de executie si rezultatul masurat dupa PIF.',
+          title: 'Industrial fara loc pentru ambiguitate',
+          body: 'Cazuri unde executia si exploatarea au trebuit sa ramana clare.',
           href: 'portofoliu.html#studii-de-caz',
           x: '20%',
           y: '20%'
@@ -200,8 +200,8 @@
         {
           code: 'MED',
           label: 'medical',
-          title: 'Scenarii medicale si de incendiu unde raspunsul trebuie sa ramana controlat',
-          body: 'Proiectele selectate arata cum este tratata integrarea in cladiri unde continuitatea si claritatea de reactie sunt critice.',
+          title: 'Medical si incendiu sub control',
+          body: 'Integrari pentru cladiri unde continuitatea si reactia corecta sunt critice.',
           href: 'portofoliu.html#studii-de-caz',
           x: '82%',
           y: '28%'
@@ -209,8 +209,8 @@
         {
           code: 'PUB',
           label: 'public',
-          title: 'Control, audit si trasee demonstrabile pentru cladiri publice',
-          body: 'Nu prezentam doar echipamente, ci modul in care sistemele lasa urme clare si sustin exploatarea zilnica.',
+          title: 'Cladiri publice cu audit clar',
+          body: 'Sisteme care lasa urme verificabile si sustin exploatarea zilnica.',
           href: 'portofoliu.html#studii-de-caz',
           x: '66%',
           y: '72%'
@@ -218,8 +218,8 @@
         {
           code: 'DC',
           label: 'camere tehnice',
-          title: 'Protectie pentru spatii tehnice unde eroarea are impact mare',
-          body: 'Camere tehnice, stingere gazoasa, detectie aspirativa si integrare pentru infrastructuri cu toleranta minima la risc.',
+          title: 'Protectie pentru camere tehnice',
+          body: 'Detectie, stingere si integrare pentru zone cu toleranta minima la risc.',
           href: 'portofoliu.html#studii-de-caz',
           x: '24%',
           y: '74%'
@@ -235,8 +235,8 @@
         {
           code: 'TEAM',
           label: 'executie',
-          title: 'Capacitate reala in teren, sustinuta de roluri clare si echipe stabile',
-          body: 'Organizarea dintre proiectare, executie, service si conformitate este ce face livrarea predictibila, nu doar marimea echipei.',
+          title: 'Echipe stabile pentru executie',
+          body: 'Proiectare, executie si service in acelasi flux.',
           href: 'despre.html#auth-slider',
           x: '18%',
           y: '22%'
@@ -244,8 +244,8 @@
         {
           code: 'AUTH',
           label: 'autorizari',
-          title: 'Autorizari si trasabilitate care sustin lucrari sensibile',
-          body: 'Documentatia, autorizatiile si cadrul de conformitate sunt tratate ca parte din produsul final, nu ca formalitate separata.',
+          title: 'Autorizari care sustin lucrarea',
+          body: 'Conformitate si trasabilitate tratate ca parte din livrare.',
           href: 'despre.html#auth-slider',
           x: '82%',
           y: '24%'
@@ -253,8 +253,8 @@
         {
           code: 'PIF',
           label: 'punere in functiune',
-          title: 'Punerea in functiune este faza unde sistemul devine exploatabil',
-          body: 'Testarea, integrarea si reglajele finale sunt tratate ca etapa critica pentru obiective care trebuie sa functioneze fara improvizatii.',
+          title: 'Punere in functiune fara improvizatii',
+          body: 'Testarea finala transforma sistemul in exploatare reala.',
           href: 'servicii.html',
           x: '70%',
           y: '70%'
@@ -262,8 +262,8 @@
         {
           code: 'OPS',
           label: 'raspuns 24/7',
-          title: 'Dispeceratul si service-ul inchid bucla operationala dupa livrare',
-          body: 'Raspunsul rapid are sens doar cand este legat de diagnostic, istoric si o echipa care poate interveni coerent.',
+          title: 'Raspuns 24/7 cu context tehnic',
+          body: 'Diagnostic, istoric si interventie coordonata.',
           href: 'contact.html',
           x: '26%',
           y: '72%'
@@ -279,8 +279,8 @@
         {
           code: 'CALL',
           label: 'urgente',
-          title: 'Call-center pentru incidente si escaladare de service',
-          body: 'Canalul telefonic ramane cel mai rapid cand exista o urgenta, un risc operational sau o nevoie de triere imediata.',
+          title: 'Call-center pentru urgente',
+          body: 'Canalul rapid pentru incidente, escaladare si triere.',
           href: 'tel:0334401092',
           x: '18%',
           y: '20%'
@@ -288,8 +288,8 @@
         {
           code: 'MAIL',
           label: 'ofertare',
-          title: 'Email-ul ramane canalul curat pentru brief, documente si ofertare',
-          body: 'Pentru cereri comerciale si date tehnice, emailul pastreaza firul clar si permite intoarcerea rapida cu intrebari sau oferta.',
+          title: 'Email pentru ofertare si documente',
+          body: 'Brief-uri, planuri si clarificari tehnice intr-un fir usor de urmarit.',
           href: 'contact.html#contact-form',
           x: '82%',
           y: '24%'
@@ -297,8 +297,8 @@
         {
           code: 'MAP',
           label: 'sediu Bacau',
-          title: 'Sediul operational este punctul pentru intalniri, acte si pornirea evaluarilor',
-          body: 'Localizarea, accesul direct si coordonatele publice sunt pregatite pentru intalniri de proiect si vizite tehnice.',
+          title: 'Sediu pentru intalniri si evaluari',
+          body: 'Punctul de pornire pentru vizite, acte si discutii tehnice.',
           href: 'contact.html#evaluare',
           x: '66%',
           y: '72%'
@@ -306,8 +306,8 @@
         {
           code: 'SITE',
           label: 'rutare publica',
-          title: 'Formularul scurteaza traseul dintre context si raspunsul potrivit',
-          body: 'Prin brief-ul din pagina separati imediat ofertarea, evaluarea in teren si preluarea de sisteme existente.',
+          title: 'Formular care trimite cererea corect',
+          body: 'Separati rapid ofertarea, evaluarea si preluarea de sisteme existente.',
           href: 'contact.html#contact-form',
           x: '24%',
           y: '72%'
@@ -323,8 +323,8 @@
         {
           code: 'FIELD',
           label: 'tehnician',
-          title: 'Roluri de teren pentru oameni care duc sistemul in exploatare reala',
-          body: 'Pozitiile de tehnician cer disciplina, cablare curata, punere in functie controlata si reactie buna in santier.',
+          title: 'Teren pentru oameni care livreaza curat',
+          body: 'Cablare, montaj si punere in functiune fara improvizatii.',
           href: 'cariere.html#jobs-list',
           x: '20%',
           y: '20%'
@@ -332,8 +332,8 @@
         {
           code: 'DESIGN',
           label: 'proiectare',
-          title: 'Proiectarea este tratata ca inginerie aplicata, nu ca desen formal',
-          body: 'Cautam proiectanti care inteleg normativele, integrarea si impactul fiecarei decizii in executie si service.',
+          title: 'Proiectare aplicata in teren',
+          body: 'Normative, integrare si decizii care rezista in executie.',
           href: 'cariere.html#jobs-list',
           x: '80%',
           y: '24%'
@@ -341,8 +341,8 @@
         {
           code: 'PIF',
           label: 'punere in functiune',
-          title: 'Punerea in functiune cere diagnostic bun si control asupra detaliului',
-          body: 'Rolurile de commissioning fac diferenta dintre un sistem instalat si unul exploatabil, stabil si documentat.',
+          title: 'Punere in functiune cu diagnostic bun',
+          body: 'Commissioning pentru sisteme stabile, reglate si documentate.',
           href: 'cariere.html#jobs-list',
           x: '68%',
           y: '72%'
@@ -350,8 +350,8 @@
         {
           code: 'TEAM',
           label: 'candidatura',
-          title: 'Aplicarea intra direct in fluxul intern de selectie si raspuns',
-          body: 'Daca profilul este potrivit, pastram traseul simplu: formular, apel scurt, interviu tehnic si raspuns clar.',
+          title: 'Aplicare cu raspuns clar',
+          body: 'Formular scurt, discutie tehnica si decizie rapida.',
           href: 'cariere.html#aplica',
           x: '24%',
           y: '72%'
@@ -1300,14 +1300,14 @@
         const display = h('div', { class: 'hero-command-deck__display' });
         const top = h('div', { class: 'hero-command-deck__top' });
 
-        top.appendChild(h('div', { class: 'eyebrow hero-command-deck__eyebrow' }, '§ 00 / Operations core'));
-        top.appendChild(h('div', { class: 'hero-command-deck__live' }, 'Scene activă · sincronizată'));
+        top.appendChild(h('div', { class: 'eyebrow hero-command-deck__eyebrow' }, '§ 00 / Nucleu operational'));
+        top.appendChild(h('div', { class: 'hero-command-deck__live' }, 'Sisteme sincronizate'));
 
         deckCode = h('div', { class: 'hero-command-deck__code' });
         deckTitle = h('h2', { class: 'hero-command-deck__title' });
         deckBody = h('p', { class: 'hero-command-deck__body' });
         deckTags = h('div', { class: 'badge-row hero-command-deck__tags' });
-        deckLink = h('a', { class: 'btn btn--ghost-dark hero-command-deck__cta', href: 'servicii.html' }, 'Deschide familia →');
+        deckLink = h('a', { class: 'btn btn--ghost-dark hero-command-deck__cta', href: 'servicii.html' }, 'Vezi familia →');
 
         display.appendChild(top);
         display.appendChild(deckCode);
@@ -1663,10 +1663,10 @@
         const activeTitle = h('h2', { class: 'page-hero__command-title' });
         const activeBody = h('p', { class: 'page-hero__command-body' });
         const activeTags = h('div', { class: 'badge-row page-hero__command-tags' });
-        const activeLink = h('a', { class: 'btn btn--ghost-dark page-hero__command-cta', href: '#' }, 'Acceseaza →');
+        const activeLink = h('a', { class: 'btn btn--ghost-dark page-hero__command-cta', href: '#' }, 'Vezi detaliu →');
         const railButtons = [];
 
-        top.appendChild(h('div', { class: 'eyebrow page-hero__command-eyebrow' }, '§ / Operational stack'));
+        top.appendChild(h('div', { class: 'eyebrow page-hero__command-eyebrow' }, '§ / Nucleu operational'));
         top.appendChild(h('div', { class: 'page-hero__command-live' }, config.signalCode));
 
         display.appendChild(top);
