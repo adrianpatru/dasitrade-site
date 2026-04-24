@@ -122,6 +122,7 @@
   <div class="hero__img">
     <img src="assets/img/hero-index.jpg" alt="Acoperire națională Dasitrade pentru proiecte de curenți slabi și sisteme de securitate" loading="eager"/>
   </div>
+  <div class="technical-hero" data-technical-hero aria-hidden="true"></div>
 
   <!-- Romania coverage map — full viewport -->
   <div class="hero__map" aria-hidden="true">
@@ -283,14 +284,19 @@
       <span>SYS/01 · SEC-INT</span>
     </div>
 
-    <div class="eyebrow eyebrow--dark hero__eyebrow" data-reveal>Industrie, medical, retail, infrastructură și clădiri publice</div>
+    <div class="eyebrow eyebrow--dark hero__eyebrow">Industrie, medical, retail, infrastructură și clădiri publice</div>
 
-    <h1 class="hero__title" data-reveal>
+    <h1 class="hero__title">
       Proiectăm și menținem<br/>
       sisteme critice de securitate<em>.</em>
     </h1>
 
-    <div class="hero__bottom" data-reveal>
+    <div class="hero__actions">
+      <a href="contact.html" class="btn btn--accent">Cere ofertă tehnică →</a>
+      <a href="servicii.html" class="btn btn--ghost-dark">Vezi ecosistemul de servicii</a>
+    </div>
+
+    <div class="hero__bottom">
       <p class="hero__lede">
         De la incendiu, CCTV și control acces până la voice-data, BMS și infrastructură suport,
         livrăm cap-coadă: analiză, proiectare, execuție, punere în funcțiune, mentenanță și intervenție 24/7.
@@ -303,11 +309,6 @@
         <div class="hero__stat-num">24/7</div>
         <div class="hero__stat-label">dispecerat activ</div>
       </div>
-    </div>
-
-    <div class="hero__actions" data-reveal>
-      <a href="contact.html" class="btn btn--accent">Cere ofertă tehnică →</a>
-      <a href="servicii.html" class="btn btn--ghost-dark">Vezi ecosistemul de servicii</a>
     </div>
   </div>
 </section>
@@ -687,6 +688,7 @@
       'TURDA','BISTRIȚA','DROBETA-T.S.','CÂMPULUNG','MEDIAȘ',
       'DEJ','BÂRLAD','TECUCI','ADJUD','ONEȘTI','MOINEȘTI','COMĂNEȘTI'
     ];
+    if (document.querySelector('[data-technical-hero]')) return;
     var labels = Array.from(document.querySelectorAll('.hm-label'));
     if (!labels.length) return;
     /* SVG coords of each dot — used for proximity check */
