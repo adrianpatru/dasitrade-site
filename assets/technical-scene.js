@@ -229,6 +229,68 @@ function projectToScreen(camera, width, height, worldPosition) {
   };
 }
 
+function resolveCameraPose(mode, lightMode, width) {
+  return {
+    position: [
+      mode === 'home' ? -18 : mode === 'flow' ? -32 : (lightMode ? -6 : 10),
+      mode === 'home' ? 68 : mode === 'flow' ? 96 : (lightMode ? 28 : 36),
+      mode === 'home' ? 760 : mode === 'flow' ? 920 : 600,
+    ],
+    target: [
+      mode === 'home' ? -28 : mode === 'flow' ? 0 : 24,
+      mode === 'home' ? 6 : mode === 'flow' ? 12 : -4,
+      0,
+    ],
+    fov: mode === 'home'
+      ? (width < 720 ? 40 : 33)
+      : mode === 'flow'
+        ? (width < 720 ? 40 : 31)
+        : (width < 420 ? 42 : 36),
+  };
+}
+
+function resolveCameraTravel(mode) {
+  switch (mode) {
+    case 'home':
+      return {
+        position: { x: 44, y: -14, z: -110 },
+        target: { x: 82, y: 18, z: 92 },
+        activePositionX: 14,
+        activeTargetX: 24,
+      };
+    case 'flow':
+      return {
+        position: { x: 108, y: -26, z: -240 },
+        target: { x: 132, y: 30, z: 164 },
+        activePositionX: 26,
+        activeTargetX: 42,
+      };
+    case 'page':
+    default:
+      return {
+        position: { x: 58, y: -16, z: -156 },
+        target: { x: 64, y: 18, z: 96 },
+        activePositionX: 18,
+        activeTargetX: 30,
+      };
+  }
+}
+
+function measureScrollProgress(target, mode, fallbackHeight) {
+  const rect = target?.getBoundingClientRect?.();
+  if (!rect || !rect.height) return 0;
+
+  const viewportHeight = Math.max(1, globalThis.innerHeight || fallbackHeight || rect.height);
+
+  if (mode === 'flow') {
+    const travel = Math.max(1, rect.height - viewportHeight * 0.52);
+    return THREE.MathUtils.clamp((-rect.top - viewportHeight * 0.18) / travel, 0, 1);
+  }
+
+  const travel = Math.max(1, rect.height * (mode === 'home' ? 0.84 : 0.92));
+  return THREE.MathUtils.clamp((-rect.top) / travel, 0, 1);
+}
+
 export function mountTechnicalScene({
   host,
   canvas,
@@ -391,6 +453,11 @@ export function mountTechnicalScene({
   let inView = true;
   let lastSizeKey = '';
   const pointer = { currentX: 0, currentY: 0, targetX: 0, targetY: 0 };
+  const scroll = { current: 0, target: 0 };
+  const cameraBasePosition = new THREE.Vector3();
+  const cameraBaseTarget = new THREE.Vector3();
+  const cameraLookTarget = new THREE.Vector3();
+  const cameraTravel = resolveCameraTravel(mode);
 
   function resize() {
     const rect = host.getBoundingClientRect();
@@ -406,22 +473,13 @@ export function mountTechnicalScene({
     renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio || 1, 2));
     renderer.setSize(width, height, false);
 
+    const cameraPose = resolveCameraPose(mode, lightMode, width);
     camera.aspect = width / height;
-    camera.fov = mode === 'home'
-      ? (width < 720 ? 40 : 33)
-      : mode === 'flow'
-        ? (width < 720 ? 40 : 31)
-        : (width < 420 ? 42 : 36);
-    camera.position.set(
-      mode === 'home' ? -18 : mode === 'flow' ? -32 : (lightMode ? -6 : 10),
-      mode === 'home' ? 68 : mode === 'flow' ? 96 : (lightMode ? 28 : 36),
-      mode === 'home' ? 760 : mode === 'flow' ? 920 : 600
-    );
-    camera.lookAt(
-      mode === 'home' ? -28 : mode === 'flow' ? 0 : 24,
-      mode === 'home' ? 6 : mode === 'flow' ? 12 : -4,
-      0
-    );
+    camera.fov = cameraPose.fov;
+    cameraBasePosition.set(...cameraPose.position);
+    cameraBaseTarget.set(...cameraPose.target);
+    camera.position.copy(cameraBasePosition);
+    camera.lookAt(cameraBaseTarget);
     camera.updateProjectionMatrix();
   }
 
@@ -431,6 +489,26 @@ export function mountTechnicalScene({
 
     const time = reducedMotion ? 0 : now * 0.001;
     const activeIndex = Math.max(0, Math.min(runtimeItems.length - 1, getActiveIndex()));
+    const activeBias = runtimeItems.length > 1
+      ? activeIndex / Math.max(1, runtimeItems.length - 1) - 0.5
+      : 0;
+
+    scroll.target = measureScrollProgress(pointerTarget || host, mode, height);
+    scroll.current = reducedMotion
+      ? scroll.target
+      : scroll.current + (scroll.target - scroll.current) * 0.08;
+
+    camera.position.set(
+      cameraBasePosition.x + scroll.current * cameraTravel.position.x + activeBias * cameraTravel.activePositionX,
+      cameraBasePosition.y + scroll.current * cameraTravel.position.y,
+      cameraBasePosition.z + scroll.current * cameraTravel.position.z
+    );
+    cameraLookTarget.set(
+      cameraBaseTarget.x + scroll.current * cameraTravel.target.x + activeBias * cameraTravel.activeTargetX,
+      cameraBaseTarget.y + scroll.current * cameraTravel.target.y,
+      cameraBaseTarget.z + scroll.current * cameraTravel.target.z
+    );
+    camera.lookAt(cameraLookTarget);
 
     pointer.currentX += (pointer.targetX - pointer.currentX) * 0.06;
     pointer.currentY += (pointer.targetY - pointer.currentY) * 0.06;
@@ -535,8 +613,15 @@ export function mountTechnicalScene({
     pointer.targetY = 0;
   }
 
+  function onScroll() {
+    if (reducedMotion && inView) {
+      render(globalThis.performance?.now?.() || 0);
+    }
+  }
+
   pointerTarget.addEventListener('pointermove', onPointerMove);
   pointerTarget.addEventListener('pointerleave', onPointerLeave);
+  globalThis.addEventListener('scroll', onScroll, { passive: true });
 
   const wantsDeviceOrientation = useDeviceOrientation
     && 'DeviceOrientationEvent' in globalThis
@@ -597,6 +682,7 @@ export function mountTechnicalScene({
 
       pointerTarget.removeEventListener('pointermove', onPointerMove);
       pointerTarget.removeEventListener('pointerleave', onPointerLeave);
+      globalThis.removeEventListener('scroll', onScroll);
       if (wantsDeviceOrientation) {
         globalThis.removeEventListener('deviceorientation', onDeviceOrientation);
       }

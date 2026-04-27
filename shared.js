@@ -731,9 +731,51 @@
       .trim();
   }
 
+  function normalizeSectionEyebrow(value = '') {
+    return collapseWhitespace(value)
+      .replace(/^§\s*\/\s*/i, '')
+      .replace(/[\[\]]+/g, '')
+      .trim();
+  }
+
+  function resolveSectionEyebrow(section) {
+    return normalizeSectionEyebrow(section.querySelector('.eyebrow')?.textContent || '');
+  }
+
+  function resolveSectionLabel(section, fallback = '') {
+    const explicit = collapseWhitespace(section.dataset.sectionTitle || section.dataset.flowTitle || '');
+    if (explicit) return explicit;
+
+    const heading = collapseWhitespace(section.querySelector('h1, h2, h3')?.textContent || '');
+    if (heading) return heading;
+
+    const eyebrow = resolveSectionEyebrow(section);
+    if (eyebrow) {
+      return eyebrow.split(/\s+[·|]\s+/)[0].trim() || eyebrow;
+    }
+
+    return collapseWhitespace(fallback || resolvePrimarySectionToken(section));
+  }
+
   function resolvePrimarySectionToken(section) {
+    const explicitToken = collapseWhitespace(section.dataset.sectionToken || section.dataset.flowToken || '');
+    if (explicitToken) {
+      return formatTelemetryToken(explicitToken) || 'operational layer';
+    }
+
+    const screenToken = section.dataset.screenLabel ? section.dataset.screenLabel.split('.').pop() : '';
+    if (screenToken) {
+      return formatTelemetryToken(screenToken) || 'operational layer';
+    }
+
     if (section.id) {
       return formatTelemetryToken(section.id) || 'operational layer';
+    }
+
+    const eyebrow = resolveSectionEyebrow(section);
+    if (eyebrow) {
+      const primaryEyebrowToken = eyebrow.split(/\s+[·|]\s+/)[0].trim();
+      return formatTelemetryToken(primaryEyebrowToken || eyebrow) || 'operational layer';
     }
 
     const token = Array.from(section.classList)
@@ -744,8 +786,7 @@
       return formatTelemetryToken(token) || 'operational layer';
     }
 
-    const screenToken = section.dataset.screenLabel ? section.dataset.screenLabel.split('.').pop() : '';
-    return formatTelemetryToken(screenToken) || 'operational layer';
+    return 'operational layer';
   }
 
   function resolveSectionHeading(section, fallback) {
@@ -850,8 +891,8 @@
     const usableSections = sections.filter(section => !section.matches('.route-orbit, .cta'));
 
     return usableSections.slice(0, 6).map((section, index, collection) => {
-      const heading = collapseWhitespace(section.querySelector('h1, h2, h3')?.textContent || resolvePrimarySectionToken(section));
-      const eyebrow = collapseWhitespace(section.querySelector('.eyebrow')?.textContent || '');
+      const heading = resolveSectionLabel(section, resolvePrimarySectionToken(section));
+      const eyebrow = resolveSectionEyebrow(section);
       const geometry = resolveSpatialFlowGeometry(flowConfig.variant, index, collection.length);
       const palette = flowConfig.palette?.length ? flowConfig.palette : TECHNICAL_NODE_COLORS;
       const code = collapseWhitespace(eyebrow.replace(/^§\s*/i, '').replace(/[\[\]]/g, '')) || `${config.prefix} / ${String(index + 1).padStart(2, '0')}`;
@@ -2026,6 +2067,8 @@
           getActiveIndex: () => activeIndex,
           onProject: ({ projections, core }) => {
             const compact = stage.clientWidth < 360;
+            const stageWidth = Math.max(1, stage.clientWidth);
+            const stageHeight = Math.max(1, stage.clientHeight);
             stageCore.style.left = `${core.x}px`;
             stageCore.style.top = `${core.y}px`;
 
@@ -2034,10 +2077,17 @@
               if (!nodeEl) return;
 
               const isActive = item.key === runtimeNodes[activeIndex]?.code;
+              const depth = Math.max(0, Math.min(compact ? 72 : 96, (1 - projection.ndcZ) * (compact ? 26 : 34) + (isActive ? 16 : 0)));
+              const tiltY = (((projection.x / stageWidth) - 0.5) * (compact ? 10 : 14)) * (isActive ? 1.08 : 1);
+              const tiltX = (((projection.y / stageHeight) - 0.5) * (compact ? -7 : -10)) * (isActive ? 1.08 : 1);
+              const scale = Math.max(compact ? 0.6 : 0.72, Math.min(compact ? 0.92 : 1.02, projection.scale * (isActive ? 1.04 : 0.94)));
               nodeEl.style.left = `${projection.x}px`;
               nodeEl.style.top = `${projection.y}px`;
               nodeEl.style.opacity = `${Math.max(compact ? 0.42 : 0.5, projection.alpha * (isActive ? 1 : 0.88))}`;
-              nodeEl.style.transform = `translate(-50%, -50%) scale(${Math.max(compact ? 0.6 : 0.72, Math.min(compact ? 0.92 : 1.02, projection.scale * (isActive ? 1.04 : 0.94)))})`;
+              nodeEl.style.setProperty('--node-scale', scale.toFixed(4));
+              nodeEl.style.setProperty('--node-depth', `${depth.toFixed(1)}px`);
+              nodeEl.style.setProperty('--node-tilt-x', `${tiltX.toFixed(2)}deg`);
+              nodeEl.style.setProperty('--node-tilt-y', `${tiltY.toFixed(2)}deg`);
               nodeEl.style.zIndex = String(100 + order + (isActive ? 12 : 0));
             });
           },
@@ -2156,6 +2206,7 @@
     const beaconButtons = [];
     let activeIndex = 0;
     let stageController = null;
+    let roomDepthFrame = null;
 
     hud.appendChild(hudKicker);
     hud.appendChild(hudCode);
@@ -2180,6 +2231,48 @@
       section.dataset.roomIndex = String(index + 1);
       stack.appendChild(section);
     });
+
+    function applyRoomDepth() {
+      if (reducedMotion) {
+        flowItems.forEach((item, index) => {
+          item.section.style.removeProperty('--room-shift');
+          item.section.style.removeProperty('--room-depth');
+          item.section.style.removeProperty('--room-tilt');
+          item.section.style.removeProperty('--room-scale');
+          item.section.style.removeProperty('--room-opacity');
+          item.section.classList.toggle('is-room-active', index === activeIndex);
+        });
+        return;
+      }
+
+      const viewportHeight = Math.max(1, globalThis.innerHeight || document.documentElement?.clientHeight || 1);
+      const anchor = viewportHeight * 0.48;
+
+      flowItems.forEach((item, index) => {
+        const rect = item.section.getBoundingClientRect();
+        const center = rect.top + rect.height * 0.5;
+        const distance = (center - anchor) / viewportHeight;
+        const clamped = Math.max(-1.15, Math.min(1.15, distance));
+        const focus = 1 - Math.min(1, Math.abs(clamped));
+        const activeBoost = index === activeIndex ? 0.14 : 0;
+
+        item.section.style.setProperty('--room-shift', `${Math.round(-clamped * 44)}px`);
+        item.section.style.setProperty('--room-depth', `${Math.round((focus + activeBoost) * 120 - 54)}px`);
+        item.section.style.setProperty('--room-tilt', `${(-clamped * 7).toFixed(2)}deg`);
+        item.section.style.setProperty('--room-scale', `${(0.968 + focus * 0.032 + activeBoost * 0.02).toFixed(4)}`);
+        item.section.style.setProperty('--room-opacity', `${(0.72 + focus * 0.22 + activeBoost * 0.06).toFixed(3)}`);
+        item.section.classList.toggle('is-room-active', index === activeIndex);
+      });
+    }
+
+    function scheduleRoomDepth() {
+      if (roomDepthFrame) return;
+
+      roomDepthFrame = globalThis.requestAnimationFrame(() => {
+        roomDepthFrame = null;
+        applyRoomDepth();
+      });
+    }
 
     function seedBeacons() {
       const rect = viewport.getBoundingClientRect();
@@ -2226,6 +2319,8 @@
         button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       });
 
+      scheduleRoomDepth();
+
       if (stageController) {
         stageController.render();
       } else {
@@ -2261,9 +2356,14 @@
         if (!stageController) {
           seedBeacons();
         }
+
+        scheduleRoomDepth();
       });
       observer.observe(viewport);
     }
+
+    globalThis.addEventListener('scroll', scheduleRoomDepth, { passive: true });
+    globalThis.addEventListener('resize', scheduleRoomDepth, { passive: true });
 
     if ('IntersectionObserver' in globalThis) {
       const visibility = new Map();
@@ -2295,6 +2395,7 @@
 
     seedBeacons();
     setActive(0);
+    scheduleRoomDepth();
 
     loadTechnicalSceneModule().then(module => {
       const mountTechnicalScene = module?.mountTechnicalScene;
@@ -2320,10 +2421,12 @@
         getActiveIndex: () => activeIndex,
         onProject: ({ projections }) => {
           const compact = viewport.clientWidth < 860;
+          const viewportWidth = Math.max(1, viewport.clientWidth);
+          const viewportHeight = Math.max(1, viewport.clientHeight);
           const minX = compact ? 64 : 90;
-          const maxX = viewport.clientWidth - minX;
+          const maxX = viewportWidth - minX;
           const minY = compact ? 92 : 118;
-          const maxY = viewport.clientHeight - (compact ? 84 : 110);
+          const maxY = viewportHeight - (compact ? 84 : 110);
 
           projections.forEach(({ item, projection }, order) => {
             const button = item.button;
@@ -2333,11 +2436,18 @@
             const isActive = beaconIndex === activeIndex;
             const x = Math.max(minX, Math.min(maxX, projection.x));
             const y = Math.max(minY, Math.min(maxY, projection.y));
+            const depth = Math.max(-8, Math.min(compact ? 82 : 118, (1 - projection.ndcZ) * (compact ? 28 : 38) + (isActive ? 22 : 0)));
+            const tiltY = (((x / viewportWidth) - 0.5) * (compact ? 9 : 13)) * (isActive ? 1.12 : 1);
+            const tiltX = (((y / viewportHeight) - 0.5) * (compact ? -6 : -9)) * (isActive ? 1.08 : 1);
+            const scale = Math.max(compact ? 0.72 : 0.82, Math.min(compact ? 0.96 : 1.08, projection.scale * (isActive ? 1.08 : 0.94)));
 
             button.style.left = `${x}px`;
             button.style.top = `${y}px`;
             button.style.opacity = `${Math.max(compact ? 0.46 : 0.54, projection.alpha * (isActive ? 1 : 0.9))}`;
-            button.style.transform = `translate(-50%, -50%) scale(${Math.max(compact ? 0.72 : 0.82, Math.min(compact ? 0.96 : 1.08, projection.scale * (isActive ? 1.08 : 0.94)))})`;
+            button.style.setProperty('--beacon-scale', scale.toFixed(4));
+            button.style.setProperty('--beacon-depth', `${depth.toFixed(1)}px`);
+            button.style.setProperty('--beacon-tilt-x', `${tiltX.toFixed(2)}deg`);
+            button.style.setProperty('--beacon-tilt-y', `${tiltY.toFixed(2)}deg`);
             button.style.zIndex = String(120 + order + (isActive ? 18 : 0));
           });
         },

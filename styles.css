@@ -419,6 +419,26 @@ img { max-width: 100%; display: block; }
   opacity: 0.4;
 }
 
+.hero,
+.page-hero,
+.legal-hero {
+  isolation: isolate;
+}
+
+.hero::after,
+.page-hero::after,
+.legal-hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(136px, 16vw, 224px);
+  background: linear-gradient(180deg, rgba(5, 6, 7, 0) 0%, rgba(7, 10, 12, 0.16) 28%, rgba(8, 12, 15, 0.62) 68%, rgba(8, 12, 15, 0.96) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
 .page-hero--technical,
 .legal-hero {
   isolation: isolate;
@@ -466,6 +486,9 @@ img { max-width: 100%; display: block; }
   width: min(40vw, 520px);
   z-index: 1;
   pointer-events: none;
+  perspective: 1280px;
+  perspective-origin: 62% 46%;
+  transform-style: preserve-3d;
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 18%, #000 100%);
   mask-image: linear-gradient(90deg, transparent 0, #000 18%, #000 100%);
 }
@@ -540,11 +563,20 @@ img { max-width: 100%; display: block; }
   min-width: 112px;
   padding: 10px 12px;
   border: 1px solid rgba(220,225,230,0.16);
-  background: rgba(7,10,12,0.66);
-  transform: translate(-50%, -50%);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%),
+    rgba(7,10,12,0.66);
+  transform:
+    translate(-50%, -50%)
+    translate3d(0, 0, var(--node-depth, 0px))
+    rotateX(var(--node-tilt-x, 0deg))
+    rotateY(var(--node-tilt-y, 0deg))
+    scale(var(--node-scale, 1));
   animation: pageHeroFloat 8s var(--delay) ease-in-out infinite;
-  transition: border-color 220ms ease, background 220ms ease, box-shadow 220ms ease, opacity 220ms ease;
+  transition: border-color 220ms ease, background 220ms ease, box-shadow 220ms ease, opacity 220ms ease, transform 220ms ease;
   will-change: left, top, opacity, transform;
+  transform-style: preserve-3d;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.14);
 }
 .page-hero__technical-node::before {
   content: '';
@@ -572,7 +604,7 @@ img { max-width: 100%; display: block; }
 .page-hero__technical-node.is-active {
   border-color: rgba(132,211,166,0.44);
   background: rgba(7,10,12,0.84);
-  box-shadow: 0 18px 30px rgba(0,0,0,0.22);
+  box-shadow: 0 22px 42px rgba(0,0,0,0.26);
 }
 .page-hero__technical-node.is-active::before {
   background: linear-gradient(180deg, rgba(132,211,166,0.48), transparent);
@@ -978,6 +1010,18 @@ img { max-width: 100%; display: block; }
     radial-gradient(circle at top right, rgba(146,191,255,0.12) 0%, transparent 24%),
     linear-gradient(180deg, #06080b 0%, #0b1014 24%, #10171c 54%, #0d1318 100%);
 }
+.hero + .spatial-flow,
+.page-hero + .spatial-flow,
+.legal-hero + .spatial-flow {
+  margin-top: clamp(-132px, -10vw, -88px);
+  padding-top: clamp(84px, 9vw, 132px);
+}
+
+.hero + .spatial-flow .spatial-flow__viewport,
+.page-hero + .spatial-flow .spatial-flow__viewport,
+.legal-hero + .spatial-flow .spatial-flow__viewport {
+  border-top-color: rgba(255,255,255,0.04);
+}
 .spatial-flow::before,
 .spatial-flow::after {
   content: '';
@@ -1128,6 +1172,9 @@ img { max-width: 100%; display: block; }
 }
 .spatial-flow__beacons {
   z-index: 4;
+  perspective: 1440px;
+  perspective-origin: 50% 38%;
+  transform-style: preserve-3d;
 }
 .spatial-flow__beacon {
   position: absolute;
@@ -1139,18 +1186,28 @@ img { max-width: 100%; display: block; }
   min-width: 132px;
   padding: 12px 14px;
   border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(9,12,15,0.78);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%),
+    rgba(9,12,15,0.78);
   color: rgba(245,248,252,0.92);
   box-shadow: 0 22px 44px rgba(0,0,0,0.24);
+  transform:
+    translate(-50%, -50%)
+    translate3d(0, 0, var(--beacon-depth, 0px))
+    rotateX(var(--beacon-tilt-x, 0deg))
+    rotateY(var(--beacon-tilt-y, 0deg))
+    scale(var(--beacon-scale, 1));
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, color 180ms ease, opacity 180ms ease;
   pointer-events: auto;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
 }
 .spatial-flow__beacon:hover,
 .spatial-flow__beacon:focus-visible,
 .spatial-flow__beacon.is-active {
   border-color: rgba(132,211,166,0.46);
   background: rgba(13,17,20,0.96);
-  box-shadow: 0 24px 52px rgba(0,0,0,0.3);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.32);
   color: #fff;
 }
 .spatial-flow__beacon-code {
@@ -1170,6 +1227,9 @@ img { max-width: 100%; display: block; }
   display: grid;
   gap: 18px;
   margin-top: -96px;
+  perspective: 1600px;
+  perspective-origin: 50% 12%;
+  transform-style: preserve-3d;
 }
 .spatial-flow .route-orbit {
   width: min(1320px, calc(100% - 48px));
@@ -1189,6 +1249,18 @@ img { max-width: 100%; display: block; }
 .spatial-flow__stack > .spatial-room {
   width: min(1320px, calc(100% - 48px));
   margin: 0 auto;
+  transform-origin: center top;
+  transform-style: preserve-3d;
+  transform:
+    translate3d(0, var(--room-shift, 0px), var(--room-depth, 0px))
+    rotateX(var(--room-tilt, 0deg))
+    scale(var(--room-scale, 1));
+  opacity: var(--room-opacity, 1);
+  will-change: transform, opacity;
+  transition: transform 180ms cubic-bezier(.2,.7,.2,1), opacity 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+.spatial-flow__stack > .spatial-room.is-room-active {
+  z-index: 2;
 }
 .spatial-flow__stack > .tech-surface--compressed {
   padding-top: clamp(56px, 6vw, 84px);
@@ -1199,6 +1271,9 @@ img { max-width: 100%; display: block; }
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
   overflow: hidden;
+}
+.spatial-flow__stack > .tech-surface--compressed.is-room-active {
+  box-shadow: 0 36px 88px rgba(0,0,0,0.28);
 }
 .spatial-flow__stack > .tech-surface--compressed[data-telemetry-tone="dark"] {
   background: linear-gradient(180deg, rgba(8,12,15,0.66) 0%, rgba(8,12,15,0.82) 100%);
@@ -1385,6 +1460,17 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 860px) {
+  .spatial-flow__stack {
+    perspective: 1200px;
+  }
+
+  .hero + .spatial-flow,
+  .page-hero + .spatial-flow,
+  .legal-hero + .spatial-flow {
+    margin-top: -88px;
+    padding-top: 72px;
+  }
+
   .spatial-flow {
     padding: 16px 0 72px;
   }
@@ -1432,8 +1518,24 @@ img { max-width: 100%; display: block; }
   100% { transform: translate(-50%, -50%) scale(1.12); opacity: 0; }
 }
 @keyframes pageHeroFloat {
-  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-  50% { transform: translate(-50%, -50%) translateY(-6px); }
+  0%, 100% {
+    transform:
+      translate(-50%, -50%)
+      translate3d(0, 0, var(--node-depth, 0px))
+      rotateX(var(--node-tilt-x, 0deg))
+      rotateY(var(--node-tilt-y, 0deg))
+      scale(var(--node-scale, 1))
+      translateY(0);
+  }
+  50% {
+    transform:
+      translate(-50%, -50%)
+      translate3d(0, 0, var(--node-depth, 0px))
+      rotateX(var(--node-tilt-x, 0deg))
+      rotateY(var(--node-tilt-y, 0deg))
+      scale(var(--node-scale, 1))
+      translateY(-6px);
+  }
 }
 @keyframes routeOrbitFloat {
   0%, 100% { transform: translate(-50%, -50%) translateY(0); }
